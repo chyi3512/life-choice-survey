@@ -1,313 +1,380 @@
 <!doctype html>
 <html lang="zh-Hant">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#ffffff" />
-  <title>下一階段生活選擇</title>
-  <style>
-    :root{
-      --bg:#f6f7f8; --card:#fff; --text:#17191c; --muted:#70757d;
-      --line:#e6e8eb; --accent:#20242a; --soft:#f0f2f4; --danger:#b42318;
-      --ok:#256d3f;
-    }
-    *{box-sizing:border-box}
-    body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;background:var(--bg);color:var(--text)}
-    .wrap{max-width:760px;margin:0 auto;padding:20px 14px 72px}
-    header{background:#fff;border:1px solid var(--line);border-radius:18px;padding:20px;margin-bottom:14px;position:sticky;top:8px;z-index:10;box-shadow:0 6px 24px rgba(0,0,0,.04)}
-    h1{font-size:24px;margin:0 0 8px}
-    .sub{font-size:14px;color:var(--muted);line-height:1.6}
-    .progress-row{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-top:16px;font-size:14px}
-    .progress{height:8px;background:#eceff1;border-radius:999px;overflow:hidden;margin-top:8px}
-    .progress > div{height:100%;background:var(--accent);width:0;transition:width .2s}
-    .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;margin:12px 0}
-    .qnum{font-size:12px;color:var(--muted);margin-bottom:7px}
-    .qtext{font-weight:700;line-height:1.55;margin-bottom:12px}
-    .option{display:flex;align-items:flex-start;gap:10px;padding:12px 13px;border:1px solid var(--line);border-radius:12px;margin:8px 0;cursor:pointer;background:#fff;transition:.15s}
-    .option:hover{background:#fafafa}
-    .option.selected{border-color:#1f2937;background:#f4f6f8}
-    .option input{margin-top:2px;flex:0 0 auto}
-    .option span{line-height:1.5}
-    .actions{display:grid;grid-template-columns:1fr;gap:10px;margin-top:18px}
-    button{appearance:none;border:0;border-radius:12px;padding:14px 16px;font-size:16px;font-weight:700;cursor:pointer}
-    .primary{background:#17191c;color:#fff}
-    .secondary{background:#fff;color:#17191c;border:1px solid var(--line)}
-    .danger{background:#fff;color:var(--danger);border:1px solid #f0c7c2}
-    .notice{margin-top:12px;font-size:13px;color:var(--muted);line-height:1.6}
-    .error{color:var(--danger);font-weight:700;margin-top:12px;line-height:1.6}
-    .hidden{display:none}
-    .results{margin-top:18px}
-    .dimension{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px;margin:10px 0}
-    .dimension-head{display:flex;justify-content:space-between;gap:10px;font-weight:700}
-    .mini{height:7px;background:#edf0f2;border-radius:999px;overflow:hidden;margin:10px 0}
-    .mini div{height:100%;background:#30353b}
-    .dimension p,.conclusion p{margin:6px 0 0;color:#50555c;font-size:14px;line-height:1.65}
-    .conclusion{background:#fff;border:2px solid #222;border-radius:16px;padding:16px;margin-top:14px}
-    .conclusion h2{font-size:18px;margin:0 0 6px}
-    .report-section{background:#fff;border:1px solid var(--line);border-radius:14px;padding:15px;margin:10px 0}
-    .report-section h3{font-size:16px;margin:0 0 9px}
-    .report-section p{margin:7px 0;color:#50555c;font-size:14px;line-height:1.7}
-    .report-section ul{margin:7px 0 0;padding-left:20px;color:#50555c;font-size:14px;line-height:1.7}
-    .tag{display:inline-block;font-size:12px;padding:4px 8px;border-radius:999px;background:var(--soft);margin-left:6px;font-weight:600}
-    .missing{outline:2px solid #f4b5ae;scroll-margin-top:140px}
-    .footer-note{font-size:12px;color:var(--muted);margin-top:20px;line-height:1.6}
-    @media(min-width:620px){.wrap{padding:28px 20px 84px}.actions{grid-template-columns:1fr 1fr}.actions .primary{grid-column:1/-1}}
-    @media(max-width:390px){.wrap{padding:12px 10px 54px}header{padding:16px;top:4px}h1{font-size:21px}.card{padding:14px}.option{padding:12px 11px}}
-  </style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<meta name="theme-color" content="#ffffff" />
+<title>下一階段生活選擇｜V3</title>
+<style>
+:root{
+  --bg:#f6f7f8;--card:#fff;--text:#17191c;--muted:#6f757d;--line:#e5e7eb;
+  --accent:#17191c;--soft:#f1f3f5;--danger:#b42318;--ok:#245c3a;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;background:var(--bg);color:var(--text)}
+.wrap{max-width:760px;margin:0 auto;padding:18px 14px 72px}
+header{position:sticky;top:6px;z-index:20;background:#fff;border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:0 6px 24px rgba(0,0,0,.05)}
+h1{font-size:23px;margin:0 0 7px}
+.sub{font-size:14px;color:var(--muted);line-height:1.65}
+.version{display:inline-block;margin-left:6px;padding:2px 7px;border-radius:999px;background:var(--soft);font-size:11px;color:#555}
+.progress-row{display:flex;justify-content:space-between;gap:12px;margin-top:14px;font-size:13px}
+.progress{height:8px;background:#eceff1;border-radius:999px;overflow:hidden;margin-top:7px}
+.progress>div{height:100%;background:var(--accent);width:0;transition:.2s}
+.section-title{margin:24px 2px 8px;font-size:15px;color:#444;font-weight:800}
+.card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px;margin:10px 0}
+.card.missing{outline:2px solid #f1aaa2;scroll-margin-top:135px}
+.qnum{font-size:12px;color:var(--muted);margin-bottom:6px}
+.qtext{font-weight:750;line-height:1.55;margin-bottom:12px}
+.option{display:flex;gap:10px;align-items:flex-start;padding:12px;border:1px solid var(--line);border-radius:12px;margin:8px 0;background:#fff;cursor:pointer}
+.option.selected{background:#f4f6f8;border-color:#222}
+.option input{margin-top:3px}
+.option span{line-height:1.5}
+.range-wrap{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center}
+.range-wrap input[type=range]{width:100%}
+.score-badge{min-width:42px;text-align:center;font-weight:800;border:1px solid var(--line);border-radius:10px;padding:7px;background:#fff}
+.scale-labels{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-top:5px}
+textarea{width:100%;min-height:110px;border:1px solid var(--line);border-radius:12px;padding:12px;font:inherit;line-height:1.55;resize:vertical}
+.check-grid{display:grid;grid-template-columns:1fr;gap:8px}
+.check-item{display:flex;gap:10px;align-items:flex-start;border:1px solid var(--line);padding:11px 12px;border-radius:12px;background:#fff}
+.actions{display:grid;grid-template-columns:1fr;gap:10px;margin-top:18px}
+button{appearance:none;border:0;border-radius:12px;padding:14px 16px;font-size:16px;font-weight:750;cursor:pointer}
+.primary{background:#17191c;color:#fff}
+.secondary{background:#fff;border:1px solid var(--line);color:#17191c}
+.danger{background:#fff;border:1px solid #efc4bf;color:var(--danger)}
+.error{color:var(--danger);font-weight:700;line-height:1.6;margin-top:10px}
+.hidden{display:none}
+.results{margin-top:20px}
+.hero{background:#fff;border:2px solid #1e2328;border-radius:18px;padding:18px;margin-bottom:12px}
+.hero h2{margin:0 0 8px;font-size:19px}
+.hero .big{font-size:36px;font-weight:850;letter-spacing:-1px}
+.hero p{color:#50555c;line-height:1.7;margin:8px 0 0}
+.report{background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px;margin:10px 0}
+.report h3{font-size:16px;margin:0 0 10px}
+.report p,.report li{color:#50555c;font-size:14px;line-height:1.75}
+.report ul{padding-left:20px;margin:8px 0 0}
+.metric{margin:12px 0}
+.metric-head{display:flex;justify-content:space-between;gap:10px;font-weight:750}
+.bar{height:8px;background:#edf0f2;border-radius:999px;overflow:hidden;margin:7px 0 5px}
+.bar>div{height:100%;background:#2d3136}
+.metric small{color:var(--muted);line-height:1.5}
+.grid2{display:grid;grid-template-columns:1fr;gap:10px}
+.path{border:1px solid var(--line);border-radius:13px;padding:13px}
+.path h4{margin:0 0 7px;font-size:14px}
+.tag{display:inline-block;padding:4px 8px;border-radius:999px;background:var(--soft);font-size:12px;font-weight:700;margin-left:6px}
+.notice,.footer{font-size:12px;color:var(--muted);line-height:1.65;margin-top:16px}
+@media(min-width:640px){.wrap{padding:26px 20px 84px}.actions{grid-template-columns:1fr 1fr}.actions .primary{grid-column:1/-1}.grid2{grid-template-columns:1fr 1fr}}
+</style>
 </head>
 <body>
 <div class="wrap">
-  <header>
-    <h1>下一階段生活選擇</h1>
-    <div class="sub">30 道題目，用六個角度整理「現在是否適合搬去媽媽所在的地方生活」。請依照你現在真實的想法作答，不需要猜哪個答案比較好。</div>
-    <div class="progress-row"><span id="doneText">已完成 0 / 30</span><span id="percentText">0%</span></div>
-    <div class="progress"><div id="progressBar"></div></div>
-  </header>
+<header>
+  <h1>下一階段生活選擇 <span class="version">V3</span></h1>
+  <div class="sub">這不是在判斷「跟媽媽住好不好」，而是在整理：現在去媽媽所在的地方，究竟是在前進、過渡，還是只是暫時離開目前狀態。</div>
+  <div class="progress-row"><span id="doneText">已完成 0 / 30</span><span id="percentText">0%</span></div>
+  <div class="progress"><div id="progressBar"></div></div>
+</header>
 
-  <main id="survey"></main>
+<main id="survey"></main>
 
-  <div class="actions">
-    <button class="primary" id="analyzeBtn">產生分析結果</button>
-    <button class="secondary" id="copyBtn" disabled>複製完整回答</button>
-    <button class="danger" id="clearBtn">清除重新填寫</button>
-  </div>
-  <div id="errorBox" class="error hidden"></div>
+<div class="actions">
+  <button class="primary" id="analyzeBtn">產生完整分析</button>
+  <button class="secondary" id="copyBtn" disabled>複製完整回答與分析</button>
+  <button class="danger" id="clearBtn">清除重新填寫</button>
+</div>
+<div id="errorBox" class="error hidden"></div>
 
-  <section id="results" class="results hidden">
-    <div id="dimensions"></div>
-    <div id="conclusion" class="conclusion"></div>
-    <div class="notice">此結果依照你的回答進行多維度分析，不是心理診斷或人生決策的唯一依據。</div>
-  </section>
+<section id="results" class="results hidden"></section>
 
-  <div class="footer-note">本頁不登入、不連資料庫、不使用 API。回答只儲存在你目前瀏覽器的 localStorage。</div>
+<div class="footer">回答只儲存在你目前的瀏覽器，不登入、不連資料庫、不使用 API。此結果是多維度決策整理，不是心理診斷，也不是人生決策的唯一依據。</div>
 </div>
 
 <script>
-const STORAGE_KEY = 'lifeChoiceSurvey_v1';
+const STORAGE_KEY='lifeChoiceSurvey_v3';
 
-const Q = [
-{t:'如果媽媽不在那座城市，你還會想搬去那裡嗎？',o:['很可能還是會','可能會，但吸引力會下降','大概不會','幾乎完全不會'],s:{mom:[0,1,2,3],plan:[3,2,1,0]}},
-{t:'目前你想去那裡，最主要是被什麼吸引？',o:['城市本身的機會與生活條件','一個具體工作／學習機會','媽媽在那裡，生活比較安心','主要是想離開現在的狀態'],s:{mom:[0,0,3,1],growth:[2,3,0,0],plan:[2,3,1,0]}},
-{t:'如果下個月真的搬過去，你知道前 6 個月大致要做什麼嗎？',o:['有明確工作／學習／收入安排','有方向，也有幾個可執行步驟','只知道先過去再說','幾乎沒有規劃'],s:{plan:[3,2,1,0],growth:[3,2,1,0]}},
-{t:'如果媽媽提供住宿與照顧，你覺得自己會怎麼安排日常？',o:['仍照自己的工作與學習節奏','會接受幫忙，但保留自己的責任','可能會慢慢依賴現成安排','希望先被照顧一段時間再說'],s:{ind:[3,2,1,0],comfort:[0,1,2,3]}},
-{t:'你覺得現階段最需要優先累積的是什麼？',o:['可帶走的技能／作品／學歷','收入與職涯經驗','穩定與生活秩序','陪伴家人與休息'],s:{growth:[3,3,1,0],plan:[2,2,1,1]}},
-{t:'如果在媽媽身邊住 2 年，你最希望得到什麼？',o:['完成一個明確職涯／學習成果','累積存款並建立下一步','讓生活穩定、有人照應','暫時不要想太多未來'],s:{growth:[3,2,1,0],plan:[3,3,1,0],comfort:[0,1,2,3]}},
-{t:'如果改去一個競爭更強的城市 2 年，你覺得最可能得到什麼？',o:['更強技能、人脈與履歷','更多收入與機會，但壓力也大','不確定，可能只是更累','我不覺得競爭更強一定更好'],s:{growth:[3,2,0,1],plan:[2,2,1,1]}},
-{t:'如果現在搬去，你有沒有先設定「何時重新評估要不要離開」？',o:['有明確日期與條件','有大概時間點','想等住一陣子再看','沒有想過'],s:{exit:[3,2,1,0],plan:[3,2,1,0]}},
-{t:'如果那裡有工作、住處、朋友和媽媽，但別的城市出現更好的機會，你會怎麼做？',o:['會重新比較，必要時離開','會認真考慮，但需要一點時間','除非差距非常大才會離開','大概會留下，因為搬走很麻煩'],s:{exit:[3,2,1,0],comfort:[0,1,2,3]}},
-{t:'如果你其實不太喜歡那座城市，但生活很方便又穩定，你最可能怎麼做？',o:['設定期限，期限到就重新選擇','先住一段時間，同時保留外部機會','只要方便穩定就可能一直住','看媽媽是否也留在那裡'],s:{exit:[3,2,0,1],comfort:[0,1,3,2],mom:[0,0,1,3]}},
-{t:'你怎麼看「我不喜歡這地方，所以不會形成舒適圈」這句話？',o:['不一定，便利與低成本也會形成舒適圈','有可能，但要看生活結構','我覺得大致成立','我沒想過這件事'],s:{comfort:[0,1,3,2],plan:[2,2,0,1]}},
-{t:'過去你有沒有出現過「本來只想暫時做，最後卻拖很久」？',o:['幾乎沒有，我通常會按時間點調整','偶爾有，但會自己拉回來','有過幾次','常常如此'],s:{comfort:[0,1,2,3],exit:[3,2,1,0]}},
-{t:'做重大決定時，你通常比較接近哪一種？',o:['先列條件與期限，再做決定','理性與感受大約各半','多半看當下感受','通常先做了再想後果'],s:{plan:[3,2,1,0],exit:[3,2,1,0]}},
-{t:'如果媽媽希望你留下，但你原本計畫要去別的城市，你會怎麼做？',o:['仍以自己的長期計畫為主','會討論，但不會直接改變目標','可能會因此延後','大概會留下陪她'],s:{mom:[0,1,2,3],exit:[3,2,1,0],ind:[3,2,1,0]}},
-{t:'如果跟媽媽住，你準備自己負責多少生活事務？',o:['財務、家務、行政與時間安排都自己負責','大部分自己負責，少部分互相幫忙','很多事情會讓媽媽處理','希望媽媽先幫我安頓好'],s:{ind:[3,2,1,0],comfort:[0,1,2,3]}},
-{t:'你是否真正獨自在陌生城市生活過？',o:['有，而且能自己處理大多數問題','有，但時間不長','只有短期旅行／交換類經驗','幾乎沒有'],s:{ind:[3,2,1,0]}},
-{t:'如果不是去媽媽身邊，你還會把這座城市列入前三個選項嗎？',o:['會，而且理由很明確','可能會','大概不會','完全不會'],s:{mom:[0,1,2,3],plan:[3,2,1,0]}},
-{t:'如果不去找媽媽，你有沒有願意投入 1–2 年的其他目標？',o:['有，而且知道它對未來很重要','有幾個方向正在比較','有想法，但不太具體','沒有，現在只想先換環境'],s:{growth:[3,2,1,0],plan:[3,2,1,0]}},
-{t:'如果選擇不去，接下來兩年你比較可能怎麼過？',o:['執行一個明確職涯／學習計畫','工作並穩定累積技能或存款','先維持現況，看機會再說','我其實沒有想像過'],s:{growth:[3,2,1,0],plan:[3,2,1,0]}},
-{t:'如果選擇去，接下來兩年你比較可能怎麼過？',o:['有清楚工作／學習里程碑','先找工作，再逐步調整','先安頓生活，其他之後再說','主要想靠近媽媽，其他未定'],s:{plan:[3,2,1,0],growth:[3,2,1,0],mom:[0,0,1,3]}},
-{t:'你現在是否正在快速累積技能、學歷、作品、語言、收入或人脈？',o:['是，而且正處於關鍵上升期','有穩定累積','有一些，但速度普通','目前幾乎沒有累積'],s:{growth:[3,2,1,0]}},
-{t:'搬去媽媽所在的地方，對你目前的累積節奏可能有什麼影響？',o:['可以延續，甚至更好','大致不變','會中斷一部分','很可能整體重來'],s:{growth:[3,2,1,0],plan:[2,2,1,0]}},
-{t:'如果工作很穩定，但兩年後看不到明顯成長，你能接受多久？',o:['3–6 個月就會檢查下一步','最多約 1 年','1–2 年也可以','只要穩定就可以一直做'],s:{comfort:[0,1,2,3],exit:[3,2,1,0],growth:[3,2,1,0]}},
-{t:'幾年後回頭看，你最怕後悔哪一件事？',o:['沒有建立自己的能力與選擇權','錯過一個很重要的職涯機會','沒有多陪媽媽','當時太累，沒有先讓自己穩定'],s:{growth:[3,3,0,1],mom:[0,0,3,1]}},
-{t:'你現在是真的想去那裡，還是更像想離開目前的生活？',o:['是真的想去，城市本身有吸引力','兩者都有','比較像想離開現在','我還分不清楚'],s:{plan:[3,2,0,1],mom:[0,1,1,1]}},
-{t:'如果媽媽半年後又搬去另一座城市，你會怎麼做？',o:['不會跟著走，除非那也符合我的計畫','會重新評估','很可能一起搬','大概會跟著她走'],s:{mom:[0,1,2,3],ind:[3,2,1,0],exit:[3,2,1,0]}},
-{t:'你能接受「只去 3–6 個月」，期限到即使住得舒服也重新評估嗎？',o:['可以，而且願意先寫下退出條件','可以，但到時候再看','可能很難，因為搬一次很麻煩','不太想設定期限'],s:{exit:[3,2,1,0],comfort:[0,1,2,3],plan:[3,2,1,0]}},
-{t:'你有沒有準備一筆不依賴媽媽、可以讓自己離開那裡的資金？',o:['有，足夠搬家與支撐幾個月','有一部分','目前很少','沒有'],s:{exit:[3,2,1,0],ind:[3,2,1,0]}},
-{t:'如果搬去 6 個月後，能力、收入、工作或學習都沒有明顯進展，你會怎麼做？',o:['按照原本條件重新評估，必要時離開','先再給自己幾個月','可能會因為生活穩定而繼續住','只要跟媽媽住得還好就不急'],s:{exit:[3,2,1,0],growth:[3,2,1,0],comfort:[0,1,2,3],mom:[0,0,1,3]}},
-{t:'排除孤單、媽媽、疲累與搬家麻煩後，哪一種選擇更可能讓三年後的你擁有更多選擇？',o:['有明確答案，而且知道原因','有一個偏好的方向','兩邊差不多，很難判斷','我目前完全不知道'],s:{plan:[3,2,1,0],growth:[3,2,1,0],exit:[3,2,1,0]}}
+const sections=[
+  {title:'一｜現在到底為什麼想換方向', ids:[1,2,3,4,5]},
+  {title:'二｜媽媽在這個決定裡到底是什麼', ids:[6,7,8,9,10]},
+  {title:'三｜去了之後，到底準備做什麼', ids:[11,12,13,14,15]},
+  {title:'四｜如果不去，真正的替代方案是什麼', ids:[16,17,18,19,20]},
+  {title:'五｜去了以後，還能不能重新選擇', ids:[21,22,23,24,25]},
+  {title:'六｜逼近真正的選擇', ids:[26,27,28,29,30]}
 ];
 
-const DIM = {
-  mom:{name:'媽媽因素',risk:true},
-  growth:{name:'競爭力／成長',risk:false},
-  comfort:{name:'舒適圈風險',risk:true},
-  ind:{name:'獨立程度',risk:false},
-  exit:{name:'退出能力',risk:false},
-  plan:{name:'計畫清晰度',risk:false}
-};
+const Q=[
+{id:1,type:'single',t:'如果現在不用立刻決定下一步，你最想先做的是什麼？',o:['繼續讀書','開始工作','先嘗試不同工作或生活','去媽媽那裡','休息一段時間','其他','不知道']},
+{id:2,type:'single',t:'你現在最想改變目前生活中的哪一件事？',o:['學習狀態','工作與收入','生活環境','跟家人的距離','未來沒有方向','人際或情緒狀態','其他']},
+{id:3,type:'single',t:'如果目前的生活突然變得比較順利，你還會想去媽媽那裡嗎？',o:['一定會','可能會','不確定','可能不會','不會'],score:{go:[100,75,50,25,0],escape:[0,25,50,75,100]}},
+{id:4,type:'single',t:'「去媽媽那裡」這個想法，是什麼時候開始變得認真的？',o:['很早就想過','最近才出現','某件事情發生後','媽媽提出後','其他']},
+{id:5,type:'range',t:'你現在想離開目前狀態的程度有多高？',min:0,max:10,score:{escape:'direct'}},
 
-let answers = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+{id:6,type:'single',t:'如果媽媽不住在那裡，你還會考慮去那裡生活嗎？',o:['會','可能會','不知道','可能不會','不會'],score:{place:[100,75,50,25,0],mom:[0,25,50,75,100]}},
+{id:7,type:'single',t:'媽媽在那裡，對你最大的實際幫助是什麼？',o:['住宿','經濟','生活照顧','有人陪','工作或資源','只是想離她近一點','沒有特別幫助','其他']},
+{id:8,type:'single',t:'你想跟媽媽住在一起，還是只是想住在同一個地方？',o:['想一起住','同城市但分開住','都可以','還沒想過','其他']},
+{id:9,type:'single',t:'如果你去了，但之後媽媽搬走，你還會想留在那裡嗎？',o:['會','可能會','不知道','可能不會','不會'],score:{place:[100,75,50,25,0],mom:[0,25,50,75,100],exit:[80,70,50,40,30]}},
+{id:10,type:'range',t:'如果媽媽希望你留下，但你在別的地方得到一個你真的很想要的機會，你覺得媽媽的意見會影響你多少？',min:0,max:10,score:{mom:'direct',autonomy:'inverse'}},
 
-function render(){
-  const survey = document.getElementById('survey');
-  survey.innerHTML = '';
-  Q.forEach((q,i)=>{
-    const card = document.createElement('section');
-    card.className='card';
-    card.id=`q${i+1}`;
-    card.innerHTML=`<div class="qnum">第 ${i+1} 題</div><div class="qtext">${q.t}</div>`;
-    q.o.forEach((opt,j)=>{
-      const label=document.createElement('label');
-      label.className='option'+(answers[i]===j?' selected':'');
-      label.innerHTML=`<input type="radio" name="q${i}" value="${j}" ${answers[i]===j?'checked':''}><span>${opt}</span>`;
-      label.addEventListener('click',()=>{
-        answers[i]=j;
-        localStorage.setItem(STORAGE_KEY,JSON.stringify(answers));
-        card.querySelectorAll('.option').forEach(x=>x.classList.remove('selected'));
-        label.classList.add('selected');
-        card.classList.remove('missing');
-        updateProgress();
-      });
-      card.appendChild(label);
+{id:11,type:'single',t:'如果下個月就過去，你目前最可能先做什麼？',o:['已有明確工作','找工作','讀書或準備升學','學技能','先適應生活再決定','其他','不知道'],score:{plan:[100,70,80,80,40,50,20]}},
+{id:12,type:'single_text',t:'你現在有沒有一件「即使去了媽媽那裡，也一定想繼續做」的事情？',o:['有，而且很明確','大概有','沒有','不知道'],score:{plan:[100,70,30,20],growth:[100,70,30,20]}},
+{id:13,type:'multi',t:'如果在那裡待一年，你希望一年後自己至少多了什麼？（可複選）',o:['收入','存款','工作經驗','學歷','技能','作品','語言','人脈','生活能力','其他','不知道']},
+{id:14,type:'single',t:'你覺得去那裡，會讓上面那些目標變得：',o:['更容易','差不多','更困難','不知道'],score:{growth:[100,60,20,40]}},
+{id:15,type:'single',t:'如果一年後生活很舒服，但你發現自己跟現在相比幾乎沒有成長，你會覺得這一年可以接受嗎？',o:['可以','要看原因','不確定','比較不能接受','不能接受'],score:{path:[100,70,50,25,10],growth:[30,50,50,75,100]}},
+
+{id:16,type:'single',t:'如果最後決定不去，你現在最可能做什麼？',o:['繼續目前路線','換學校或學習方向','找工作','去其他城市','回原本熟悉的地方','其他','完全不知道'],score:{alt:[80,90,90,100,70,60,10]}},
+{id:17,type:'range',t:'你對「不去時最可能走的那條路」自己有多想做？',min:0,max:10,score:{alt:'direct'}},
+{id:18,type:'single',t:'和去媽媽那裡相比，哪一邊比較可能讓你三年後變成你想成為的人？',o:['媽媽那裡','其他方案','差不多','完全不知道'],score:{goFit:[100,20,60,40],alt:[30,100,70,20]}},
+{id:19,type:'text',t:'如果完全不用考慮錢、住宿和媽媽的感受，你現在最想在哪裡、做什麼？'},
+{id:20,type:'single',t:'現實中阻止你選第 19 題那條路的最大原因是什麼？',o:['錢','能力或資格','不知道怎麼開始','害怕失敗','家人','時間','其實沒有那麼想要','其他']},
+
+{id:21,type:'single',t:'你目前想像自己會在媽媽那裡待多久？',o:['幾個月','1 年左右','2–3 年','更久','沒有設定'],score:{exit:[100,80,60,40,20],plan:[80,80,70,60,30]}},
+{id:22,type:'multi',t:'什麼事情發生時，你會認真考慮離開？（可複選）',o:['找不到合適工作','沒有成長','收入太低','不喜歡生活','出現更好機會','跟媽媽相處不適合','其他','目前沒有想過']},
+{id:23,type:'single',t:'如果兩年後你已經有穩定工作、熟悉生活、也住得很便宜，但還是不喜歡那個地方，你覺得自己會留下嗎？',o:['很可能','可能','不知道','可能不會','不會'],score:{path:[100,75,50,25,0],exit:[20,40,50,75,100]}},
+{id:24,type:'range',t:'如果兩年後另一個城市出現更好的機會，你覺得重新搬走對你來說有多困難？',min:0,max:10,score:{exit:'inverse',path:'direct'}},
+{id:25,type:'single',t:'如果需要離開，你認為自己最可能被什麼留下來？',o:['媽媽','錢和低生活成本','穩定工作','朋友與生活圈','怕重新開始','沒有東西會特別留下我','其他']},
+
+{id:26,type:'range',t:'「我想去媽媽那裡」這件事，你現在有多確定？',min:0,max:10,score:{go:'direct'}},
+{id:27,type:'range',t:'「我知道自己未來三年想往哪裡走」，你有多確定？',min:0,max:10,score:{plan:'direct'}},
+{id:28,type:'single',t:'如果只能選一個，你現在更需要的是：',o:['一個能安心生活的地方','一個能讓自己快速成長的環境','兩者都重要','我現在不知道']},
+{id:29,type:'single',t:'你最怕哪一種結果？',o:['去了之後後悔','沒有去而後悔','幾年後發現自己停在原地','選了很辛苦的路但沒有結果','失去跟媽媽相處的時間','其他']},
+{id:30,type:'text',t:'如果今天沒有人評價你的選擇，也不用向任何人解釋，你現在真正想選哪條路？為什麼？'}
+];
+
+let A=JSON.parse(localStorage.getItem(STORAGE_KEY)||'{}');
+let lastReport=null;
+
+function save(){localStorage.setItem(STORAGE_KEY,JSON.stringify(A));updateProgress()}
+function isAnswered(q){
+  const v=A[q.id];
+  if(q.type==='range') return v!==undefined && v!==null && v!=='';
+  if(q.type==='multi') return Array.isArray(v) && v.length>0;
+  if(q.type==='single_text') return v && v.choice!==undefined;
+  if(q.type==='text') return typeof v==='string' && v.trim().length>0;
+  return v!==undefined && v!==null && v!=='';
+}
+function updateProgress(){
+  const n=Q.filter(isAnswered).length,p=Math.round(n/Q.length*100);
+  doneText.textContent=`已完成 ${n} / ${Q.length}`;
+  percentText.textContent=`${p}%`;
+  progressBar.style.width=p+'%';
+}
+function selectSingle(id,idx){
+  A[id]=idx;save();renderSurvey(false);
+}
+function setRange(id,val){A[id]=Number(val);save();document.querySelector(`#badge-${id}`).textContent=val}
+function setText(id,val){A[id]=val;save()}
+function setSingleText(id,idx){
+  const old=A[id]||{}; A[id]={choice:idx,text:old.text||''}; save(); renderSurvey(false);
+}
+function setSingleTextNote(id,val){ if(!A[id]||typeof A[id]!=='object')A[id]={choice:undefined,text:''}; A[id].text=val; save();}
+function toggleMulti(id,idx){
+  const arr=Array.isArray(A[id])?[...A[id]]:[];
+  const pos=arr.indexOf(idx); if(pos>=0)arr.splice(pos,1); else arr.push(idx);
+  A[id]=arr;save();renderSurvey(false);
+}
+function renderSurvey(scroll=false){
+  const root=document.getElementById('survey'); root.innerHTML='';
+  sections.forEach(sec=>{
+    const st=document.createElement('div'); st.className='section-title'; st.textContent=sec.title; root.appendChild(st);
+    sec.ids.forEach(id=>{
+      const q=Q.find(x=>x.id===id), card=document.createElement('div'); card.className='card'; card.id='q'+id;
+      let html=`<div class="qnum">問題 ${id} / 30</div><div class="qtext">${q.t}</div>`;
+      if(q.type==='single'){
+        q.o.forEach((op,i)=>{
+          html+=`<label class="option ${A[id]===i?'selected':''}"><input type="radio" name="q${id}" ${A[id]===i?'checked':''} onchange="selectSingle(${id},${i})"><span>${op}</span></label>`;
+        });
+      } else if(q.type==='range'){
+        const v=A[id]??5;
+        html+=`<div class="range-wrap"><input type="range" min="${q.min}" max="${q.max}" value="${v}" oninput="setRange(${id},this.value)"><div class="score-badge" id="badge-${id}">${v}</div></div><div class="scale-labels"><span>${q.min}</span><span>${q.max}</span></div>`;
+      } else if(q.type==='text'){
+        html+=`<textarea placeholder="寫下你的真實想法…" oninput="setText(${id},this.value)">${A[id]||''}</textarea>`;
+      } else if(q.type==='single_text'){
+        const ch=A[id]?.choice;
+        q.o.forEach((op,i)=>{
+          html+=`<label class="option ${ch===i?'selected':''}"><input type="radio" name="q${id}" ${ch===i?'checked':''} onchange="setSingleText(${id},${i})"><span>${op}</span></label>`;
+        });
+        html+=`<textarea placeholder="如果有，可以寫下是什麼…" oninput="setSingleTextNote(${id},this.value)">${A[id]?.text||''}</textarea>`;
+      } else if(q.type==='multi'){
+        html+='<div class="check-grid">';
+        q.o.forEach((op,i)=>{
+          const checked=Array.isArray(A[id])&&A[id].includes(i);
+          html+=`<label class="check-item"><input type="checkbox" ${checked?'checked':''} onchange="toggleMulti(${id},${i})"><span>${op}</span></label>`;
+        });
+        html+='</div>';
+      }
+      card.innerHTML=html; root.appendChild(card);
     });
-    survey.appendChild(card);
   });
   updateProgress();
 }
 
-function updateProgress(){
-  const n=Object.keys(answers).filter(k=>answers[k]!==undefined).length;
-  document.getElementById('doneText').textContent=`已完成 ${n} / 30`;
-  const p=Math.round(n/30*100);
-  document.getElementById('percentText').textContent=p+'%';
-  document.getElementById('progressBar').style.width=p+'%';
+function scoreValue(q,key){
+  const spec=q.score?.[key]; if(spec===undefined) return null;
+  const a=A[q.id];
+  if(q.type==='range'){
+    if(spec==='direct') return Number(a)*10;
+    if(spec==='inverse') return 100-Number(a)*10;
+  }
+  if(q.type==='single') return spec[a];
+  if(q.type==='single_text') return spec[a.choice];
+  return null;
 }
+function avg(vals){const a=vals.filter(v=>v!==null&&v!==undefined&&!Number.isNaN(v));return a.length?Math.round(a.reduce((x,y)=>x+y,0)/a.length):50}
+function collect(key){return avg(Q.map(q=>scoreValue(q,key)))}
 
-function calc(){
-  const sums={}, maxs={};
-  Object.keys(DIM).forEach(k=>{sums[k]=0;maxs[k]=0});
-  Q.forEach((q,i)=>{
-    const a=answers[i];
-    if(a===undefined)return;
-    Object.entries(q.s||{}).forEach(([dim,arr])=>{
-      sums[dim]+=arr[a];
-      maxs[dim]+=Math.max(...arr);
-    });
-  });
-  const pct={};
-  Object.keys(DIM).forEach(k=>pct[k]=maxs[k]?Math.round(sums[k]/maxs[k]*100):0);
-  return pct;
+function buildMetrics(){
+  const go=avg([collect('go'),collect('goFit')]);
+  const mom=collect('mom');
+  const place=collect('place');
+  const plan=collect('plan');
+  const growth=collect('growth');
+  const feasibility=avg([
+    A[11]!==6?70:30,
+    A[21]===4?35:70,
+    A[16]===6?35:70,
+    Math.min(100,(Array.isArray(A[13])?A[13].length:0)*14+30)
+  ]);
+  const exit=avg([collect('exit'),collect('autonomy')]);
+  const alt=collect('alt');
+  const path=collect('path');
+  const escape=collect('escape');
+  const maturity=Math.round(plan*.22+growth*.18+feasibility*.14+exit*.18+alt*.18+place*.10);
+  const fit=Math.round(go*.18+place*.18+growth*.20+feasibility*.14+exit*.15+plan*.15 - Math.max(0,path-55)*.12);
+  return {go,mom,place,plan,growth,feasibility,exit,alt,path,escape,maturity:Math.max(0,Math.min(100,maturity)),fit:Math.max(0,Math.min(100,fit))};
 }
-
-function level(v, risk=false){
-  if(risk) return v>=70?'高':v>=45?'中等':'低';
-  return v>=70?'強':v>=45?'中等':'偏弱';
+function label(v,risk=false){
+  if(risk) return v>=70?'高':v>=45?'中':'低';
+  return v>=75?'高':v>=55?'中':'低';
 }
-
-function explain(k,v){
-  const high=v>=70, mid=v>=45;
-  const texts={
-    mom: high?'媽媽對這次搬遷的吸引力明顯偏高。家庭支持本身不是問題，但城市與人生方向需要有即使媽媽不在也成立的理由。':mid?'媽媽是重要因素之一，但不是唯一因素。關鍵在於城市、工作與個人目標能否獨立成立。':'這次選擇較不依賴媽媽是否在場，城市或個人發展理由相對獨立。',
-    growth: high?'你目前很重視可帶走的能力，例如技能、履歷、收入、作品或人脈，搬遷決策有較強的成長導向。':mid?'你有成長意識，但搬遷後如何持續累積還需要更具體的路徑與里程碑。':'目前成長路線較模糊，直接搬遷容易先解決生活穩定，再把能力累積延後。',
-    comfort: high?'「方便、有人照應、成本低、生活穩定」可能提高停留黏著度。真正的風險不是喜不喜歡城市，而是之後缺少重新選擇的動力。':mid?'存在一定舒適圈風險。預先設定檢查點、成果條件與離開條件，可以降低短期選擇變成長期停留的機率。':'你對便利與穩定造成的黏著風險已有較清楚的警覺，較能把短期安頓和長期定居分開。',
-    ind: high?'生活責任、決策與資源大多能維持在自己手上，即使接受家庭支持，也較不容易失去自主性。':mid?'具備部分獨立能力，但搬去後仍有幾個環節可能逐漸交由家庭處理。':'目前較依賴外部照顧，或缺少獨立城市生活經驗。若搬去，生活責任最好一開始就分清楚。',
-    exit: high?'你有較完整的轉換意識，包含期限、資金與重新比較其他城市的能力，搬去不等於把其他選項關掉。':mid?'你知道未來可能需要離開，但退出條件、資金或時間點還不夠完整。':'一旦安頓後，轉換城市的成本可能快速升高。最大的風險是「原本只是暫時」最後沒有重新評估。',
-    plan: high?'搬遷後前幾個月與未來 1–3 年方向相對清楚，這次選擇比較像計畫的一部分，而不是單純換環境。':mid?'已有方向，但還缺少明確時間點、里程碑或替代方案。':'目前較多由感受、家庭或環境推動，去與不去兩條路都還缺少具體的兩年版本。'
-  };
-  return texts[k];
-}
-
-function chooseConclusion(p){
-  const pos=(p.growth+p.ind+p.exit+p.plan)/4;
-  const risk=(p.mom+p.comfort)/2;
-  if(pos>=70 && risk<50) return ['A','目前條件支持前往，而且較能維持自己的發展路線','你的搬遷理由、成長能力與未來轉換空間相對完整。這比較像主動選擇一個生活基地，而不是依附家庭或逃離現況。'];
-  if(pos>=55 && p.exit>=50 && p.plan>=50) return ['B','較適合「有條件地前往」，先把它當成階段性選擇','你有一定能力把這次搬遷轉化成成長機會，但仍存在家庭支持或穩定生活帶來的黏著。與其直接決定長住，更適合先設定期限與成果條件。'];
-  if(p.mom>=65 && (p.plan<55 || p.growth<55)) return ['C','先建立自己的路線，再決定是否前往','目前「媽媽在那裡」對決策的影響高於個人發展路線。這不代表不應該去，而是現在還需要一個即使媽媽不在也能成立的前往理由。'];
-  return ['D','目前直接長期搬遷的風險偏高，先補足選擇權','主要問題不是那座城市好不好，而是搬去之後是否仍有能力成長、重新比較並離開。若仍想去，建議先把它改成有期限的試住方案。'];
-}
-
-function patternAnalysis(p){
-  const a=i=>answers[i-1];
+function crossSignals(m){
   const out=[];
-  if(a(1)>=2 && a(17)>=2) out.push('你在兩個不同問法中都顯示：如果媽媽不在，這座城市的吸引力會明顯下降。這表示「城市本身」目前還不是足夠獨立的目的地。');
-  if(a(1)<=1 && a(26)>=2) out.push('你認為即使媽媽不在仍可能前往，但如果媽媽再次搬家，你又可能跟著移動。這兩組回答有張力：理性上把城市視為自己的選擇，實際離留卻仍可能受媽媽位置影響。');
-  if(a(8)>=2 && a(27)>=2) out.push('你尚未建立清楚的重新評估時間點，而且對設定 3–6 個月期限也有抗拒。這會放大「暫時住下 → 沒有時間點 → 長期留下」的風險。');
-  if(a(18)<=1 && a(19)<=1 && a(20)>=2) out.push('你其實有其他值得投入的發展方向，但對「搬去之後兩年要得到什麼」反而比較模糊。這代表搬遷可能中斷一條原本可累積的路線。');
-  if(a(21)<=1 && a(22)>=2) out.push('你目前正有一定累積動能，但也預期搬遷會讓它中斷。這是本次決策中需要特別計算的機會成本。');
-  if(a(15)>=2 && p.ind<55) out.push('多個回答都顯示搬去後可能把部分生活責任交回家庭。家庭支持會降低短期壓力，但也可能降低獨立生活能力的使用頻率。');
-  if(a(23)>=2 && a(29)>=2) out.push('當成長停滯時，你傾向再等一段時間，而不是立刻重新配置環境。若同時生活很穩定，停留時間可能比原先預期更長。');
-  if(!out.length) out.push('目前回答的整體方向相對一致，沒有出現特別明顯的前後衝突。真正需要處理的是把意向轉成可檢查的期限、成果與退出條件。');
-  return out.slice(0,3);
+  if(m.go>=75 && m.plan<50) out.push('你很想前往，但目前對接下來 1–3 年要做什麼仍不夠清楚。意願很強，不等於路線已成熟。');
+  if(m.mom>=70 && m.place<45) out.push('媽媽因素很強，但排除媽媽後，這座城市本身的吸引力偏低。這表示「想靠近媽媽」和「想選這座城市」可能是兩件不同的事。');
+  if(m.place>=70 && m.mom>=70) out.push('媽媽確實是重要因素，但城市本身也有獨立吸引力，因此不能簡化成「只是因為媽媽才去」。');
+  if(m.growth<50 && m.go>=65) out.push('你對前往的意願高於你對「去了之後能否成長」的判斷。建議先確認這個地方如何支撐工作、學習或技能累積。');
+  if(m.path>=70 && m.exit<55) out.push('路徑依賴風險偏高，而且重新離開的能力不足。真正要防的不是「舒服」，而是幾年後重新選擇的成本變高。');
+  if(m.alt<45 && m.fit<65) out.push('目前替代方案也不成熟，所以「先不要去」不一定 automatically 是更好的答案。真正缺的是可比較的第二方案。');
+  if(m.escape>=70 && m.place<55) out.push('你現在很想離開目前狀態，但對目的地本身的吸引力較弱。這可能是「想離開」大於「真的想去」。');
+  if(!out.length) out.push('目前回答之間沒有明顯衝突，前往意願、未來方向與退出能力大致一致。');
+  return out;
 }
-
-function drivers(p){
-  const arr=[
-    {score:p.mom, text:p.mom>=60?'家庭／媽媽是這次選擇的重要驅動力':'家庭因素不是主要驅動力'},
-    {score:100-p.growth, text:p.growth<55?'成長路線不夠具體，是目前最大的決策缺口':'成長與競爭力累積相對穩定'},
-    {score:p.comfort, text:p.comfort>=55?'安穩生活可能提高長期停留的黏著':'舒適圈黏著風險相對可控'},
-    {score:100-p.exit, text:p.exit<55?'未來重新離開的條件還不完整':'仍保有重新換城市的能力'},
-    {score:100-p.plan, text:p.plan<55?'1–3 年計畫仍偏模糊':'未來 1–3 年方向相對清楚'}
-  ];
-  return arr.sort((x,y)=>y.score-x.score).slice(0,3).map(x=>x.text);
+function recommendations(m){
+  const out=[];
+  if(m.plan<60) out.push('先寫出「前往後 6–12 個月」至少 3 個具體成果，例如工作、收入、技能、學歷或作品，避免只用「先過去看看」當作計畫。');
+  if(m.exit<60) out.push('在搬之前先設定重新評估時間點，並保留一筆能自行搬家與支撐數月生活的資金。');
+  if(m.place<55 && m.mom>=65) out.push('把「想跟媽媽近一點」和「想選這座城市」分開思考。前者可以成立，但不應自動等於後者。');
+  if(m.growth<60) out.push('確認當地至少一條可以實際取得的發展路徑，不只看生活是否方便，也要看一年後能多出什麼能力或履歷。');
+  if(m.alt<60) out.push('至少建立一個現實可行的替代方案，再比較兩條路。沒有替代方案時，很容易把「唯一看得到的路」誤認成「最適合的路」。');
+  if(m.path>=65) out.push('如果前往，建議把它定義成一個有期限的階段，例如 6–12 個月，而不是一開始就默認長期留下。');
+  if(!out.length) out.push('目前條件已相對完整。建議把決策寫成「前往條件、重新評估日期、離開條件」三件事，之後按條件檢查，而不是只靠當下感受。');
+  return out.slice(0,5);
 }
-
-function comparison(p){
-  const go=[], stay=[];
-  if(p.mom>=45) go.push('可得到更直接的家庭支持與陪伴');
-  if(p.ind>=55) go.push('即使靠近家人，仍有一定能力維持自己的生活責任');
-  if(p.growth>=55) go.push('若把現有成長節奏帶過去，搬遷可以成為新的累積基地');
-  if(p.comfort>=55) go.push('風險：便利與穩定可能讓短期停留逐漸固定化');
-  if(p.plan<55) go.push('風險：前往後的成果與時間表目前不夠明確');
-  if(p.growth>=55) stay.push('保留目前已建立的能力累積與外部競爭環境');
-  if(p.exit<55) stay.push('避免搬去後因成本、家庭與穩定而更難再次轉換城市');
-  if(p.mom>=60) stay.push('代價：與媽媽相處及家庭支持的時間會減少');
-  if(p.plan<55) stay.push('風險：如果「不去」也沒有替代計畫，留下不一定等於成長');
-  return {go:go.slice(0,4),stay:stay.slice(0,4)};
+function conclusion(m){
+  if(m.fit>=80 && m.maturity>=70) return ['現階段高度適合前往','這個選擇不只靠情感支撐，發展、可行性與重新選擇能力也相對完整。'];
+  if(m.fit>=65) return ['較適合「有條件地前往」','可以去，但最好把它當成一個有目標、有期限、可重新評估的階段性選擇。'];
+  if(m.fit>=50) return ['可以試行，但不宜直接當長期答案','目前不是明顯不適合，而是仍有幾個關鍵條件沒有被證明。'];
+  if(m.alt<45) return ['目前證據不足，先補資訊再決定','去與不去都還沒有形成很強的方案。此時最重要的不是立刻選，而是把兩條路變得可比較。'];
+  return ['目前不建議直接做長期搬遷決定','現有答案顯示，前往的支持條件不足，或重新離開的成本偏高。'];
 }
-
-function nextSteps(p){
-  const s=[];
-  if(p.plan<65) s.push('在搬家前寫出「前 6 個月要完成的 3 個成果」，至少包含工作／學習、收入或能力累積其中兩項。');
-  if(p.exit<65) s.push('設定第一次重新評估日期（建議 3–6 個月），並寫下什麼情況下要離開或換城市。');
-  if(p.ind<65) s.push('即使和媽媽住，也預先劃分自己負責的財務、家務、行政與時間安排，避免支持逐漸變成依賴。');
-  if(p.comfort>=50) s.push('建立一項「不能因生活舒服而取消」的外部成長指標，例如作品、證照、語言、收入或求職里程碑。');
-  if(p.mom>=60) s.push('另外寫一句：「如果媽媽明天不在這座城市，我仍然願意留下，因為＿＿＿。」如果填不出來，把前往定義成陪伴家人的階段性選擇，而不是城市定居決策。');
-  if(s.length<3) s.push('每 3–6 個月重新比較一次：能力、收入、選擇權是否比搬遷前增加。');
-  return s.slice(0,4);
+function pathCompare(m){
+  const goPros=[],goRisks=[],stayPros=[],stayRisks=[];
+  if(m.mom>=60) goPros.push('有明確家庭支持，短期生活壓力可能較低。');
+  if(m.feasibility>=60) goPros.push('搬遷本身具備一定現實可行性。');
+  if(m.growth>=60) goPros.push('前往後仍有累積能力或經驗的可能。');
+  if(m.place<55) goRisks.push('排除媽媽因素後，地點本身吸引力不足。');
+  if(m.path>=60) goRisks.push('生活穩定後可能提高留下成本，形成路徑依賴。');
+  if(m.exit<60) goRisks.push('重新離開的資源或心理彈性不足。');
+  if(m.alt>=60) stayPros.push('不前往時仍有另一條具體可走的方案。');
+  else stayRisks.push('不去不代表自動變好，因為替代方案目前仍不夠成熟。');
+  if(m.escape>=65) stayPros.push('暫時不搬可以避免在「只想離開現在」的狀態下做過快決定。');
+  if(m.go>=75) stayRisks.push('如果長期壓抑強烈的前往意願，也可能產生「沒有試過」的後悔。');
+  return {goPros,goRisks,stayPros,stayRisks};
+}
+function metricBlock(name,val,desc,risk=false){
+  return `<div class="metric"><div class="metric-head"><span>${name}<span class="tag">${label(val,risk)}</span></span><span>${val}/100</span></div><div class="bar"><div style="width:${val}%"></div></div><small>${desc}</small></div>`;
 }
 
 function analyze(){
-  document.querySelectorAll('.card').forEach(c=>c.classList.remove('missing'));
-  const missing=[]; Q.forEach((_,i)=>{if(answers[i]===undefined)missing.push(i+1)});
-  const error=document.getElementById('errorBox');
+  const missing=Q.filter(q=>!isAnswered(q)).map(q=>q.id);
+  document.querySelectorAll('.card').forEach(x=>x.classList.remove('missing'));
   if(missing.length){
-    error.classList.remove('hidden'); error.textContent='尚未完成：第 '+missing.join('、')+' 題。請填完 30 題後再產生分析。';
-    missing.forEach(n=>document.getElementById('q'+n).classList.add('missing'));
-    document.getElementById('q'+missing[0]).scrollIntoView({behavior:'smooth',block:'center'}); return;
+    errorBox.classList.remove('hidden');
+    errorBox.textContent='還沒完成：第 '+missing.join('、')+' 題。';
+    missing.forEach(id=>document.getElementById('q'+id)?.classList.add('missing'));
+    document.getElementById('q'+missing[0])?.scrollIntoView({behavior:'smooth',block:'center'});
+    return;
   }
-  error.classList.add('hidden');
-  const p=calc(), c=chooseConclusion(p), patterns=patternAnalysis(p), ds=drivers(p), comp=comparison(p), steps=nextSteps(p);
-  const holder=document.getElementById('dimensions'); holder.innerHTML='';
-  const summary=document.createElement('div'); summary.className='conclusion';
-  summary.innerHTML=`<h2>${c[0]}｜${c[1]}</h2><p>${c[2]}</p><p><strong>目前最重要的不是單純回答「去／不去」，而是確認這個選擇會不會增加三年後的選擇權。</strong></p>`;
-  holder.appendChild(summary);
-  const drive=document.createElement('div'); drive.className='report-section'; drive.innerHTML=`<h3>影響這次決策最大的 3 個因素</h3><ul>${ds.map(x=>`<li>${x}</li>`).join('')}</ul>`; holder.appendChild(drive);
-  Object.keys(DIM).forEach(k=>{
-    const d=document.createElement('div'); d.className='dimension'; const shown=p[k];
-    d.innerHTML=`<div class="dimension-head"><span>${DIM[k].name}<span class="tag">${level(shown,DIM[k].risk)}</span></span><span>${shown}%</span></div><div class="mini"><div style="width:${shown}%"></div></div><p>${explain(k,shown)}</p>`; holder.appendChild(d);
-  });
-  const pat=document.createElement('div'); pat.className='report-section'; pat.innerHTML=`<h3>回答中的交叉訊號</h3><ul>${patterns.map(x=>`<li>${x}</li>`).join('')}</ul>`; holder.appendChild(pat);
-  const compare=document.createElement('div'); compare.className='report-section'; compare.innerHTML=`<h3>搬去 vs. 不搬去</h3><p><strong>如果搬去：</strong></p><ul>${comp.go.map(x=>`<li>${x}</li>`).join('')}</ul><p><strong>如果暫時不搬：</strong></p><ul>${comp.stay.map(x=>`<li>${x}</li>`).join('')}</ul>`; holder.appendChild(compare);
-  const next=document.createElement('div'); next.className='report-section'; next.innerHTML=`<h3>建議先完成的條件</h3><ul>${steps.map(x=>`<li>${x}</li>`).join('')}</ul>`; holder.appendChild(next);
-  document.getElementById('conclusion').innerHTML=`<h2>怎麼使用這份結果</h2><p>這份結果不是在替你決定要不要去，而是在找出「什麼條件補齊之後，這個選擇比較不會犧牲未來的選擇權」。分數也不是人格好壞：媽媽因素與舒適圈為風險指標，數字越高代表越需要留意；其餘四項數字越高代表資源越完整。</p>`;
-  document.getElementById('results').classList.remove('hidden'); document.getElementById('copyBtn').disabled=false;
-  document.getElementById('results').scrollIntoView({behavior:'smooth',block:'start'});
+  errorBox.classList.add('hidden');
+  const m=buildMetrics(), c=conclusion(m), signals=crossSignals(m), recs=recommendations(m), cmp=pathCompare(m);
+  const free19=A[19]||'', free30=A[30]||'';
+  const metrics=[
+    ['前往意願',m.go,'你自己對「去媽媽那裡」這個選擇有多強烈。'],
+    ['媽媽影響度',m.mom,'媽媽的位置、期待與支持，在這個決定中占多大比重。',true],
+    ['地點獨立吸引力',m.place,'把媽媽因素拿掉後，這個地方本身還值不值得你選。'],
+    ['未來方向清晰度',m.plan,'你是否知道接下來 1–3 年要累積什麼，以及前往後怎麼開始。'],
+    ['發展增益',m.growth,'前往是否能增加工作、技能、學習、收入或未來選擇。'],
+    ['現實可行性',m.feasibility,'這件事是否真的能落地，而不只是想像。'],
+    ['自主／退出能力',m.exit,'去了之後能不能自己生活，也能不能重新離開。'],
+    ['替代方案成熟度',m.alt,'如果不去，是否存在另一條具體、可執行而且你願意走的路。'],
+    ['路徑依賴風險',m.path,'是否可能因低成本、穩定、熟悉或重新開始太麻煩而一直留下。',true]
+  ];
+  lastReport={m,c,signals,recs,cmp,free19,free30,metrics};
+
+  results.innerHTML=`
+    <div class="hero">
+      <h2>${c[0]}</h2>
+      <div class="big">${m.fit}/100</div>
+      <p><strong>前往適配度</strong>｜${c[1]}</p>
+      <p><strong>決策成熟度：${m.maturity}/100</strong>。這個分數不是在測你「想不想去」，而是在看這個決定是否已經有足夠的方向、比較與退出條件。</p>
+    </div>
+    <div class="report"><h3>九個核心分數</h3>${metrics.map(x=>metricBlock(...x)).join('')}</div>
+    <div class="report"><h3>交叉分析</h3><ul>${signals.map(x=>`<li>${x}</li>`).join('')}</ul></div>
+    <div class="report"><h3>如果現在去 vs. 現在不去</h3>
+      <div class="grid2">
+        <div class="path"><h4>如果現在去</h4><p><strong>可能的優勢</strong></p><ul>${(cmp.goPros.length?cmp.goPros:['目前沒有特別強的優勢訊號。']).map(x=>`<li>${x}</li>`).join('')}</ul><p><strong>主要風險</strong></p><ul>${(cmp.goRisks.length?cmp.goRisks:['目前沒有明顯高風險訊號。']).map(x=>`<li>${x}</li>`).join('')}</ul></div>
+        <div class="path"><h4>如果現在不去</h4><p><strong>可能的優勢</strong></p><ul>${(cmp.stayPros.length?cmp.stayPros:['目前沒有特別強的優勢訊號。']).map(x=>`<li>${x}</li>`).join('')}</ul><p><strong>主要風險</strong></p><ul>${(cmp.stayRisks.length?cmp.stayRisks:['目前沒有明顯高風險訊號。']).map(x=>`<li>${x}</li>`).join('')}</ul></div>
+      </div>
+    </div>
+    <div class="report"><h3>現在最需要先處理的事情</h3><ul>${recs.map(x=>`<li>${x}</li>`).join('')}</ul></div>
+    <div class="report"><h3>你自己真正想要的路</h3><p><strong>不考慮錢、住宿與媽媽感受：</strong><br>${escapeHtml(free19)}</p><p><strong>如果不用向任何人解釋：</strong><br>${escapeHtml(free30)}</p></div>
+    <div class="report"><h3>怎麼使用這份結果</h3><p>先不要只看總分。真正值得看的，是「哪幾個分數彼此不一致」。例如很想去，但地點吸引力低；或前往適配度高，但退出能力低。這些落差通常比單一高低分更能指出下一步要補什麼。</p></div>
+  `;
+  results.classList.remove('hidden');
+  copyBtn.disabled=false;
+  results.scrollIntoView({behavior:'smooth',block:'start'});
 }
 
-function copyAll(){
-  if(Object.keys(answers).length<30)return;
-  const p=calc(), c=chooseConclusion(p), patterns=patternAnalysis(p), ds=drivers(p), comp=comparison(p), steps=nextSteps(p);
-  let text='下一階段生活選擇｜完整回答與決策分析\n\n';
-  Q.forEach((q,i)=>{text+=`${i+1}. ${q.t}\n回答：${q.o[answers[i]]}\n\n`});
-  text+='六維結果\n'; Object.keys(DIM).forEach(k=>text+=`${DIM[k].name}：${p[k]}%（${level(p[k],DIM[k].risk)}）\n`);
-  text+=`\n綜合結論：${c[0]}｜${c[1]}\n${c[2]}\n\n主要因素\n- ${ds.join('\n- ')}\n\n交叉訊號\n- ${patterns.join('\n- ')}\n\n如果搬去\n- ${comp.go.join('\n- ')}\n\n如果暫時不搬\n- ${comp.stay.join('\n- ')}\n\n建議先完成的條件\n- ${steps.join('\n- ')}\n\n此結果依照你的回答進行多維度決策分析，不是心理診斷或人生決策的唯一依據。`;
-  navigator.clipboard.writeText(text).then(()=>{const b=document.getElementById('copyBtn'),old=b.textContent;b.textContent='已複製';setTimeout(()=>b.textContent=old,1500)}).catch(()=>{const ta=document.createElement('textarea');ta.value=text;document.body.appendChild(ta);ta.select();document.execCommand('copy');ta.remove()});
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
+function answerText(q){
+  const a=A[q.id];
+  if(q.type==='range') return `${a}/10`;
+  if(q.type==='text') return a;
+  if(q.type==='single') return q.o[a];
+  if(q.type==='multi') return a.map(i=>q.o[i]).join('、');
+  if(q.type==='single_text') return q.o[a.choice]+(a.text?`｜補充：${a.text}`:'');
+  return '';
+}
+async function copyAll(){
+  if(!lastReport) return;
+  const r=lastReport;
+  let txt='下一階段生活選擇｜V3\n\n';
+  Q.forEach(q=>{txt+=`${q.id}. ${q.t}\n回答：${answerText(q)}\n\n`;});
+  txt+='=== 分析 ===\n';
+  txt+=`前往適配度：${r.m.fit}/100\n決策成熟度：${r.m.maturity}/100\n結論：${r.c[0]}\n\n`;
+  r.metrics.forEach(x=>txt+=`${x[0]}：${x[1]}/100\n`);
+  txt+='\n交叉分析：\n'+r.signals.map(x=>'• '+x).join('\n');
+  txt+='\n\n建議：\n'+r.recs.map(x=>'• '+x).join('\n');
+  try{await navigator.clipboard.writeText(txt);copyBtn.textContent='已複製';setTimeout(()=>copyBtn.textContent='複製完整回答與分析',1400)}
+  catch(e){const ta=document.createElement('textarea');ta.value=txt;document.body.appendChild(ta);ta.select();document.execCommand('copy');ta.remove();}
+}
+function clearAll(){
+  if(!confirm('確定要清除所有回答並重新填寫嗎？')) return;
+  A={};lastReport=null;localStorage.removeItem(STORAGE_KEY);results.classList.add('hidden');copyBtn.disabled=true;renderSurvey();window.scrollTo({top:0,behavior:'smooth'});
 }
 
 document.getElementById('analyzeBtn').addEventListener('click',analyze);
 document.getElementById('copyBtn').addEventListener('click',copyAll);
-document.getElementById('clearBtn').addEventListener('click',()=>{
-  if(confirm('確定要清除所有回答並重新填寫嗎？')){
-    localStorage.removeItem(STORAGE_KEY);answers={};
-    document.getElementById('results').classList.add('hidden');
-    document.getElementById('copyBtn').disabled=true;
-    document.getElementById('errorBox').classList.add('hidden');
-    render();
-    window.scrollTo({top:0,behavior:'smooth'});
-  }
-});
-render();
+document.getElementById('clearBtn').addEventListener('click',clearAll);
+
+renderSurvey();
 </script>
 </body>
 </html>
