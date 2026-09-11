@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#ffffff" />
+  <title>下一階段生活選擇</title>
+  <style>
+    :root{
+      --bg:#f6f7f8; --card:#fff; --text:#17191c; --muted:#70757d;
+      --line:#e6e8eb; --accent:#20242a; --soft:#f0f2f4; --danger:#b42318;
+      --ok:#256d3f;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;background:var(--bg);color:var(--text)}
+    .wrap{max-width:760px;margin:0 auto;padding:20px 14px 72px}
+    header{background:#fff;border:1px solid var(--line);border-radius:18px;padding:20px;margin-bottom:14px;position:sticky;top:8px;z-index:10;box-shadow:0 6px 24px rgba(0,0,0,.04)}
+    h1{font-size:24px;margin:0 0 8px}
+    .sub{font-size:14px;color:var(--muted);line-height:1.6}
+    .progress-row{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-top:16px;font-size:14px}
+    .progress{height:8px;background:#eceff1;border-radius:999px;overflow:hidden;margin-top:8px}
+    .progress > div{height:100%;background:var(--accent);width:0;transition:width .2s}
+    .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;margin:12px 0}
+    .qnum{font-size:12px;color:var(--muted);margin-bottom:7px}
+    .qtext{font-weight:700;line-height:1.55;margin-bottom:12px}
+    .option{display:flex;align-items:flex-start;gap:10px;padding:12px 13px;border:1px solid var(--line);border-radius:12px;margin:8px 0;cursor:pointer;background:#fff;transition:.15s}
+    .option:hover{background:#fafafa}
+    .option.selected{border-color:#1f2937;background:#f4f6f8}
+    .option input{margin-top:2px;flex:0 0 auto}
+    .option span{line-height:1.5}
+    .actions{display:grid;grid-template-columns:1fr;gap:10px;margin-top:18px}
+    button{appearance:none;border:0;border-radius:12px;padding:14px 16px;font-size:16px;font-weight:700;cursor:pointer}
+    .primary{background:#17191c;color:#fff}
+    .secondary{background:#fff;color:#17191c;border:1px solid var(--line)}
+    .danger{background:#fff;color:var(--danger);border:1px solid #f0c7c2}
+    .notice{margin-top:12px;font-size:13px;color:var(--muted);line-height:1.6}
+    .error{color:var(--danger);font-weight:700;margin-top:12px;line-height:1.6}
+    .hidden{display:none}
+    .results{margin-top:18px}
+    .dimension{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px;margin:10px 0}
+    .dimension-head{display:flex;justify-content:space-between;gap:10px;font-weight:700}
+    .mini{height:7px;background:#edf0f2;border-radius:999px;overflow:hidden;margin:10px 0}
+    .mini div{height:100%;background:#30353b}
+    .dimension p,.conclusion p{margin:6px 0 0;color:#50555c;font-size:14px;line-height:1.65}
+    .conclusion{background:#fff;border:2px solid #222;border-radius:16px;padding:16px;margin-top:14px}
+    .conclusion h2{font-size:18px;margin:0 0 6px}
+    .missing{outline:2px solid #f4b5ae;scroll-margin-top:140px}
+    .footer-note{font-size:12px;color:var(--muted);margin-top:20px;line-height:1.6}
+    @media(min-width:620px){.wrap{padding:28px 20px 84px}.actions{grid-template-columns:1fr 1fr}.actions .primary{grid-column:1/-1}}
+    @media(max-width:390px){.wrap{padding:12px 10px 54px}header{padding:16px;top:4px}h1{font-size:21px}.card{padding:14px}.option{padding:12px 11px}}
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>下一階段生活選擇</h1>
+    <div class="sub">30 道題目，用六個角度整理「現在是否適合搬去媽媽所在的地方生活」。請依照你現在真實的想法作答，不需要猜哪個答案比較好。</div>
+    <div class="progress-row"><span id="doneText">已完成 0 / 30</span><span id="percentText">0%</span></div>
+    <div class="progress"><div id="progressBar"></div></div>
+  </header>
+
+  <main id="survey"></main>
+
+  <div class="actions">
+    <button class="primary" id="analyzeBtn">產生分析結果</button>
+    <button class="secondary" id="copyBtn" disabled>複製完整回答</button>
+    <button class="danger" id="clearBtn">清除重新填寫</button>
+  </div>
+  <div id="errorBox" class="error hidden"></div>
+
+  <section id="results" class="results hidden">
+    <div id="dimensions"></div>
+    <div id="conclusion" class="conclusion"></div>
+    <div class="notice">此結果依照你的回答進行多維度分析，不是心理診斷或人生決策的唯一依據。</div>
+  </section>
+
+  <div class="footer-note">本頁不登入、不連資料庫、不使用 API。回答只儲存在你目前瀏覽器的 localStorage。</div>
+</div>
+
+<script>
+const STORAGE_KEY = 'lifeChoiceSurvey_v1';
+
+const Q = [
+{t:'如果媽媽不在那座城市，你還會想搬去那裡嗎？',o:['很可能還是會','可能會，但吸引力會下降','大概不會','幾乎完全不會'],s:{mom:[0,1,2,3],plan:[3,2,1,0]}},
+{t:'目前你想去那裡，最主要是被什麼吸引？',o:['城市本身的機會與生活條件','一個具體工作／學習機會','媽媽在那裡，生活比較安心','主要是想離開現在的狀態'],s:{mom:[0,0,3,1],growth:[2,3,0,0],plan:[2,3,1,0]}},
+{t:'如果下個月真的搬過去，你知道前 6 個月大致要做什麼嗎？',o:['有明確工作／學習／收入安排','有方向，也有幾個可執行步驟','只知道先過去再說','幾乎沒有規劃'],s:{plan:[3,2,1,0],growth:[3,2,1,0]}},
+{t:'如果媽媽提供住宿與照顧，你覺得自己會怎麼安排日常？',o:['仍照自己的工作與學習節奏','會接受幫忙，但保留自己的責任','可能會慢慢依賴現成安排','希望先被照顧一段時間再說'],s:{ind:[3,2,1,0],comfort:[0,1,2,3]}},
+{t:'你覺得現階段最需要優先累積的是什麼？',o:['可帶走的技能／作品／學歷','收入與職涯經驗','穩定與生活秩序','陪伴家人與休息'],s:{growth:[3,3,1,0],plan:[2,2,1,1]}},
+{t:'如果在媽媽身邊住 2 年，你最希望得到什麼？',o:['完成一個明確職涯／學習成果','累積存款並建立下一步','讓生活穩定、有人照應','暫時不要想太多未來'],s:{growth:[3,2,1,0],plan:[3,3,1,0],comfort:[0,1,2,3]}},
+{t:'如果改去一個競爭更強的城市 2 年，你覺得最可能得到什麼？',o:['更強技能、人脈與履歷','更多收入與機會，但壓力也大','不確定，可能只是更累','我不覺得競爭更強一定更好'],s:{growth:[3,2,0,1],plan:[2,2,1,1]}},
+{t:'如果現在搬去，你有沒有先設定「何時重新評估要不要離開」？',o:['有明確日期與條件','有大概時間點','想等住一陣子再看','沒有想過'],s:{exit:[3,2,1,0],plan:[3,2,1,0]}},
+{t:'如果那裡有工作、住處、朋友和媽媽，但別的城市出現更好的機會，你會怎麼做？',o:['會重新比較，必要時離開','會認真考慮，但需要一點時間','除非差距非常大才會離開','大概會留下，因為搬走很麻煩'],s:{exit:[3,2,1,0],comfort:[0,1,2,3]}},
+{t:'如果你其實不太喜歡那座城市，但生活很方便又穩定，你最可能怎麼做？',o:['設定期限，期限到就重新選擇','先住一段時間，同時保留外部機會','只要方便穩定就可能一直住','看媽媽是否也留在那裡'],s:{exit:[3,2,0,1],comfort:[0,1,3,2],mom:[0,0,1,3]}},
+{t:'你怎麼看「我不喜歡這地方，所以不會形成舒適圈」這句話？',o:['不一定，便利與低成本也會形成舒適圈','有可能，但要看生活結構','我覺得大致成立','我沒想過這件事'],s:{comfort:[0,1,3,2],plan:[2,2,0,1]}},
+{t:'過去你有沒有出現過「本來只想暫時做，最後卻拖很久」？',o:['幾乎沒有，我通常會按時間點調整','偶爾有，但會自己拉回來','有過幾次','常常如此'],s:{comfort:[0,1,2,3],exit:[3,2,1,0]}},
+{t:'做重大決定時，你通常比較接近哪一種？',o:['先列條件與期限，再做決定','理性與感受大約各半','多半看當下感受','通常先做了再想後果'],s:{plan:[3,2,1,0],exit:[3,2,1,0]}},
+{t:'如果媽媽希望你留下，但你原本計畫要去別的城市，你會怎麼做？',o:['仍以自己的長期計畫為主','會討論，但不會直接改變目標','可能會因此延後','大概會留下陪她'],s:{mom:[0,1,2,3],exit:[3,2,1,0],ind:[3,2,1,0]}},
+{t:'如果跟媽媽住，你準備自己負責多少生活事務？',o:['財務、家務、行政與時間安排都自己負責','大部分自己負責，少部分互相幫忙','很多事情會讓媽媽處理','希望媽媽先幫我安頓好'],s:{ind:[3,2,1,0],comfort:[0,1,2,3]}},
+{t:'你是否真正獨自在陌生城市生活過？',o:['有，而且能自己處理大多數問題','有，但時間不長','只有短期旅行／交換類經驗','幾乎沒有'],s:{ind:[3,2,1,0]}},
+{t:'如果不是去媽媽身邊，你還會把這座城市列入前三個選項嗎？',o:['會，而且理由很明確','可能會','大概不會','完全不會'],s:{mom:[0,1,2,3],plan:[3,2,1,0]}},
+{t:'如果不去找媽媽，你有沒有願意投入 1–2 年的其他目標？',o:['有，而且知道它對未來很重要','有幾個方向正在比較','有想法，但不太具體','沒有，現在只想先換環境'],s:{growth:[3,2,1,0],plan:[3,2,1,0]}},
+{t:'如果選擇不去，接下來兩年你比較可能怎麼過？',o:['執行一個明確職涯／學習計畫','工作並穩定累積技能或存款','先維持現況，看機會再說','我其實沒有想像過'],s:{growth:[3,2,1,0],plan:[3,2,1,0]}},
+{t:'如果選擇去，接下來兩年你比較可能怎麼過？',o:['有清楚工作／學習里程碑','先找工作，再逐步調整','先安頓生活，其他之後再說','主要想靠近媽媽，其他未定'],s:{plan:[3,2,1,0],growth:[3,2,1,0],mom:[0,0,1,3]}},
+{t:'你現在是否正在快速累積技能、學歷、作品、語言、收入或人脈？',o:['是，而且正處於關鍵上升期','有穩定累積','有一些，但速度普通','目前幾乎沒有累積'],s:{growth:[3,2,1,0]}},
+{t:'搬去媽媽所在的地方，對你目前的累積節奏可能有什麼影響？',o:['可以延續，甚至更好','大致不變','會中斷一部分','很可能整體重來'],s:{growth:[3,2,1,0],plan:[2,2,1,0]}},
+{t:'如果工作很穩定，但兩年後看不到明顯成長，你能接受多久？',o:['3–6 個月就會檢查下一步','最多約 1 年','1–2 年也可以','只要穩定就可以一直做'],s:{comfort:[0,1,2,3],exit:[3,2,1,0],growth:[3,2,1,0]}},
+{t:'幾年後回頭看，你最怕後悔哪一件事？',o:['沒有建立自己的能力與選擇權','錯過一個很重要的職涯機會','沒有多陪媽媽','當時太累，沒有先讓自己穩定'],s:{growth:[3,3,0,1],mom:[0,0,3,1]}},
+{t:'你現在是真的想去那裡，還是更像想離開目前的生活？',o:['是真的想去，城市本身有吸引力','兩者都有','比較像想離開現在','我還分不清楚'],s:{plan:[3,2,0,1],mom:[0,1,1,1]}},
+{t:'如果媽媽半年後又搬去另一座城市，你會怎麼做？',o:['不會跟著走，除非那也符合我的計畫','會重新評估','很可能一起搬','大概會跟著她走'],s:{mom:[0,1,2,3],ind:[3,2,1,0],exit:[3,2,1,0]}},
+{t:'你能接受「只去 3–6 個月」，期限到即使住得舒服也重新評估嗎？',o:['可以，而且願意先寫下退出條件','可以，但到時候再看','可能很難，因為搬一次很麻煩','不太想設定期限'],s:{exit:[3,2,1,0],comfort:[0,1,2,3],plan:[3,2,1,0]}},
+{t:'你有沒有準備一筆不依賴媽媽、可以讓自己離開那裡的資金？',o:['有，足夠搬家與支撐幾個月','有一部分','目前很少','沒有'],s:{exit:[3,2,1,0],ind:[3,2,1,0]}},
+{t:'如果搬去 6 個月後，能力、收入、工作或學習都沒有明顯進展，你會怎麼做？',o:['按照原本條件重新評估，必要時離開','先再給自己幾個月','可能會因為生活穩定而繼續住','只要跟媽媽住得還好就不急'],s:{exit:[3,2,1,0],growth:[3,2,1,0],comfort:[0,1,2,3],mom:[0,0,1,3]}},
+{t:'排除孤單、媽媽、疲累與搬家麻煩後，哪一種選擇更可能讓三年後的你擁有更多選擇？',o:['有明確答案，而且知道原因','有一個偏好的方向','兩邊差不多，很難判斷','我目前完全不知道'],s:{plan:[3,2,1,0],growth:[3,2,1,0],exit:[3,2,1,0]}}
+];
+
+const DIM = {
+  mom:{name:'媽媽因素',risk:true},
+  growth:{name:'競爭力／成長',risk:false},
+  comfort:{name:'舒適圈風險',risk:true},
+  ind:{name:'獨立程度',risk:false},
+  exit:{name:'退出能力',risk:false},
+  plan:{name:'計畫清晰度',risk:false}
+};
+
+let answers = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+
+function render(){
+  const survey = document.getElementById('survey');
+  survey.innerHTML = '';
+  Q.forEach((q,i)=>{
+    const card = document.createElement('section');
+    card.className='card';
+    card.id=`q${i+1}`;
+    card.innerHTML=`<div class="qnum">第 ${i+1} 題</div><div class="qtext">${q.t}</div>`;
+    q.o.forEach((opt,j)=>{
+      const label=document.createElement('label');
+      label.className='option'+(answers[i]===j?' selected':'');
+      label.innerHTML=`<input type="radio" name="q${i}" value="${j}" ${answers[i]===j?'checked':''}><span>${opt}</span>`;
+      label.addEventListener('click',()=>{
+        answers[i]=j;
+        localStorage.setItem(STORAGE_KEY,JSON.stringify(answers));
+        card.querySelectorAll('.option').forEach(x=>x.classList.remove('selected'));
+        label.classList.add('selected');
+        card.classList.remove('missing');
+        updateProgress();
+      });
+      card.appendChild(label);
+    });
+    survey.appendChild(card);
+  });
+  updateProgress();
+}
+
+function updateProgress(){
+  const n=Object.keys(answers).filter(k=>answers[k]!==undefined).length;
+  document.getElementById('doneText').textContent=`已完成 ${n} / 30`;
+  const p=Math.round(n/30*100);
+  document.getElementById('percentText').textContent=p+'%';
+  document.getElementById('progressBar').style.width=p+'%';
+}
+
+function calc(){
+  const sums={}, maxs={};
+  Object.keys(DIM).forEach(k=>{sums[k]=0;maxs[k]=0});
+  Q.forEach((q,i)=>{
+    const a=answers[i];
+    if(a===undefined)return;
+    Object.entries(q.s||{}).forEach(([dim,arr])=>{
+      sums[dim]+=arr[a];
+      maxs[dim]+=Math.max(...arr);
+    });
+  });
+  const pct={};
+  Object.keys(DIM).forEach(k=>pct[k]=maxs[k]?Math.round(sums[k]/maxs[k]*100):0);
+  return pct;
+}
+
+function explain(k,v){
+  const high = v>=70, mid=v>=45;
+  const texts={
+    mom: high?'目前搬去的動力很大一部分和媽媽的存在、照顧或陪伴有關。這不代表不能去，但最好把「自己的理由」另外寫清楚。':mid?'媽媽是重要因素之一，但不是唯一因素。適合再確認城市、工作與個人目標本身是否也成立。':'目前選擇較不依賴媽媽是否在場，個人理由相對獨立。',
+    growth: high?'目前對技能、履歷、收入或其他可帶走能力的累積意識較強。':mid?'有成長意識，但搬遷後是否能持續累積還需要更具體安排。':'目前成長路線較模糊，若直接搬遷，容易先追求穩定而延後能力累積。',
+    comfort: high?'目前形成「方便但難離開」的風險較高，尤其在住房、照顧與穩定工作同時存在時。':mid?'有一定舒適圈風險，最好預先設定檢查點與離開條件。':'你對舒適圈與拖延停留的風險已有較明確警覺。',
+    ind: high?'生活責任、決策與資源較能維持在自己手上。':mid?'具備部分獨立能力，但仍有幾個地方容易依賴家庭支持。':'目前較依賴外部照顧或尚缺少獨立城市生活經驗，搬遷後需刻意保留自己的責任。',
+    exit: high?'即使搬去，也較有能力保留「再離開」的選項，包括期限、資金與決策彈性。':mid?'有離開意識，但退出條件或資源仍不完整。':'一旦安頓後，未來轉換城市的成本可能快速升高，建議先準備退出條件與資金。',
+    plan: high?'1–3 年方向與搬遷後前幾個月的安排相對清楚。':mid?'有方向，但還缺少明確時間點、里程碑或替代方案。':'目前較多是感受與環境驅動，計畫結構不足，適合先把去／不去兩條路各自寫成兩年版本。'
+  };
+  return texts[k];
+}
+
+function chooseConclusion(p){
+  const momRisk=p.mom, comfort=p.comfort, avgPositive=(p.growth+p.ind+p.exit+p.plan)/4;
+  if(avgPositive>=70 && momRisk<55 && comfort<55){
+    return ['A','目前可以去，而且有能力保持自己的發展路線','你的回答顯示，搬遷不是單靠家庭情感支撐，而且你保有成長、獨立與退出能力。重點是把原本的節奏帶過去，而不是搬去之後再重新找方向。'];
+  }
+  if(avgPositive>=55 && p.exit>=50 && p.plan>=50){
+    return ['B','適合短期去，但應先設定 3–6 個月檢查點','你具備一定計畫與轉換能力，但仍有家庭或穩定生活帶來的黏著風險。短期試住比直接把它定義成長期定居更合適。'];
+  }
+  if(momRisk>=60 || p.plan<45 || p.growth<45){
+    return ['C','目前去的主要動力可能來自家庭／逃離現況，建議先建立自己的發展計畫','你的回答裡，個人發展路線尚未完全獨立成立。先把「如果媽媽不在那裡，我還要什麼」和未來兩年的累積目標寫清楚，再決定搬遷，會更有選擇權。'];
+  }
+  return ['D','目前長期搬去的風險較高，可能降低未來選擇權','最大的問題不一定是那座城市好不好，而是安頓後是否還能離開。若要去，應先準備期限、離開基金、成長里程碑與重新評估條件。'];
+}
+
+function analyze(){
+  document.querySelectorAll('.card').forEach(c=>c.classList.remove('missing'));
+  const missing=[];
+  Q.forEach((_,i)=>{if(answers[i]===undefined)missing.push(i+1)});
+  const error=document.getElementById('errorBox');
+  if(missing.length){
+    error.classList.remove('hidden');
+    error.textContent='尚未完成：第 '+missing.join('、')+' 題。請填完 30 題後再產生分析。';
+    missing.forEach(n=>document.getElementById('q'+n).classList.add('missing'));
+    document.getElementById('q'+missing[0]).scrollIntoView({behavior:'smooth',block:'center'});
+    return;
+  }
+  error.classList.add('hidden');
+  const p=calc();
+  const holder=document.getElementById('dimensions');
+  holder.innerHTML='';
+  Object.keys(DIM).forEach(k=>{
+    const d=document.createElement('div');
+    d.className='dimension';
+    const shown = DIM[k].risk ? p[k] : p[k];
+    d.innerHTML=`<div class="dimension-head"><span>${DIM[k].name}</span><span>${shown}%</span></div><div class="mini"><div style="width:${shown}%"></div></div><p>${explain(k,p[k])}</p>`;
+    holder.appendChild(d);
+  });
+  const c=chooseConclusion(p);
+  document.getElementById('conclusion').innerHTML=`<h2>${c[0]}｜${c[1]}</h2><p>${c[2]}</p>`;
+  document.getElementById('results').classList.remove('hidden');
+  document.getElementById('copyBtn').disabled=false;
+  document.getElementById('results').scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function copyAll(){
+  if(Object.keys(answers).length<30){return}
+  const p=calc();
+  const c=chooseConclusion(p);
+  let text='下一階段生活選擇｜完整回答\n\n';
+  Q.forEach((q,i)=>{text+=`${i+1}. ${q.t}\n回答：${q.o[answers[i]]}\n\n`});
+  text+='六維結果\n';
+  Object.keys(DIM).forEach(k=>text+=`${DIM[k].name}：${p[k]}%\n`);
+  text+=`\n綜合結論：${c[0]}｜${c[1]}\n${c[2]}\n\n此結果依照你的回答進行多維度分析，不是心理診斷或人生決策的唯一依據。`;
+  navigator.clipboard.writeText(text).then(()=>{
+    const b=document.getElementById('copyBtn'); const old=b.textContent;
+    b.textContent='已複製'; setTimeout(()=>b.textContent=old,1500);
+  }).catch(()=>{
+    const ta=document.createElement('textarea');ta.value=text;document.body.appendChild(ta);ta.select();document.execCommand('copy');ta.remove();
+  });
+}
+
+document.getElementById('analyzeBtn').addEventListener('click',analyze);
+document.getElementById('copyBtn').addEventListener('click',copyAll);
+document.getElementById('clearBtn').addEventListener('click',()=>{
+  if(confirm('確定要清除所有回答並重新填寫嗎？')){
+    localStorage.removeItem(STORAGE_KEY);answers={};
+    document.getElementById('results').classList.add('hidden');
+    document.getElementById('copyBtn').disabled=true;
+    document.getElementById('errorBox').classList.add('hidden');
+    render();
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+});
+render();
+</script>
+</body>
+</html>
