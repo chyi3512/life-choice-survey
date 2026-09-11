@@ -44,6 +44,11 @@
     .dimension p,.conclusion p{margin:6px 0 0;color:#50555c;font-size:14px;line-height:1.65}
     .conclusion{background:#fff;border:2px solid #222;border-radius:16px;padding:16px;margin-top:14px}
     .conclusion h2{font-size:18px;margin:0 0 6px}
+    .report-section{background:#fff;border:1px solid var(--line);border-radius:14px;padding:15px;margin:10px 0}
+    .report-section h3{font-size:16px;margin:0 0 9px}
+    .report-section p{margin:7px 0;color:#50555c;font-size:14px;line-height:1.7}
+    .report-section ul{margin:7px 0 0;padding-left:20px;color:#50555c;font-size:14px;line-height:1.7}
+    .tag{display:inline-block;font-size:12px;padding:4px 8px;border-radius:999px;background:var(--soft);margin-left:6px;font-weight:600}
     .missing{outline:2px solid #f4b5ae;scroll-margin-top:140px}
     .footer-note{font-size:12px;color:var(--muted);margin-top:20px;line-height:1.6}
     @media(min-width:620px){.wrap{padding:28px 20px 84px}.actions{grid-template-columns:1fr 1fr}.actions .primary{grid-column:1/-1}}
@@ -175,78 +180,119 @@ function calc(){
   return pct;
 }
 
+function level(v, risk=false){
+  if(risk) return v>=70?'高':v>=45?'中等':'低';
+  return v>=70?'強':v>=45?'中等':'偏弱';
+}
+
 function explain(k,v){
-  const high = v>=70, mid=v>=45;
+  const high=v>=70, mid=v>=45;
   const texts={
-    mom: high?'目前搬去的動力很大一部分和媽媽的存在、照顧或陪伴有關。這不代表不能去，但最好把「自己的理由」另外寫清楚。':mid?'媽媽是重要因素之一，但不是唯一因素。適合再確認城市、工作與個人目標本身是否也成立。':'目前選擇較不依賴媽媽是否在場，個人理由相對獨立。',
-    growth: high?'目前對技能、履歷、收入或其他可帶走能力的累積意識較強。':mid?'有成長意識，但搬遷後是否能持續累積還需要更具體安排。':'目前成長路線較模糊，若直接搬遷，容易先追求穩定而延後能力累積。',
-    comfort: high?'目前形成「方便但難離開」的風險較高，尤其在住房、照顧與穩定工作同時存在時。':mid?'有一定舒適圈風險，最好預先設定檢查點與離開條件。':'你對舒適圈與拖延停留的風險已有較明確警覺。',
-    ind: high?'生活責任、決策與資源較能維持在自己手上。':mid?'具備部分獨立能力，但仍有幾個地方容易依賴家庭支持。':'目前較依賴外部照顧或尚缺少獨立城市生活經驗，搬遷後需刻意保留自己的責任。',
-    exit: high?'即使搬去，也較有能力保留「再離開」的選項，包括期限、資金與決策彈性。':mid?'有離開意識，但退出條件或資源仍不完整。':'一旦安頓後，未來轉換城市的成本可能快速升高，建議先準備退出條件與資金。',
-    plan: high?'1–3 年方向與搬遷後前幾個月的安排相對清楚。':mid?'有方向，但還缺少明確時間點、里程碑或替代方案。':'目前較多是感受與環境驅動，計畫結構不足，適合先把去／不去兩條路各自寫成兩年版本。'
+    mom: high?'媽媽對這次搬遷的吸引力明顯偏高。家庭支持本身不是問題，但城市與人生方向需要有即使媽媽不在也成立的理由。':mid?'媽媽是重要因素之一，但不是唯一因素。關鍵在於城市、工作與個人目標能否獨立成立。':'這次選擇較不依賴媽媽是否在場，城市或個人發展理由相對獨立。',
+    growth: high?'你目前很重視可帶走的能力，例如技能、履歷、收入、作品或人脈，搬遷決策有較強的成長導向。':mid?'你有成長意識，但搬遷後如何持續累積還需要更具體的路徑與里程碑。':'目前成長路線較模糊，直接搬遷容易先解決生活穩定，再把能力累積延後。',
+    comfort: high?'「方便、有人照應、成本低、生活穩定」可能提高停留黏著度。真正的風險不是喜不喜歡城市，而是之後缺少重新選擇的動力。':mid?'存在一定舒適圈風險。預先設定檢查點、成果條件與離開條件，可以降低短期選擇變成長期停留的機率。':'你對便利與穩定造成的黏著風險已有較清楚的警覺，較能把短期安頓和長期定居分開。',
+    ind: high?'生活責任、決策與資源大多能維持在自己手上，即使接受家庭支持，也較不容易失去自主性。':mid?'具備部分獨立能力，但搬去後仍有幾個環節可能逐漸交由家庭處理。':'目前較依賴外部照顧，或缺少獨立城市生活經驗。若搬去，生活責任最好一開始就分清楚。',
+    exit: high?'你有較完整的轉換意識，包含期限、資金與重新比較其他城市的能力，搬去不等於把其他選項關掉。':mid?'你知道未來可能需要離開，但退出條件、資金或時間點還不夠完整。':'一旦安頓後，轉換城市的成本可能快速升高。最大的風險是「原本只是暫時」最後沒有重新評估。',
+    plan: high?'搬遷後前幾個月與未來 1–3 年方向相對清楚，這次選擇比較像計畫的一部分，而不是單純換環境。':mid?'已有方向，但還缺少明確時間點、里程碑或替代方案。':'目前較多由感受、家庭或環境推動，去與不去兩條路都還缺少具體的兩年版本。'
   };
   return texts[k];
 }
 
 function chooseConclusion(p){
-  const momRisk=p.mom, comfort=p.comfort, avgPositive=(p.growth+p.ind+p.exit+p.plan)/4;
-  if(avgPositive>=70 && momRisk<55 && comfort<55){
-    return ['A','目前可以去，而且有能力保持自己的發展路線','你的回答顯示，搬遷不是單靠家庭情感支撐，而且你保有成長、獨立與退出能力。重點是把原本的節奏帶過去，而不是搬去之後再重新找方向。'];
-  }
-  if(avgPositive>=55 && p.exit>=50 && p.plan>=50){
-    return ['B','適合短期去，但應先設定 3–6 個月檢查點','你具備一定計畫與轉換能力，但仍有家庭或穩定生活帶來的黏著風險。短期試住比直接把它定義成長期定居更合適。'];
-  }
-  if(momRisk>=60 || p.plan<45 || p.growth<45){
-    return ['C','目前去的主要動力可能來自家庭／逃離現況，建議先建立自己的發展計畫','你的回答裡，個人發展路線尚未完全獨立成立。先把「如果媽媽不在那裡，我還要什麼」和未來兩年的累積目標寫清楚，再決定搬遷，會更有選擇權。'];
-  }
-  return ['D','目前長期搬去的風險較高，可能降低未來選擇權','最大的問題不一定是那座城市好不好，而是安頓後是否還能離開。若要去，應先準備期限、離開基金、成長里程碑與重新評估條件。'];
+  const pos=(p.growth+p.ind+p.exit+p.plan)/4;
+  const risk=(p.mom+p.comfort)/2;
+  if(pos>=70 && risk<50) return ['A','目前條件支持前往，而且較能維持自己的發展路線','你的搬遷理由、成長能力與未來轉換空間相對完整。這比較像主動選擇一個生活基地，而不是依附家庭或逃離現況。'];
+  if(pos>=55 && p.exit>=50 && p.plan>=50) return ['B','較適合「有條件地前往」，先把它當成階段性選擇','你有一定能力把這次搬遷轉化成成長機會，但仍存在家庭支持或穩定生活帶來的黏著。與其直接決定長住，更適合先設定期限與成果條件。'];
+  if(p.mom>=65 && (p.plan<55 || p.growth<55)) return ['C','先建立自己的路線，再決定是否前往','目前「媽媽在那裡」對決策的影響高於個人發展路線。這不代表不應該去，而是現在還需要一個即使媽媽不在也能成立的前往理由。'];
+  return ['D','目前直接長期搬遷的風險偏高，先補足選擇權','主要問題不是那座城市好不好，而是搬去之後是否仍有能力成長、重新比較並離開。若仍想去，建議先把它改成有期限的試住方案。'];
+}
+
+function patternAnalysis(p){
+  const a=i=>answers[i-1];
+  const out=[];
+  if(a(1)>=2 && a(17)>=2) out.push('你在兩個不同問法中都顯示：如果媽媽不在，這座城市的吸引力會明顯下降。這表示「城市本身」目前還不是足夠獨立的目的地。');
+  if(a(1)<=1 && a(26)>=2) out.push('你認為即使媽媽不在仍可能前往，但如果媽媽再次搬家，你又可能跟著移動。這兩組回答有張力：理性上把城市視為自己的選擇，實際離留卻仍可能受媽媽位置影響。');
+  if(a(8)>=2 && a(27)>=2) out.push('你尚未建立清楚的重新評估時間點，而且對設定 3–6 個月期限也有抗拒。這會放大「暫時住下 → 沒有時間點 → 長期留下」的風險。');
+  if(a(18)<=1 && a(19)<=1 && a(20)>=2) out.push('你其實有其他值得投入的發展方向，但對「搬去之後兩年要得到什麼」反而比較模糊。這代表搬遷可能中斷一條原本可累積的路線。');
+  if(a(21)<=1 && a(22)>=2) out.push('你目前正有一定累積動能，但也預期搬遷會讓它中斷。這是本次決策中需要特別計算的機會成本。');
+  if(a(15)>=2 && p.ind<55) out.push('多個回答都顯示搬去後可能把部分生活責任交回家庭。家庭支持會降低短期壓力，但也可能降低獨立生活能力的使用頻率。');
+  if(a(23)>=2 && a(29)>=2) out.push('當成長停滯時，你傾向再等一段時間，而不是立刻重新配置環境。若同時生活很穩定，停留時間可能比原先預期更長。');
+  if(!out.length) out.push('目前回答的整體方向相對一致，沒有出現特別明顯的前後衝突。真正需要處理的是把意向轉成可檢查的期限、成果與退出條件。');
+  return out.slice(0,3);
+}
+
+function drivers(p){
+  const arr=[
+    {score:p.mom, text:p.mom>=60?'家庭／媽媽是這次選擇的重要驅動力':'家庭因素不是主要驅動力'},
+    {score:100-p.growth, text:p.growth<55?'成長路線不夠具體，是目前最大的決策缺口':'成長與競爭力累積相對穩定'},
+    {score:p.comfort, text:p.comfort>=55?'安穩生活可能提高長期停留的黏著':'舒適圈黏著風險相對可控'},
+    {score:100-p.exit, text:p.exit<55?'未來重新離開的條件還不完整':'仍保有重新換城市的能力'},
+    {score:100-p.plan, text:p.plan<55?'1–3 年計畫仍偏模糊':'未來 1–3 年方向相對清楚'}
+  ];
+  return arr.sort((x,y)=>y.score-x.score).slice(0,3).map(x=>x.text);
+}
+
+function comparison(p){
+  const go=[], stay=[];
+  if(p.mom>=45) go.push('可得到更直接的家庭支持與陪伴');
+  if(p.ind>=55) go.push('即使靠近家人，仍有一定能力維持自己的生活責任');
+  if(p.growth>=55) go.push('若把現有成長節奏帶過去，搬遷可以成為新的累積基地');
+  if(p.comfort>=55) go.push('風險：便利與穩定可能讓短期停留逐漸固定化');
+  if(p.plan<55) go.push('風險：前往後的成果與時間表目前不夠明確');
+  if(p.growth>=55) stay.push('保留目前已建立的能力累積與外部競爭環境');
+  if(p.exit<55) stay.push('避免搬去後因成本、家庭與穩定而更難再次轉換城市');
+  if(p.mom>=60) stay.push('代價：與媽媽相處及家庭支持的時間會減少');
+  if(p.plan<55) stay.push('風險：如果「不去」也沒有替代計畫，留下不一定等於成長');
+  return {go:go.slice(0,4),stay:stay.slice(0,4)};
+}
+
+function nextSteps(p){
+  const s=[];
+  if(p.plan<65) s.push('在搬家前寫出「前 6 個月要完成的 3 個成果」，至少包含工作／學習、收入或能力累積其中兩項。');
+  if(p.exit<65) s.push('設定第一次重新評估日期（建議 3–6 個月），並寫下什麼情況下要離開或換城市。');
+  if(p.ind<65) s.push('即使和媽媽住，也預先劃分自己負責的財務、家務、行政與時間安排，避免支持逐漸變成依賴。');
+  if(p.comfort>=50) s.push('建立一項「不能因生活舒服而取消」的外部成長指標，例如作品、證照、語言、收入或求職里程碑。');
+  if(p.mom>=60) s.push('另外寫一句：「如果媽媽明天不在這座城市，我仍然願意留下，因為＿＿＿。」如果填不出來，把前往定義成陪伴家人的階段性選擇，而不是城市定居決策。');
+  if(s.length<3) s.push('每 3–6 個月重新比較一次：能力、收入、選擇權是否比搬遷前增加。');
+  return s.slice(0,4);
 }
 
 function analyze(){
   document.querySelectorAll('.card').forEach(c=>c.classList.remove('missing'));
-  const missing=[];
-  Q.forEach((_,i)=>{if(answers[i]===undefined)missing.push(i+1)});
+  const missing=[]; Q.forEach((_,i)=>{if(answers[i]===undefined)missing.push(i+1)});
   const error=document.getElementById('errorBox');
   if(missing.length){
-    error.classList.remove('hidden');
-    error.textContent='尚未完成：第 '+missing.join('、')+' 題。請填完 30 題後再產生分析。';
+    error.classList.remove('hidden'); error.textContent='尚未完成：第 '+missing.join('、')+' 題。請填完 30 題後再產生分析。';
     missing.forEach(n=>document.getElementById('q'+n).classList.add('missing'));
-    document.getElementById('q'+missing[0]).scrollIntoView({behavior:'smooth',block:'center'});
-    return;
+    document.getElementById('q'+missing[0]).scrollIntoView({behavior:'smooth',block:'center'}); return;
   }
   error.classList.add('hidden');
-  const p=calc();
-  const holder=document.getElementById('dimensions');
-  holder.innerHTML='';
+  const p=calc(), c=chooseConclusion(p), patterns=patternAnalysis(p), ds=drivers(p), comp=comparison(p), steps=nextSteps(p);
+  const holder=document.getElementById('dimensions'); holder.innerHTML='';
+  const summary=document.createElement('div'); summary.className='conclusion';
+  summary.innerHTML=`<h2>${c[0]}｜${c[1]}</h2><p>${c[2]}</p><p><strong>目前最重要的不是單純回答「去／不去」，而是確認這個選擇會不會增加三年後的選擇權。</strong></p>`;
+  holder.appendChild(summary);
+  const drive=document.createElement('div'); drive.className='report-section'; drive.innerHTML=`<h3>影響這次決策最大的 3 個因素</h3><ul>${ds.map(x=>`<li>${x}</li>`).join('')}</ul>`; holder.appendChild(drive);
   Object.keys(DIM).forEach(k=>{
-    const d=document.createElement('div');
-    d.className='dimension';
-    const shown = DIM[k].risk ? p[k] : p[k];
-    d.innerHTML=`<div class="dimension-head"><span>${DIM[k].name}</span><span>${shown}%</span></div><div class="mini"><div style="width:${shown}%"></div></div><p>${explain(k,p[k])}</p>`;
-    holder.appendChild(d);
+    const d=document.createElement('div'); d.className='dimension'; const shown=p[k];
+    d.innerHTML=`<div class="dimension-head"><span>${DIM[k].name}<span class="tag">${level(shown,DIM[k].risk)}</span></span><span>${shown}%</span></div><div class="mini"><div style="width:${shown}%"></div></div><p>${explain(k,shown)}</p>`; holder.appendChild(d);
   });
-  const c=chooseConclusion(p);
-  document.getElementById('conclusion').innerHTML=`<h2>${c[0]}｜${c[1]}</h2><p>${c[2]}</p>`;
-  document.getElementById('results').classList.remove('hidden');
-  document.getElementById('copyBtn').disabled=false;
+  const pat=document.createElement('div'); pat.className='report-section'; pat.innerHTML=`<h3>回答中的交叉訊號</h3><ul>${patterns.map(x=>`<li>${x}</li>`).join('')}</ul>`; holder.appendChild(pat);
+  const compare=document.createElement('div'); compare.className='report-section'; compare.innerHTML=`<h3>搬去 vs. 不搬去</h3><p><strong>如果搬去：</strong></p><ul>${comp.go.map(x=>`<li>${x}</li>`).join('')}</ul><p><strong>如果暫時不搬：</strong></p><ul>${comp.stay.map(x=>`<li>${x}</li>`).join('')}</ul>`; holder.appendChild(compare);
+  const next=document.createElement('div'); next.className='report-section'; next.innerHTML=`<h3>建議先完成的條件</h3><ul>${steps.map(x=>`<li>${x}</li>`).join('')}</ul>`; holder.appendChild(next);
+  document.getElementById('conclusion').innerHTML=`<h2>怎麼使用這份結果</h2><p>這份結果不是在替你決定要不要去，而是在找出「什麼條件補齊之後，這個選擇比較不會犧牲未來的選擇權」。分數也不是人格好壞：媽媽因素與舒適圈為風險指標，數字越高代表越需要留意；其餘四項數字越高代表資源越完整。</p>`;
+  document.getElementById('results').classList.remove('hidden'); document.getElementById('copyBtn').disabled=false;
   document.getElementById('results').scrollIntoView({behavior:'smooth',block:'start'});
 }
 
 function copyAll(){
-  if(Object.keys(answers).length<30){return}
-  const p=calc();
-  const c=chooseConclusion(p);
-  let text='下一階段生活選擇｜完整回答\n\n';
+  if(Object.keys(answers).length<30)return;
+  const p=calc(), c=chooseConclusion(p), patterns=patternAnalysis(p), ds=drivers(p), comp=comparison(p), steps=nextSteps(p);
+  let text='下一階段生活選擇｜完整回答與決策分析\n\n';
   Q.forEach((q,i)=>{text+=`${i+1}. ${q.t}\n回答：${q.o[answers[i]]}\n\n`});
-  text+='六維結果\n';
-  Object.keys(DIM).forEach(k=>text+=`${DIM[k].name}：${p[k]}%\n`);
-  text+=`\n綜合結論：${c[0]}｜${c[1]}\n${c[2]}\n\n此結果依照你的回答進行多維度分析，不是心理診斷或人生決策的唯一依據。`;
-  navigator.clipboard.writeText(text).then(()=>{
-    const b=document.getElementById('copyBtn'); const old=b.textContent;
-    b.textContent='已複製'; setTimeout(()=>b.textContent=old,1500);
-  }).catch(()=>{
-    const ta=document.createElement('textarea');ta.value=text;document.body.appendChild(ta);ta.select();document.execCommand('copy');ta.remove();
-  });
+  text+='六維結果\n'; Object.keys(DIM).forEach(k=>text+=`${DIM[k].name}：${p[k]}%（${level(p[k],DIM[k].risk)}）\n`);
+  text+=`\n綜合結論：${c[0]}｜${c[1]}\n${c[2]}\n\n主要因素\n- ${ds.join('\n- ')}\n\n交叉訊號\n- ${patterns.join('\n- ')}\n\n如果搬去\n- ${comp.go.join('\n- ')}\n\n如果暫時不搬\n- ${comp.stay.join('\n- ')}\n\n建議先完成的條件\n- ${steps.join('\n- ')}\n\n此結果依照你的回答進行多維度決策分析，不是心理診斷或人生決策的唯一依據。`;
+  navigator.clipboard.writeText(text).then(()=>{const b=document.getElementById('copyBtn'),old=b.textContent;b.textContent='已複製';setTimeout(()=>b.textContent=old,1500)}).catch(()=>{const ta=document.createElement('textarea');ta.value=text;document.body.appendChild(ta);ta.select();document.execCommand('copy');ta.remove()});
 }
 
 document.getElementById('analyzeBtn').addEventListener('click',analyze);
