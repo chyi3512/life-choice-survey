@@ -1,0 +1,71 @@
+<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>你真的是媽寶嗎？｜成人自主性測驗</title>
+<style>
+:root{--bg:#f5f5f3;--card:#fff;--text:#171717;--muted:#777;--line:#e5e5e2;--accent:#222}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Noto Sans TC","Segoe UI",sans-serif}
+.wrap{max-width:720px;margin:auto;padding:24px 16px 70px}header{padding:18px 2px 22px}.tag{font-size:12px;letter-spacing:.08em;color:#777;margin-bottom:12px}
+h1{font-size:29px;line-height:1.25;margin:0 0 12px}.sub{color:#666;line-height:1.75;font-size:14px}
+.progress{position:sticky;top:0;background:rgba(245,245,243,.94);backdrop-filter:blur(10px);padding:10px 0 14px;z-index:5}
+.ptext{display:flex;justify-content:space-between;font-size:12px;color:#777;margin-bottom:7px}.bar{height:6px;background:#ddd;border-radius:99px;overflow:hidden}.bar i{display:block;height:100%;background:#222;width:0}
+.card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:20px;margin:13px 0}.dim{font-size:12px;color:#888;margin-bottom:8px}.q{font-size:17px;font-weight:650;line-height:1.55;margin-bottom:15px}
+.opt{display:block;border:1px solid var(--line);border-radius:13px;padding:13px;margin:9px 0;line-height:1.45;cursor:pointer}.opt:has(input:checked){border-color:#333;background:#f6f6f4}.opt input{margin-right:8px}
+button{border:0;border-radius:13px;padding:14px 17px;font:inherit;font-weight:700;cursor:pointer}.primary{width:100%;background:#222;color:#fff;margin-top:15px}.secondary{background:#e7e7e4;color:#222;width:100%;margin-top:10px}
+#result{display:none}.hero{text-align:center;padding:28px 18px}.scorebig{font-size:64px;font-weight:800;line-height:1}.level{font-size:20px;font-weight:750;margin-top:10px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.metric{background:#fff;border:1px solid var(--line);border-radius:15px;padding:14px}.metric b{font-size:20px}.mini{height:6px;background:#eee;border-radius:9px;margin-top:8px;overflow:hidden}.mini span{display:block;height:100%;background:#333}
+.analysis{line-height:1.8}.analysis h3{margin:18px 0 6px}.note{font-size:12px;color:#777;line-height:1.65;margin-top:20px}
+@media(max-width:520px){h1{font-size:25px}.grid{grid-template-columns:1fr}.scorebig{font-size:56px}}
+</style></head><body><div class="wrap">
+<header><div class="tag">ADULT AUTONOMY × FAMILY BOUNDARIES</div><h1>你真的是「媽寶」嗎？</h1>
+<div class="sub">30 題成人自主性測驗。這裡的「媽寶」不是指愛媽媽、孝順或和家人親近，而是檢視成年後是否仍把母親當成決策、情緒、生活或親密關係的主要控制中心。請依「實際會怎麼做」回答，而不是理想中的自己。</div></header>
+<div class="progress"><div class="ptext"><span id="pt">0 / 30</span><span id="pp">0%</span></div><div class="bar"><i id="pb"></i></div></div>
+<div id="form"></div><button class="primary" id="go">查看完整分析</button><button class="secondary" id="reset">重新作答</button>
+<div id="msg" class="note"></div><section id="result"><div id="out"></div></section>
+<div class="note">本測驗是依成人自主、心理分化、家庭界線、責任承擔與親密關係界線等概念設計的自我探索工具，不是臨床心理診斷。「媽寶」為日常用語，結果應理解為依賴與自主模式，而非人格標籤。</div>
+</div><script>
+const Q=[{"d": "決策自主", "q": "如果你得到一份非常想要的工作，但需要搬到外地，而媽媽強烈反對，你最可能怎麼做？", "o": ["媽媽不同意，我大概就不去了", "會努力取得她同意，否則很難安心", "認真聽她的理由，但最後自己決定", "先依自己的需求做決定，再和她溝通"], "s": [3, 2, 1, 0]}, {"d": "決策自主", "q": "買車、換工作、搬家、留學或結婚等重大決定，你通常怎麼處理？", "o": ["自己形成判斷後，再聽家人的意見", "可以自己決定，但媽媽反對會讓我非常動搖", "媽媽的同意通常是重要條件", "基本上會按照媽媽認為安全的方式選"], "s": [0, 1, 2, 3]}, {"d": "決策自主", "q": "你已經做出決定，媽媽卻說「你以後一定會後悔」，你通常會？", "o": ["取消或改變決定", "開始強烈懷疑自己", "重新檢查理由，但不會只因她反對就改變", "能接受她不同意，也承擔自己可能判斷錯誤"], "s": [3, 2, 1, 0]}, {"d": "決策自主", "q": "媽媽推薦的工作、對象或生活方式與你真正想要的完全不同時？", "o": ["可以清楚拒絕，不需要她最後認同", "會解釋理由，但最後仍自己決定", "會拖很久，希望找到不衝突的方法", "最後通常選媽媽較能接受的方案"], "s": [0, 1, 2, 3]}, {"d": "決策自主", "q": "當你和媽媽對人生方向意見相反，你最接近哪種狀態？", "o": ["她的意見是參考，不是批准", "會考慮她的擔心，但能自己承擔結果", "若她持續反對，我很難堅持", "我通常不會做她明確反對的事"], "s": [0, 1, 2, 3]}, {"d": "情緒分化", "q": "遇到工作失敗或重大挫折時，你通常？", "o": ["能先自己整理，需要時再找不同的人支持", "媽媽是重要支持者之一，但不是唯一來源", "如果媽媽不支持我，我會特別沒有安全感", "通常需要媽媽幫我判斷接下來該怎麼辦"], "s": [0, 1, 2, 3]}, {"d": "情緒分化", "q": "媽媽因為你的選擇而生氣或難過時？", "o": ["會立刻改變安排，避免她難過", "會有強烈罪惡感，甚至想改變決定", "會關心她，但知道她的情緒不等於我的責任", "能理解她難過，同時維持自己的界線"], "s": [3, 2, 1, 0]}, {"d": "情緒分化", "q": "如果幾天沒有跟媽媽聯絡，你通常？", "o": ["覺得很正常", "會想到應該聯絡，但不會焦慮", "會有明顯罪惡感或不安", "很難做到，幾乎必須每天聯絡"], "s": [0, 1, 2, 3]}, {"d": "情緒分化", "q": "媽媽否定你的能力或選擇時？", "o": ["可以區分她的看法與自己的價值", "會難過，但最後仍能自己判斷", "很容易覺得她可能是對的", "她的評價會大幅影響我的自信與決策"], "s": [0, 1, 2, 3]}, {"d": "情緒分化", "q": "當你非常焦慮或委屈時？", "o": ["可以自己調節，也能向不同關係尋求支持", "常找媽媽聊，但沒有她也能處理", "沒有媽媽的安慰會特別難受", "很多情緒只有媽媽能幫我處理"], "s": [0, 1, 2, 3]}, {"d": "親子界線", "q": "媽媽想知道你的收入、存款、行程、交友或感情細節時？", "o": ["她想知道就應該全部告訴她", "不告訴她會讓我覺得自己在隱瞞", "依事情決定哪些願意分享", "即使她追問，我也能保留自己的隱私"], "s": [3, 2, 1, 0]}, {"d": "親子界線", "q": "媽媽沒有先詢問就替你安排事情時？", "o": ["會清楚告訴她以後先問我", "不影響太大的話偶爾可以接受", "即使不想去，通常還是會配合", "會覺得拒絕媽媽很不孝"], "s": [0, 1, 2, 3]}, {"d": "親子界線", "q": "如果媽媽要求看你的手機訊息或伴侶聊天內容？", "o": ["可以直接拒絕，這是私人界線", "會解釋為什麼不方便給她看", "雖然不舒服，但可能還是給她看", "她是我媽媽，看一下也沒什麼"], "s": [0, 1, 2, 3]}, {"d": "親子界線", "q": "媽媽頻繁打電話確認你在哪裡、和誰在一起，你會？", "o": ["視為關心，但會設定合理聯絡方式", "偶爾回覆，必要時說明我需要空間", "怕她擔心，所以盡量隨時報備", "覺得成年後也應該讓她掌握行程"], "s": [0, 1, 2, 3]}, {"d": "親子界線", "q": "媽媽對你的穿著、交友、住處或日常習慣有很多意見時？", "o": ["能聽，但是否採納由我決定", "有時會為避免爭執而配合", "她不喜歡的事情我通常會避免", "我覺得照她的要求做比較安心"], "s": [0, 1, 2, 3]}, {"d": "生活責任", "q": "如果你一個人住，處理帳單、家務、看病、行政手續等事情的能力如何？", "o": ["大多可以自己處理", "有些不熟，但會自己學", "常需要媽媽提醒或協助", "很多事情仍習慣讓媽媽處理"], "s": [0, 1, 2, 3]}, {"d": "生活責任", "q": "你遇到工作、租屋或金錢上的麻煩時？", "o": ["先自己釐清並處理，必要時求助", "會詢問家人意見，但仍由自己執行", "常需要媽媽介入協調", "通常希望媽媽直接幫我解決"], "s": [0, 1, 2, 3]}, {"d": "生活責任", "q": "如果因自己的選擇造成損失或失敗？", "o": ["自己承擔後果並調整", "會求助，但不把責任交給別人", "很希望媽媽幫我收拾後果", "會覺得當初如果聽媽媽就好了，之後更依賴她決定"], "s": [0, 1, 2, 3]}, {"d": "生活責任", "q": "你的個人財務通常？", "o": ["自己規劃收入、支出與儲蓄", "自己管理，但偶爾需要家人提醒", "重要支出常要媽媽幫我判斷", "媽媽仍實際管理或高度介入我的錢"], "s": [0, 1, 2, 3]}, {"d": "生活責任", "q": "媽媽主動替你處理一件其實你自己能完成的事情，你通常？", "o": ["感謝但會自己完成", "偶爾接受，不會形成習慣", "覺得有人處理比較省事，常讓她做", "很自然地認為這些事情媽媽比較會處理"], "s": [0, 1, 2, 3]}, {"d": "伴侶界線", "q": "媽媽批評你的伴侶，而你認為她的批評不公平時？", "o": ["會聽取意見，但清楚表達這是我的關係", "會分別溝通，並形成自己的判斷", "為避免媽媽不高興，會要求伴侶多配合", "會重新考慮這段關係，因為媽媽通常比較了解我"], "s": [0, 1, 2, 3]}, {"d": "伴侶界線", "q": "媽媽與伴侶同時需要你，而兩件事的重要程度差不多時？", "o": ["依實際情況協調，不預設誰永遠優先", "會考慮承諾與急迫性再決定", "通常優先媽媽，否則會有罪惡感", "媽媽永遠應該優先於伴侶"], "s": [0, 1, 2, 3]}, {"d": "伴侶界線", "q": "你和伴侶發生爭執時，通常會把細節告訴媽媽嗎？", "o": ["除非真的需要外部協助，否則保留關係隱私", "偶爾會說，但不讓媽媽替我判決", "常向媽媽完整報告，希望她判斷誰對誰錯", "幾乎所有重要衝突都會讓媽媽知道"], "s": [0, 1, 2, 3]}, {"d": "伴侶界線", "q": "如果伴侶希望你對原生家庭設定一個合理界線，你會？", "o": ["先評估是否合理，合理就願意調整", "會溝通，但需要一些時間適應", "容易覺得伴侶是在逼我選邊站", "會認為伴侶不應干涉我和媽媽的關係"], "s": [0, 1, 2, 3]}, {"d": "伴侶界線", "q": "如果媽媽不喜歡你真心想長期交往的人，但沒有明確安全或品格問題？", "o": ["最終仍由我決定是否交往", "會重視她的觀察，但自己驗證", "如果她一直反對，我很可能放棄", "媽媽不接受的對象，我基本不會繼續"], "s": [0, 1, 2, 3]}, {"d": "罪惡與控制", "q": "當你拒絕媽媽的要求，她說「我都是為你好」時？", "o": ["能理解她的出發點，但仍可以說不", "會重新考慮，但不一定改變決定", "會覺得自己很自私，最後常妥協", "幾乎無法繼續拒絕"], "s": [0, 1, 2, 3]}, {"d": "罪惡與控制", "q": "媽媽說「我養你這麼大，你現在都不聽我的」時，你的反應？", "o": ["感謝養育不等於放棄成年決定權", "會難受，但仍能維持自己的決定", "會產生很強的虧欠感並妥協", "覺得她說得有道理，我確實應該聽她"], "s": [0, 1, 2, 3]}, {"d": "罪惡與控制", "q": "你為自己安排旅行、約會或生活，而媽媽因此覺得被冷落時？", "o": ["關心她的感受，但不取消合理安排", "可能調整部分時間來平衡", "通常會取消或縮短自己的安排", "很難享受自己的生活，因為會一直覺得對不起她"], "s": [0, 1, 2, 3]}, {"d": "罪惡與控制", "q": "媽媽用沉默、生氣、哭泣或失望來回應你的拒絕時？", "o": ["仍能平靜維持界線", "會不舒服，但可以等情緒過去再談", "通常會因此改變原本決定", "我很難承受，最後幾乎一定妥協"], "s": [0, 1, 2, 3]}, {"d": "罪惡與控制", "q": "哪一句最接近你對「孝順」的理解？", "o": ["尊重與照顧父母，但成年人仍有自己的人生", "願意多考慮父母感受，但不代表服從", "讓媽媽失望通常代表我做得不夠好", "好孩子就不應該做父母強烈反對的事"], "s": [0, 1, 2, 3]}];
+
+const dims=["決策自主","情緒分化","親子界線","生活責任","伴侶界線","罪惡與控制"];
+const form=document.getElementById("form");
+Q.forEach((x,i)=>{
+ const c=document.createElement("div");c.className="card";
+ c.innerHTML=`<div class="dim">${x.d} · ${i+1}/30</div><div class="q">${x.q}</div>`+
+ x.o.map((v,j)=>`<label class="opt"><input type="radio" name="q${i}" value="${x.s[j]}"> ${v}</label>`).join("");
+ form.appendChild(c);
+});
+function progress(){
+ let n=0;Q.forEach((_,i)=>{if(document.querySelector(`input[name=q${i}]:checked`))n++});
+ pt.textContent=`${n} / 30`;pp.textContent=Math.round(n/30*100)+"%";pb.style.width=(n/30*100)+"%";
+}
+form.addEventListener("change",progress);
+function band(n){if(n<25)return["高度自主","你和母親可以保持連結，但人生方向大致由自己掌舵。"];if(n<45)return["健康親密・輕度依賴","整體自主性良好，但少數情境仍容易受母親情緒或意見牽動。"];if(n<65)return["中度家庭依附","你已有成人能力，但某些重要領域的決策權仍沒有完全回到自己身上。"];if(n<80)return["明顯媽寶傾向","問題不在於你愛媽媽，而是母親的意見、情緒或需求已明顯介入你的成人決策與關係。"];return["高度依賴","你可能已具備成年人的外在生活，但心理界線、責任或重大選擇仍高度依附母親。"]}
+function advice(dim,score){
+ const m={
+ "決策自主":"重大事情先寫下自己的答案與理由，再詢問媽媽。把「徵求批准」改成「聽取意見」，並練習承擔自己選錯的可能。",
+ "情緒分化":"建立不只依靠媽媽的情緒支持系統。焦慮時先自己整理，再選擇朋友、伴侶或家人支持，而不是立即尋求媽媽替你確認對錯。",
+ "親子界線":"從低風險事情開始保留隱私與拒絕權，例如行程、訊息、生活安排。界線不是疏遠，而是讓兩個成年人都能保有自己的空間。",
+ "生活責任":"把仍由媽媽代辦的事情列出來，逐項接回：財務、行政、家務、醫療與問題處理。可以求助，但執行與後果要回到自己。",
+ "伴侶界線":"親密關係的衝突先在兩人之間處理。媽媽可以提供意見，但不應成為第三位裁判或擁有伴侶關係的否決權。",
+ "罪惡與控制":"練習區分「媽媽不開心」與「我做錯事」。拒絕合理要求可能讓人失望，但失望本身不代表你不孝或必須撤回決定。"};
+ return m[dim];
+}
+go.onclick=()=>{
+ let ans=[];for(let i=0;i<Q.length;i++){let e=document.querySelector(`input[name=q${i}]:checked`);if(!e){msg.textContent=`還有 ${30-ans.length} 題未完成。請全部回答後再分析。`;document.querySelector(`input[name=q${i}]`).closest(".card").scrollIntoView({behavior:"smooth"});return}ans.push(+e.value)}
+ msg.textContent="";
+ let raw=ans.reduce((a,b)=>a+b,0), total=Math.round(raw/90*100), [lv,desc]=band(total);
+ let ds={};dims.forEach(d=>ds[d]=0);Q.forEach((x,i)=>ds[x.d]+=ans[i]);dims.forEach(d=>ds[d]=Math.round(ds[d]/15*100));
+ let sorted=[...dims].sort((a,b)=>ds[b]-ds[a]), hi=sorted[0], hi2=sorted[1], low=sorted[5];
+ let nuance= total<45
+ ?`你的結果不像典型的「媽寶」。尤其在「${low}」上，你比較能把親密與自主分開。需要留意的是「${hi}」仍是相對容易被家庭影響的區域。`
+ :`你的核心不是單純「很聽媽媽的話」，而是 <b>${hi}</b> 與 <b>${hi2}</b> 兩個面向形成了主要依賴模式。這代表真正需要處理的不是減少和媽媽聯絡，而是把該由成年人自己承擔的決策權、情緒責任或關係界線拿回來。`;
+ let metrics=dims.map(d=>`<div class="metric">${d}<br><b>${ds[d]}</b> / 100<div class="mini"><span style="width:${ds[d]}%"></span></div></div>`).join("");
+ out.innerHTML=`<div class="card hero"><div class="scorebig">${total}</div><div>／100</div><div class="level">${lv}</div><p class="analysis">${desc}</p></div>
+ <h2>六面向結果</h2><div class="grid">${metrics}</div>
+ <div class="card analysis"><h2>你的結果怎麼看</h2><p>${nuance}</p>
+ <h3>目前最值得處理：${hi}（${ds[hi]}）</h3><p>${advice(hi,ds[hi])}</p>
+ <h3>第二優先：${hi2}（${ds[hi2]}）</h3><p>${advice(hi2,ds[hi2])}</p>
+ <h3>一個重要提醒</h3><p>成熟的目標不是「不需要媽媽」，而是可以愛她、照顧她、聽她的意見，同時仍然能說不、承受她的不認同，並為自己的選擇負責。真正的自主不是切斷關係，而是不把人生方向盤交給任何一個人。</p></div>`;
+ result.style.display="block";result.scrollIntoView({behavior:"smooth"});
+};
+reset.onclick=()=>{document.querySelectorAll("input").forEach(x=>x.checked=false);result.style.display="none";msg.textContent="";progress();scrollTo({top:0,behavior:"smooth"})};
+</script></body></html>
