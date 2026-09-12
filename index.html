@@ -1,403 +1,71 @@
-<!doctype html>
-<html lang="zh-Hant">
-<head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>未來發展地評估｜50題</title>
+<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>你真的是媽寶嗎？｜成人自主性測驗</title>
 <style>
-:root{
-  --bg:#f5f6f8; --card:#fff; --text:#17191d; --muted:#6f7680;
-  --line:#e8eaee; --accent:#111827; --soft:#f0f2f5; --ok:#eef7f0;
-}
-*{box-sizing:border-box}
-body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans TC",sans-serif;background:var(--bg);color:var(--text)}
-.wrap{max-width:760px;margin:auto;padding:18px 14px 60px}
-header{padding:10px 2px 16px}
-h1{font-size:26px;margin:0 0 8px}
-.sub{font-size:14px;line-height:1.7;color:var(--muted)}
-.badge{display:inline-block;padding:4px 8px;border-radius:999px;background:#111827;color:#fff;font-size:12px;margin-bottom:10px}
-.progressWrap{position:sticky;top:0;z-index:20;background:rgba(245,246,248,.94);backdrop-filter:blur(10px);padding:8px 0 12px}
-.progressText{font-size:13px;color:var(--muted);display:flex;justify-content:space-between;margin-bottom:7px}
-.bar{height:7px;background:#e5e7eb;border-radius:99px;overflow:hidden}
-.bar>div{height:100%;width:0;background:#111827;transition:.2s}
-.sectionTitle{font-size:16px;font-weight:700;margin:26px 2px 10px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;margin:10px 0;box-shadow:0 1px 2px rgba(0,0,0,.03)}
-.qno{font-size:12px;color:var(--muted);margin-bottom:6px}
-.q{font-size:17px;line-height:1.55;font-weight:650;margin-bottom:14px}
-.opt{display:block;border:1px solid var(--line);border-radius:12px;padding:12px 13px;margin:8px 0;cursor:pointer}
-.opt input{margin-right:8px}
-.opt:has(input:checked){border-color:#111827;background:#f7f7f8}
-.scaleRow{display:flex;align-items:center;gap:10px}
-.scaleRow input{width:100%}
-.scaleVal{min-width:34px;text-align:center;font-weight:700}
-textarea{width:100%;min-height:100px;border:1px solid var(--line);border-radius:12px;padding:12px;font:inherit;resize:vertical}
-.small{font-size:12px;color:var(--muted);line-height:1.6}
-.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
-button{border:0;border-radius:12px;padding:13px 16px;font:inherit;font-weight:700;cursor:pointer}
-.primary{background:#111827;color:#fff;flex:1}
-.secondary{background:#e9ebef;color:#111}
-.result{display:none}
-.scoreGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:14px 0}
-.score{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px}
-.score b{font-size:22px}
-.meter{height:7px;background:#eceef1;border-radius:99px;overflow:hidden;margin-top:8px}
-.meter span{display:block;height:100%;background:#111827}
-.route{background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px;margin:10px 0}
-.route h3{margin:0 0 8px;font-size:18px}
-.route .big{font-size:28px;font-weight:800}
-.note{background:#fbfbfc;border:1px dashed #d6d8dd;border-radius:14px;padding:14px;line-height:1.7}
-.kicker{font-size:13px;color:var(--muted);margin-top:18px}
-ul{padding-left:20px;line-height:1.7}
-@media(max-width:520px){
-  .scoreGrid{grid-template-columns:1fr}
-  h1{font-size:23px}
-  .q{font-size:16px}
-}
-</style>
-</head>
-<body>
-<div class="wrap">
-<header>
-  <div class="badge">Personal Future Path Assessment · V1</div>
-  <h1>未來發展地評估</h1>
-  <div class="sub">
-    這份 50 題問卷不是在問「你喜歡哪個城市」，而是評估 2027 畢業後，哪一條路最能放大你的收入、專業、作品、施工統括能力、創業準備與未來選擇權。
-    結果會比較：日本、杭州、中國其他城市、台灣與其他國際城市。命理僅作最後補充，不會混入客觀分數。
-  </div>
-</header>
+:root{--bg:#f5f5f3;--card:#fff;--text:#171717;--muted:#777;--line:#e5e5e2;--accent:#222}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Noto Sans TC","Segoe UI",sans-serif}
+.wrap{max-width:720px;margin:auto;padding:24px 16px 70px}header{padding:18px 2px 22px}.tag{font-size:12px;letter-spacing:.08em;color:#777;margin-bottom:12px}
+h1{font-size:29px;line-height:1.25;margin:0 0 12px}.sub{color:#666;line-height:1.75;font-size:14px}
+.progress{position:sticky;top:0;background:rgba(245,245,243,.94);backdrop-filter:blur(10px);padding:10px 0 14px;z-index:5}
+.ptext{display:flex;justify-content:space-between;font-size:12px;color:#777;margin-bottom:7px}.bar{height:6px;background:#ddd;border-radius:99px;overflow:hidden}.bar i{display:block;height:100%;background:#222;width:0}
+.card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:20px;margin:13px 0}.dim{font-size:12px;color:#888;margin-bottom:8px}.q{font-size:17px;font-weight:650;line-height:1.55;margin-bottom:15px}
+.opt{display:block;border:1px solid var(--line);border-radius:13px;padding:13px;margin:9px 0;line-height:1.45;cursor:pointer}.opt:has(input:checked){border-color:#333;background:#f6f6f4}.opt input{margin-right:8px}
+button{border:0;border-radius:13px;padding:14px 17px;font:inherit;font-weight:700;cursor:pointer}.primary{width:100%;background:#222;color:#fff;margin-top:15px}.secondary{background:#e7e7e4;color:#222;width:100%;margin-top:10px}
+#result{display:none}.hero{text-align:center;padding:28px 18px}.scorebig{font-size:64px;font-weight:800;line-height:1}.level{font-size:20px;font-weight:750;margin-top:10px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.metric{background:#fff;border:1px solid var(--line);border-radius:15px;padding:14px}.metric b{font-size:20px}.mini{height:6px;background:#eee;border-radius:9px;margin-top:8px;overflow:hidden}.mini span{display:block;height:100%;background:#333}
+.analysis{line-height:1.8}.analysis h3{margin:18px 0 6px}.note{font-size:12px;color:#777;line-height:1.65;margin-top:20px}
+@media(max-width:520px){h1{font-size:25px}.grid{grid-template-columns:1fr}.scorebig{font-size:56px}}
+</style></head><body><div class="wrap">
+<header><div class="tag">ADULT AUTONOMY × FAMILY BOUNDARIES</div><h1>你真的是「媽寶」嗎？</h1>
+<div class="sub">30 題成人自主性測驗。這裡的「媽寶」不是指愛媽媽、孝順或和家人親近，而是檢視成年後是否仍把母親當成決策、情緒、生活或親密關係的主要控制中心。請依「實際會怎麼做」回答，而不是理想中的自己。</div></header>
+<div class="progress"><div class="ptext"><span id="pt">0 / 30</span><span id="pp">0%</span></div><div class="bar"><i id="pb"></i></div></div>
+<div id="form"></div><button class="primary" id="go">查看完整分析</button><button class="secondary" id="reset">重新作答</button>
+<div id="msg" class="note"></div><section id="result"><div id="out"></div></section>
+<div class="note">本測驗是依成人自主、心理分化、家庭界線、責任承擔與親密關係界線等概念設計的自我探索工具，不是臨床心理診斷。「媽寶」為日常用語，結果應理解為依賴與自主模式，而非人格標籤。</div>
+</div><script>
+const Q=[{"d": "決策自主", "q": "如果你得到一份非常想要的工作，但需要搬到外地，而媽媽強烈反對，你最可能怎麼做？", "o": ["媽媽不同意，我大概就不去了", "會努力取得她同意，否則很難安心", "認真聽她的理由，但最後自己決定", "先依自己的需求做決定，再和她溝通"], "s": [3, 2, 1, 0]}, {"d": "決策自主", "q": "買車、換工作、搬家、留學或結婚等重大決定，你通常怎麼處理？", "o": ["自己形成判斷後，再聽家人的意見", "可以自己決定，但媽媽反對會讓我非常動搖", "媽媽的同意通常是重要條件", "基本上會按照媽媽認為安全的方式選"], "s": [0, 1, 2, 3]}, {"d": "決策自主", "q": "你已經做出決定，媽媽卻說「你以後一定會後悔」，你通常會？", "o": ["取消或改變決定", "開始強烈懷疑自己", "重新檢查理由，但不會只因她反對就改變", "能接受她不同意，也承擔自己可能判斷錯誤"], "s": [3, 2, 1, 0]}, {"d": "決策自主", "q": "媽媽推薦的工作、對象或生活方式與你真正想要的完全不同時？", "o": ["可以清楚拒絕，不需要她最後認同", "會解釋理由，但最後仍自己決定", "會拖很久，希望找到不衝突的方法", "最後通常選媽媽較能接受的方案"], "s": [0, 1, 2, 3]}, {"d": "決策自主", "q": "當你和媽媽對人生方向意見相反，你最接近哪種狀態？", "o": ["她的意見是參考，不是批准", "會考慮她的擔心，但能自己承擔結果", "若她持續反對，我很難堅持", "我通常不會做她明確反對的事"], "s": [0, 1, 2, 3]}, {"d": "情緒分化", "q": "遇到工作失敗或重大挫折時，你通常？", "o": ["能先自己整理，需要時再找不同的人支持", "媽媽是重要支持者之一，但不是唯一來源", "如果媽媽不支持我，我會特別沒有安全感", "通常需要媽媽幫我判斷接下來該怎麼辦"], "s": [0, 1, 2, 3]}, {"d": "情緒分化", "q": "媽媽因為你的選擇而生氣或難過時？", "o": ["會立刻改變安排，避免她難過", "會有強烈罪惡感，甚至想改變決定", "會關心她，但知道她的情緒不等於我的責任", "能理解她難過，同時維持自己的界線"], "s": [3, 2, 1, 0]}, {"d": "情緒分化", "q": "如果幾天沒有跟媽媽聯絡，你通常？", "o": ["覺得很正常", "會想到應該聯絡，但不會焦慮", "會有明顯罪惡感或不安", "很難做到，幾乎必須每天聯絡"], "s": [0, 1, 2, 3]}, {"d": "情緒分化", "q": "媽媽否定你的能力或選擇時？", "o": ["可以區分她的看法與自己的價值", "會難過，但最後仍能自己判斷", "很容易覺得她可能是對的", "她的評價會大幅影響我的自信與決策"], "s": [0, 1, 2, 3]}, {"d": "情緒分化", "q": "當你非常焦慮或委屈時？", "o": ["可以自己調節，也能向不同關係尋求支持", "常找媽媽聊，但沒有她也能處理", "沒有媽媽的安慰會特別難受", "很多情緒只有媽媽能幫我處理"], "s": [0, 1, 2, 3]}, {"d": "親子界線", "q": "媽媽想知道你的收入、存款、行程、交友或感情細節時？", "o": ["她想知道就應該全部告訴她", "不告訴她會讓我覺得自己在隱瞞", "依事情決定哪些願意分享", "即使她追問，我也能保留自己的隱私"], "s": [3, 2, 1, 0]}, {"d": "親子界線", "q": "媽媽沒有先詢問就替你安排事情時？", "o": ["會清楚告訴她以後先問我", "不影響太大的話偶爾可以接受", "即使不想去，通常還是會配合", "會覺得拒絕媽媽很不孝"], "s": [0, 1, 2, 3]}, {"d": "親子界線", "q": "如果媽媽要求看你的手機訊息或伴侶聊天內容？", "o": ["可以直接拒絕，這是私人界線", "會解釋為什麼不方便給她看", "雖然不舒服，但可能還是給她看", "她是我媽媽，看一下也沒什麼"], "s": [0, 1, 2, 3]}, {"d": "親子界線", "q": "媽媽頻繁打電話確認你在哪裡、和誰在一起，你會？", "o": ["視為關心，但會設定合理聯絡方式", "偶爾回覆，必要時說明我需要空間", "怕她擔心，所以盡量隨時報備", "覺得成年後也應該讓她掌握行程"], "s": [0, 1, 2, 3]}, {"d": "親子界線", "q": "媽媽對你的穿著、交友、住處或日常習慣有很多意見時？", "o": ["能聽，但是否採納由我決定", "有時會為避免爭執而配合", "她不喜歡的事情我通常會避免", "我覺得照她的要求做比較安心"], "s": [0, 1, 2, 3]}, {"d": "生活責任", "q": "如果你一個人住，處理帳單、家務、看病、行政手續等事情的能力如何？", "o": ["大多可以自己處理", "有些不熟，但會自己學", "常需要媽媽提醒或協助", "很多事情仍習慣讓媽媽處理"], "s": [0, 1, 2, 3]}, {"d": "生活責任", "q": "你遇到工作、租屋或金錢上的麻煩時？", "o": ["先自己釐清並處理，必要時求助", "會詢問家人意見，但仍由自己執行", "常需要媽媽介入協調", "通常希望媽媽直接幫我解決"], "s": [0, 1, 2, 3]}, {"d": "生活責任", "q": "如果因自己的選擇造成損失或失敗？", "o": ["自己承擔後果並調整", "會求助，但不把責任交給別人", "很希望媽媽幫我收拾後果", "會覺得當初如果聽媽媽就好了，之後更依賴她決定"], "s": [0, 1, 2, 3]}, {"d": "生活責任", "q": "你的個人財務通常？", "o": ["自己規劃收入、支出與儲蓄", "自己管理，但偶爾需要家人提醒", "重要支出常要媽媽幫我判斷", "媽媽仍實際管理或高度介入我的錢"], "s": [0, 1, 2, 3]}, {"d": "生活責任", "q": "媽媽主動替你處理一件其實你自己能完成的事情，你通常？", "o": ["感謝但會自己完成", "偶爾接受，不會形成習慣", "覺得有人處理比較省事，常讓她做", "很自然地認為這些事情媽媽比較會處理"], "s": [0, 1, 2, 3]}, {"d": "伴侶界線", "q": "媽媽批評你的伴侶，而你認為她的批評不公平時？", "o": ["會聽取意見，但清楚表達這是我的關係", "會分別溝通，並形成自己的判斷", "為避免媽媽不高興，會要求伴侶多配合", "會重新考慮這段關係，因為媽媽通常比較了解我"], "s": [0, 1, 2, 3]}, {"d": "伴侶界線", "q": "媽媽與伴侶同時需要你，而兩件事的重要程度差不多時？", "o": ["依實際情況協調，不預設誰永遠優先", "會考慮承諾與急迫性再決定", "通常優先媽媽，否則會有罪惡感", "媽媽永遠應該優先於伴侶"], "s": [0, 1, 2, 3]}, {"d": "伴侶界線", "q": "你和伴侶發生爭執時，通常會把細節告訴媽媽嗎？", "o": ["除非真的需要外部協助，否則保留關係隱私", "偶爾會說，但不讓媽媽替我判決", "常向媽媽完整報告，希望她判斷誰對誰錯", "幾乎所有重要衝突都會讓媽媽知道"], "s": [0, 1, 2, 3]}, {"d": "伴侶界線", "q": "如果伴侶希望你對原生家庭設定一個合理界線，你會？", "o": ["先評估是否合理，合理就願意調整", "會溝通，但需要一些時間適應", "容易覺得伴侶是在逼我選邊站", "會認為伴侶不應干涉我和媽媽的關係"], "s": [0, 1, 2, 3]}, {"d": "伴侶界線", "q": "如果媽媽不喜歡你真心想長期交往的人，但沒有明確安全或品格問題？", "o": ["最終仍由我決定是否交往", "會重視她的觀察，但自己驗證", "如果她一直反對，我很可能放棄", "媽媽不接受的對象，我基本不會繼續"], "s": [0, 1, 2, 3]}, {"d": "罪惡與控制", "q": "當你拒絕媽媽的要求，她說「我都是為你好」時？", "o": ["能理解她的出發點，但仍可以說不", "會重新考慮，但不一定改變決定", "會覺得自己很自私，最後常妥協", "幾乎無法繼續拒絕"], "s": [0, 1, 2, 3]}, {"d": "罪惡與控制", "q": "媽媽說「我養你這麼大，你現在都不聽我的」時，你的反應？", "o": ["感謝養育不等於放棄成年決定權", "會難受，但仍能維持自己的決定", "會產生很強的虧欠感並妥協", "覺得她說得有道理，我確實應該聽她"], "s": [0, 1, 2, 3]}, {"d": "罪惡與控制", "q": "你為自己安排旅行、約會或生活，而媽媽因此覺得被冷落時？", "o": ["關心她的感受，但不取消合理安排", "可能調整部分時間來平衡", "通常會取消或縮短自己的安排", "很難享受自己的生活，因為會一直覺得對不起她"], "s": [0, 1, 2, 3]}, {"d": "罪惡與控制", "q": "媽媽用沉默、生氣、哭泣或失望來回應你的拒絕時？", "o": ["仍能平靜維持界線", "會不舒服，但可以等情緒過去再談", "通常會因此改變原本決定", "我很難承受，最後幾乎一定妥協"], "s": [0, 1, 2, 3]}, {"d": "罪惡與控制", "q": "哪一句最接近你對「孝順」的理解？", "o": ["尊重與照顧父母，但成年人仍有自己的人生", "願意多考慮父母感受，但不代表服從", "讓媽媽失望通常代表我做得不夠好", "好孩子就不應該做父母強烈反對的事"], "s": [0, 1, 2, 3]}];
 
-<div class="progressWrap">
-  <div class="progressText"><span id="progressLabel">0 / 50</span><span id="progressPct">0%</span></div>
-  <div class="bar"><div id="bar"></div></div>
-</div>
-
-<div id="form"></div>
-
-<div class="card">
-  <div class="q">最後補充｜如果你現在可以對 35 歲的自己留一句話，你最希望那時候已經完成什麼？</div>
-  <textarea id="finalNote" placeholder="自由寫，不計分，但會出現在分析報告裡。"></textarea>
-</div>
-
-<div class="actions">
-  <button class="primary" id="analyzeBtn">產生完整分析</button>
-  <button class="secondary" id="resetBtn">清除全部</button>
-</div>
-
-<div id="missing" class="small" style="margin-top:12px"></div>
-
-<section id="result" class="result">
-  <div class="sectionTitle">分析結果</div>
-  <div id="resultBody"></div>
-  <div class="actions">
-    <button class="primary" id="copyBtn">複製完整回答＋分析</button>
-  </div>
-  <div class="small" style="margin-top:12px">
-    此結果為多維度決策評估模型，不是心理診斷，也不是保證未來的預測。城市評分依你的回答與既定決策邏輯計算；命理部分僅屬傳統文化詮釋，不具實證預測力。
-  </div>
-</section>
-</div>
-
-<script>
-const sections = [
-{title:"01｜你現在真正想要的是什麼", qs:[
-["如果畢業後沒有任何現實限制，你最想優先得到什麼？",["更高收入","更好的專業成長","更好的作品與履歷","更自由的生活","更快開始自己的事業","我還不知道"]],
-["你現在對「畢業後留在日本」的直覺意願有多高？","scale"],
-["你現在對「畢業後去中國發展」的直覺意願有多高？","scale"],
-["你現在對「畢業後回台灣」的直覺意願有多高？","scale"],
-["如果三年後收入不錯，但做的案子不是你真正喜歡的方向，你能接受嗎？",["可以","短期可以","很猶豫","比較不能","不能"]]
-]},
-{title:"02｜收入、存錢與現實速度", qs:[
-["畢業後前兩年，你把「存到一筆可用資金」的重要性放多高？","scale"],
-["如果某地實際可存下來的錢是另一地的 1.5 倍，你會多大程度因此改變選擇？","scale"],
-["你能接受用較高工時，換取更高收入與更快累積嗎？",["可以","可以但有上限","看工作內容","不太願意","完全不願意"]],
-["你比較能接受哪一種起薪狀態？",["薪水普通，但能學到完整專案","薪水高，但工作內容較重複","兩者要平衡","先求穩定","不知道"]],
-["如果某地生活成本高，但履歷價值也高，你最多願意多承擔多少生活成本？",["10%內","20%內","30%內","只要值得可以更高","我不願意"]]
-]},
-{title:"03｜專業能力的真正缺口", qs:[
-["你現在最想補強哪一項能力？",["建築設計邏輯","施工圖與細部","現場監造與施工","專案統籌與管理","客戶與商業能力","不知道"]],
-["你多在意「能不能從設計一路看到完工」？","scale"],
-["如果一份工作作品很好看，但你只能負責很小一部分，你能接受嗎？",["可以","短期可以","看公司品牌","比較不能","不能"]],
-["你多想累積住宅／集合住宅／改修這類經驗？","scale"],
-["你多在意未來能不能獨立判斷材料、工法、成本與現場問題？","scale"]
-]},
-{title:"04｜作品、履歷與職涯資產", qs:[
-["你認為未來三年最重要的職涯資產是什麼？",["作品集","完整案場經驗","知名公司履歷","施工與管理能力","客戶與人脈","現金與存款"]],
-["如果日本能給你更漂亮的作品，但中國能給你更多完整案子，你會偏向哪邊？",["日本","中國","看案型","看薪資差距","無法判斷"]],
-["你多在意工作經驗回到台灣後仍然『可被理解、可被使用』？","scale"],
-["你希望三年後履歷上最有力的一句話是什麼？",["參與高品質住宅設計","完整負責多個案子","管理施工與團隊","累積大型／品牌公司經驗","已有自己的客戶"]],
-["你多在意未來作品風格能形成『自己的方向』，而不是只完成公司要求？","scale"]
-]},
-{title:"05｜創業與獨立工作準備", qs:[
-["你目前對 35 歲前後開始自己的工作室／事務所的意願有多高？","scale"],
-["如果要創業，你覺得現在最缺的是什麼？",["資金","客戶","施工能力","管理能力","作品與品牌","商業經驗"]],
-["你比較想從哪種方式走向獨立？",["先在好公司累積再創業","先賺錢與存資金再創業","邊工作邊接案","盡快自己做","還沒決定"]],
-["你多在意未來工作能接觸報價、成本與客戶談判？","scale"],
-["如果一個地方薪水普通，但能更早接觸客戶、施工和商業決策，你會考慮嗎？",["會","可能會","看差距","不太會","不會"]]
-]},
-{title:"06｜生活環境與長期適配", qs:[
-["你希望未來生活環境最重要的條件是什麼？",["文化與審美","便利與效率","收入與機會","人際關係","居住品質","自由感"]],
-["你可以接受長期處在高競爭、高密度、高壓的城市嗎？","scale"],
-["你有多在意城市本身能持續刺激你的審美與建築觀？","scale"],
-["你能接受為了職涯，住在自己不特別喜歡的城市 2–3 年嗎？","scale"],
-["你比較怕哪一種狀態？",["生活太舒服但沒成長","一直很累但有成長","賺不到錢","作品不好","沒有自己的生活","都怕"]]
-]},
-{title:"07｜風險與機會成本", qs:[
-["如果去一個新城市，需要重新建立人脈與生活，你覺得這個成本有多高？","scale"],
-["如果某地政策、簽證或市場變動較大，你願意承擔多少風險？","scale"],
-["你比較怕哪一種錯誤？",["選太保守浪費時間","選太冒險最後失敗","錯過高薪機會","錯過好作品機會","延後創業"]],
-["如果兩年後證明選錯，你有多大信心重新換城市？","scale"],
-["你希望下一個城市至少待多久才值得？",["1年","2年","3年","4年以上","不一定"]]
-]},
-{title:"08｜未來選擇權", qs:[
-["你多在意工作經驗之後能不能轉去其他國家或城市？","scale"],
-["你多在意三年後自己仍然有『重新選擇』的自由？","scale"],
-["如果某城市讓你收入高，但技能過度侷限，你能接受嗎？",["可以","短期可以","看薪資","不太能","不能"]],
-["你更想要哪種三年後的自己？",["收入高","設計成熟","能獨立做完整專案","已有創業資本","可以自由換城市"]],
-["如果一份工作讓你很忙，但三年後仍沒有更高的市場價值，你會留下嗎？",["會","可能會","看薪資","大概不會","不會"]]
-]},
-{title:"09｜你對不同路線真正的接受度", qs:[
-["如果日本找到一份你很喜歡的住宅設計工作，但薪資低於中國 25%，你會怎麼選？",["日本","偏日本","看細節","偏中國","中國"]],
-["如果杭州薪資高、案子多，但審美方向不完全符合你，你能接受嗎？",["可以","短期可以","看能學什麼","比較不能","不能"]],
-["如果回台灣薪水較低，但更容易建立自己的客戶與人脈，你會考慮嗎？",["會","可能會","看差距","不太會","不會"]],
-["如果東京工作機會最好，但生活成本與搬遷壓力最高，你願意承擔嗎？","scale"],
-["如果大阪／京都收入較普通，但生活與審美更適合你，你會願意嗎？","scale"]
-]},
-{title:"10｜逼近真正的選擇", qs:[
-["如果只能選一個，你最想換取什麼？",["錢","能力","作品","自由","創業速度","生活品質"]],
-["你多希望下一份工作能直接補足你現在最弱的能力？","scale"],
-["如果 35 歲時還沒有創業，但已經是很強的專案負責人，你會覺得成功嗎？",["會","大致會","不確定","比較不會","不會"]],
-["如果未來三年只能有一個主軸，你會選哪個？",["賺錢","做作品","學施工與管理","累積創業條件","探索適合自己的方向"]],
-["現在你最想去哪裡發展？",["日本","杭州","中國其他城市","台灣","其他國際城市","我真的不知道"]]
-]}
-];
-
-const F = document.getElementById("form");
-const answers = JSON.parse(localStorage.getItem("futurePath50") || "{}");
-let qNum=0;
-const meta={};
-
-sections.forEach((sec,si)=>{
-  const title=document.createElement("div");
-  title.className="sectionTitle"; title.textContent=sec.title; F.appendChild(title);
-  sec.qs.forEach((item,idx)=>{
-    qNum++; const id="q"+qNum; meta[id]={q:item[0],type:item[1],section:si};
-    const c=document.createElement("div"); c.className="card";
-    c.innerHTML=`<div class="qno">Q${qNum}</div><div class="q">${item[0]}</div>`;
-    if(item[1]==="scale"){
-      const val = answers[id] ?? "";
-      c.innerHTML += `<div class="scaleRow">
-        <span class="small">0</span>
-        <input type="range" min="0" max="10" step="1" value="${val===""?5:val}" data-id="${id}" class="scale">
-        <span class="small">10</span>
-        <div class="scaleVal" id="${id}v">${val===""?"—":val}</div>
-      </div>
-      <div class="small" style="margin-top:8px">請拖動滑桿作答；未操作不視為已回答。</div>`;
-    } else {
-      item[1].forEach((opt,i)=>{
-        const checked = answers[id]===opt ? "checked":"";
-        c.innerHTML += `<label class="opt"><input type="radio" name="${id}" value="${opt}" ${checked}>${opt}</label>`;
-      });
-    }
-    F.appendChild(c);
-  });
+const dims=["決策自主","情緒分化","親子界線","生活責任","伴侶界線","罪惡與控制"];
+const form=document.getElementById("form");
+Q.forEach((x,i)=>{
+ const c=document.createElement("div");c.className="card";
+ c.innerHTML=`<div class="dim">${x.d} · ${i+1}/30</div><div class="q">${x.q}</div>`+
+ x.o.map((v,j)=>`<label class="opt"><input type="radio" name="q${i}" value="${x.s[j]}"> ${v}</label>`).join("");
+ form.appendChild(c);
 });
-
-document.querySelectorAll('input[type=radio]').forEach(el=>{
-  el.addEventListener('change',e=>{answers[e.target.name]=e.target.value; save(); updateProgress();});
-});
-document.querySelectorAll('.scale').forEach(el=>{
-  el.addEventListener('input',e=>{
-    answers[e.target.dataset.id]=Number(e.target.value);
-    document.getElementById(e.target.dataset.id+"v").textContent=e.target.value;
-    save(); updateProgress();
-  });
-});
-document.getElementById("finalNote").value = localStorage.getItem("futurePathNote") || "";
-document.getElementById("finalNote").addEventListener("input",e=>localStorage.setItem("futurePathNote",e.target.value));
-
-function save(){localStorage.setItem("futurePath50",JSON.stringify(answers))}
-function updateProgress(){
-  const n=Object.keys(answers).filter(k=>answers[k]!==""&&answers[k]!=null).length;
-  document.getElementById("progressLabel").textContent=`${n} / 50`;
-  document.getElementById("progressPct").textContent=`${Math.round(n/50*100)}%`;
-  document.getElementById("bar").style.width=(n/50*100)+"%";
+function progress(){
+ let n=0;Q.forEach((_,i)=>{if(document.querySelector(`input[name=q${i}]:checked`))n++});
+ pt.textContent=`${n} / 30`;pp.textContent=Math.round(n/30*100)+"%";pb.style.width=(n/30*100)+"%";
 }
-updateProgress();
-
-const optionScore = {
-  "可以":80,"短期可以":65,"很猶豫":50,"比較不能":30,"不能":10,
-  "會":85,"可能會":65,"看差距":50,"看細節":50,"看工作內容":55,"看公司品牌":50,
-  "偏日本":70,"日本":90,"偏中國":30,"中國":10,
-  "不太願意":30,"完全不願意":10,"可以但有上限":65,
-  "1年":40,"2年":60,"3年":75,"4年以上":85,"不一定":50,
-  "大致會":70,"不確定":50,"比較不會":30,"不會":15,
-  "只要值得可以更高":85,"我不願意":15
+form.addEventListener("change",progress);
+function band(n){if(n<25)return["高度自主","你和母親可以保持連結，但人生方向大致由自己掌舵。"];if(n<45)return["健康親密・輕度依賴","整體自主性良好，但少數情境仍容易受母親情緒或意見牽動。"];if(n<65)return["中度家庭依附","你已有成人能力，但某些重要領域的決策權仍沒有完全回到自己身上。"];if(n<80)return["明顯媽寶傾向","問題不在於你愛媽媽，而是母親的意見、情緒或需求已明顯介入你的成人決策與關係。"];return["高度依賴","你可能已具備成年人的外在生活，但心理界線、責任或重大選擇仍高度依附母親。"]}
+function advice(dim,score){
+ const m={
+ "決策自主":"重大事情先寫下自己的答案與理由，再詢問媽媽。把「徵求批准」改成「聽取意見」，並練習承擔自己選錯的可能。",
+ "情緒分化":"建立不只依靠媽媽的情緒支持系統。焦慮時先自己整理，再選擇朋友、伴侶或家人支持，而不是立即尋求媽媽替你確認對錯。",
+ "親子界線":"從低風險事情開始保留隱私與拒絕權，例如行程、訊息、生活安排。界線不是疏遠，而是讓兩個成年人都能保有自己的空間。",
+ "生活責任":"把仍由媽媽代辦的事情列出來，逐項接回：財務、行政、家務、醫療與問題處理。可以求助，但執行與後果要回到自己。",
+ "伴侶界線":"親密關係的衝突先在兩人之間處理。媽媽可以提供意見，但不應成為第三位裁判或擁有伴侶關係的否決權。",
+ "罪惡與控制":"練習區分「媽媽不開心」與「我做錯事」。拒絕合理要求可能讓人失望，但失望本身不代表你不孝或必須撤回決定。"};
+ return m[dim];
+}
+go.onclick=()=>{
+ let ans=[];for(let i=0;i<Q.length;i++){let e=document.querySelector(`input[name=q${i}]:checked`);if(!e){msg.textContent=`還有 ${30-ans.length} 題未完成。請全部回答後再分析。`;document.querySelector(`input[name=q${i}]`).closest(".card").scrollIntoView({behavior:"smooth"});return}ans.push(+e.value)}
+ msg.textContent="";
+ let raw=ans.reduce((a,b)=>a+b,0), total=Math.round(raw/90*100), [lv,desc]=band(total);
+ let ds={};dims.forEach(d=>ds[d]=0);Q.forEach((x,i)=>ds[x.d]+=ans[i]);dims.forEach(d=>ds[d]=Math.round(ds[d]/15*100));
+ let sorted=[...dims].sort((a,b)=>ds[b]-ds[a]), hi=sorted[0], hi2=sorted[1], low=sorted[5];
+ let nuance= total<45
+ ?`你的結果不像典型的「媽寶」。尤其在「${low}」上，你比較能把親密與自主分開。需要留意的是「${hi}」仍是相對容易被家庭影響的區域。`
+ :`你的核心不是單純「很聽媽媽的話」，而是 <b>${hi}</b> 與 <b>${hi2}</b> 兩個面向形成了主要依賴模式。這代表真正需要處理的不是減少和媽媽聯絡，而是把該由成年人自己承擔的決策權、情緒責任或關係界線拿回來。`;
+ let metrics=dims.map(d=>`<div class="metric">${d}<br><b>${ds[d]}</b> / 100<div class="mini"><span style="width:${ds[d]}%"></span></div></div>`).join("");
+ out.innerHTML=`<div class="card hero"><div class="scorebig">${total}</div><div>／100</div><div class="level">${lv}</div><p class="analysis">${desc}</p></div>
+ <h2>六面向結果</h2><div class="grid">${metrics}</div>
+ <div class="card analysis"><h2>你的結果怎麼看</h2><p>${nuance}</p>
+ <h3>目前最值得處理：${hi}（${ds[hi]}）</h3><p>${advice(hi,ds[hi])}</p>
+ <h3>第二優先：${hi2}（${ds[hi2]}）</h3><p>${advice(hi2,ds[hi2])}</p>
+ <h3>一個重要提醒</h3><p>成熟的目標不是「不需要媽媽」，而是可以愛她、照顧她、聽她的意見，同時仍然能說不、承受她的不認同，並為自己的選擇負責。真正的自主不是切斷關係，而是不把人生方向盤交給任何一個人。</p></div>`;
+ result.style.display="block";result.scrollIntoView({behavior:"smooth"});
 };
-
-function s(id, fallback=50){
-  const v=answers[id];
-  if(typeof v==="number") return v*10;
-  if(optionScore[v]!=null) return optionScore[v];
-  return fallback;
-}
-function avg(arr){const xs=arr.filter(x=>Number.isFinite(x));return xs.length?xs.reduce((a,b)=>a+b,0)/xs.length:50}
-function clamp(x){return Math.max(0,Math.min(100,Math.round(x)))}
-
-function dimensionScores(){
-  return {
-    income: clamp(avg([s("q6"),s("q7"),s("q8"),s("q9"),s("q10")])),
-    professional: clamp(avg([s("q11"),s("q12"),100-s("q13"),s("q14"),s("q15")])),
-    portfolio: clamp(avg([s("q16"),s("q17"),s("q18"),s("q19"),s("q20")])),
-    startup: clamp(avg([s("q21"),s("q22"),s("q23"),s("q24"),s("q25")])),
-    lifestyle: clamp(avg([s("q26"),100-s("q27"),s("q28"),s("q29"),50])),
-    risk: clamp(avg([100-s("q31"),100-s("q32"),s("q34"),s("q35"),50])),
-    optionality: clamp(avg([s("q36"),s("q37"),100-s("q38"),s("q39"),100-s("q40")])),
-    selfDirection: clamp(avg([s("q1"),s("q41"),s("q42"),s("q43"),s("q44")])),
-  };
-}
-
-const routeWeights = {
-  "日本": {income:.65,professional:1.05,portfolio:1.10,startup:.72,lifestyle:.92,risk:.78,optionality:.95,selfDirection:.88},
-  "杭州": {income:1.08,professional:.90,portfolio:.82,startup:1.00,lifestyle:.72,risk:.70,optionality:.82,selfDirection:.92},
-  "中國其他城市": {income:1.00,professional:.90,portfolio:.84,startup:.92,lifestyle:.70,risk:.66,optionality:.78,selfDirection:.88},
-  "台灣": {income:.72,professional:.82,portfolio:.80,startup:1.12,lifestyle:1.00,risk:.96,optionality:.82,selfDirection:.90},
-  "其他國際城市": {income:.92,professional:1.00,portfolio:1.03,startup:.78,lifestyle:.78,risk:.62,optionality:1.06,selfDirection:.84}
-};
-
-function explicitPreference(route){
-  let p=50;
-  if(route==="日本") p=avg([s("q2"), answers.q41==="日本"?90:answers.q41==="偏日本"?75:50, s("q44")]);
-  if(route==="杭州") p=avg([s("q3"), answers.q42==="可以"?80:answers.q42==="短期可以"?65:50]);
-  if(route==="中國其他城市") p=avg([s("q3"), 55]);
-  if(route==="台灣") p=avg([s("q4"), answers.q43==="會"?80:answers.q43==="可能會"?65:50]);
-  if(route==="其他國際城市") p=avg([s("q34"),s("q36"),55]);
-  if(answers.q50===route) p=avg([p,92]);
-  if(answers.q50==="我真的不知道") p=avg([p,50]);
-  return p;
-}
-function scoreRoutes(d){
-  const baseKeys=Object.keys(d);
-  return Object.entries(routeWeights).map(([name,w])=>{
-    let num=0, den=0;
-    baseKeys.forEach(k=>{ num += d[k]*w[k]; den += w[k]; });
-    const base=num/den;
-    const pref=explicitPreference(name);
-    const final=clamp(base*.78 + pref*.22);
-    return {name,score:final};
-  }).sort((a,b)=>b.score-a.score);
-}
-function confidence(){
-  const n=Object.keys(answers).length;
-  const unknownCount=Object.values(answers).filter(v=>String(v).includes("不知道")||String(v).includes("無法判斷")).length;
-  return clamp((n/50)*85 + Math.max(0,15-unknownCount*2));
-}
-function contradictions(){
-  const arr=[];
-  if(s("q21")>=70 && s("q43")>=70) arr.push("你同時重視創業與回台建立客戶／人脈，代表『先去哪裡累積，再回哪裡放大』可能比一次選定終點更適合你。");
-  if(s("q6")>=75 && s("q20")>=75) arr.push("你既重視快速累積資金，也重視形成自己的作品方向；高薪但作品價值低的工作，可能不會真正讓你滿足。");
-  if(s("q27")>=75 && s("q28")>=75) arr.push("你能承受高壓城市，同時又很需要審美與環境刺激，代表你不是單純追求舒服，而是要『值得的壓力』。");
-  if(s("q37")>=80 && s("q38")<=35) arr.push("你非常重視未來選擇權，也不接受技能過度侷限；任何高薪但工作內容封閉的路線都應該被扣分。");
-  if(s("q29")>=75 && s("q32")<=35) arr.push("你能接受為職涯短期住在不喜歡的城市，但對政策／市場風險承受度較低，適合設定明確停損點。");
-  return arr;
-}
-
-function buildReport(){
-  const d=dimensionScores(), routes=scoreRoutes(d), conf=confidence(), cons=contradictions();
-  const top=routes[0], second=routes[1];
-  let phase="";
-  if(top.name==="杭州"||top.name==="中國其他城市") phase="更像『2–3 年加速累積』路線，而不是直接定居型選擇。重點是收入、完整案場、管理與創業資本有沒有實際增加。";
-  else if(top.name==="日本") phase="更像『專業方向與作品深化』路線。前提是工作內容真的符合住宅／建築／改修，而不是只因為留在日本本身。";
-  else if(top.name==="台灣") phase="更像『把既有經驗轉成自主與創業條件』的路線。關鍵不是回去，而是能不能更快建立自己的客戶、施工網絡與品牌。";
-  else phase="更像『擴大國際選擇權』的路線，但前提是簽證、語言、成本和進入門檻都能被現實驗證。";
-
-  let switchCond = "";
-  if(top.name==="杭州") switchCond="如果杭州只能給你高薪、卻無法增加完整專案／施工統籌／未來可轉移能力，排名會明顯下降；若日本拿到真正符合住宅方向且可參與完整案子的 offer，兩者可能反轉。";
-  if(top.name==="日本") switchCond="如果日本 offer 仍以你已經會的工作為主、薪資又偏低，排名會下降；若杭州能讓你同時取得更高收入與完整案場責任，杭州可能反超。";
-  if(top.name==="台灣") switchCond="如果回台只能回到低薪、重複工作、沒有自主空間，排名會下降；若能直接接觸客戶、施工、商業決策與自己的案源，則會大幅上升。";
-  if(top.name==="其他國際城市") switchCond="這條路的最大不確定性是可行性。只要簽證、語言、求職市場或成本其中一項明顯不成立，就應重新排名。";
-  if(top.name==="中國其他城市") switchCond="這條路需要先驗證具體城市與公司，否則『中國其他城市』太寬泛，分數只能代表方向，不代表實際 offer。";
-
-  const names={
-    income:"收入／資金累積",professional:"專業成長",portfolio:"作品與履歷",
-    startup:"創業準備",lifestyle:"生活適配",risk:"風險承受",
-    optionality:"未來選擇權",selfDirection:"自我方向"
-  };
-  const dimHtml=Object.entries(d).map(([k,v])=>`<div class="score"><div>${names[k]}</div><b>${v}</b><div class="meter"><span style="width:${v}%"></span></div></div>`).join("");
-  const routeHtml=routes.map((r,i)=>`<div class="route"><h3>${i+1}. ${r.name}</h3><div class="big">${r.score}</div><div class="small">${i===0?"目前最符合你的整體權重":"作為次選／條件式選項"}</div></div>`).join("");
-
-  const free = document.getElementById("finalNote").value.trim();
-  const conHtml = cons.length?`<ul>${cons.map(x=>`<li>${x}</li>`).join("")}</ul>`:`<div class="note">目前回答沒有出現特別強烈的矛盾訊號。</div>`;
-
-  return `
-  <div class="note"><b>目前第一名：${top.name} ${top.score} 分</b><br>
-  第二名：${second.name} ${second.score} 分。兩者差距 ${top.score-second.score} 分。<br>
-  結果可信度／資訊完整度：${conf} 分。</div>
-
-  <div class="kicker">八大決策維度</div>
-  <div class="scoreGrid">${dimHtml}</div>
-
-  <div class="kicker">發展地排名</div>
-  ${routeHtml}
-
-  <div class="kicker">階段判斷</div>
-  <div class="note">${phase}</div>
-
-  <div class="kicker">什麼情況會讓排名反轉</div>
-  <div class="note">${switchCond}</div>
-
-  <div class="kicker">回答中的關鍵訊號／矛盾</div>
-  ${conHtml}
-
-  <div class="kicker">三段式建議</div>
-  <div class="note">
-    <b>2027–2028｜第一站：</b>優先選擇能補你最大能力缺口，同時不讓收入落差失控的地方。<br><br>
-    <b>2029–2031｜放大期：</b>如果第一站已經拿到完整案場、施工統籌、作品與可轉移能力，就應重新比較城市，不要因為熟悉而自動留下。<br><br>
-    <b>2032+｜獨立期：</b>再把客戶、人脈、資金、施工網絡與個人品牌放回核心，決定創業地點，而不是把第一份工作的城市當成永久答案。
-  </div>
-
-  <div class="kicker">35 歲的你</div>
-  <div class="note">${free?free.replace(/</g,"&lt;"):"尚未填寫。"}</div>
-
-  <div class="kicker">命理參考</div>
-  <div class="note">
-    命理不納入上述分數。如果你要，我可以再依你先前提供的出生資料，把這份結果另外疊加成「現實模型 vs. 命理視角」兩層比較，並明確分開顯示。
-  </div>`;
-}
-
-document.getElementById("analyzeBtn").addEventListener("click",()=>{
-  const missing=[];
-  for(let i=1;i<=50;i++){ if(answers["q"+i]===undefined) missing.push(i); }
-  if(missing.length){
-    document.getElementById("missing").innerHTML=`尚未完成：第 ${missing.join("、")} 題。`;
-    document.getElementById("result").style.display="none";
-    return;
-  }
-  document.getElementById("missing").textContent="";
-  document.getElementById("resultBody").innerHTML=buildReport();
-  document.getElementById("result").style.display="block";
-  document.getElementById("result").scrollIntoView({behavior:"smooth"});
-});
-
-document.getElementById("resetBtn").addEventListener("click",()=>{
-  if(!confirm("確定清除全部回答？")) return;
-  localStorage.removeItem("futurePath50");
-  localStorage.removeItem("futurePathNote");
-  location.reload();
-});
-
-document.getElementById("copyBtn").addEventListener("click",async()=>{
-  let txt="【未來發展地評估｜50題】\n\n";
-  for(let i=1;i<=50;i++){
-    const id="q"+i;
-    txt += `Q${i}. ${meta[id].q}\n→ ${answers[id]}\n\n`;
-  }
-  txt += `最後補充：${document.getElementById("finalNote").value}\n\n`;
-  const temp=document.createElement("div");
-  temp.innerHTML=document.getElementById("resultBody").innerHTML;
-  txt += "【分析結果】\n"+temp.innerText;
-  await navigator.clipboard.writeText(txt);
-  alert("已複製完整回答與分析。");
-});
-</script>
-</body>
-</html>
+reset.onclick=()=>{document.querySelectorAll("input").forEach(x=>x.checked=false);result.style.display="none";msg.textContent="";progress();scrollTo({top:0,behavior:"smooth"})};
+</script></body></html>
