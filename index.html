@@ -1,359 +1,247 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-Hant">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>你最後真的會去找媽媽嗎？</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>下一階段人生選擇｜30題測驗</title>
 <style>
 :root{
-  --bg:#f6f6f3; --card:#fff; --text:#1d1d1f; --muted:#737373; --line:#e7e7e2;
-  --accent:#2f5d50; --accent-soft:#eaf1ee; --warn:#8a5b2d; --danger:#8a3d3d;
+  --bg:#f6f6f3;--card:#fff;--ink:#20211f;--muted:#72756f;--line:#e7e8e3;--soft:#f0f1ed;--accent:#20211f;
 }
 *{box-sizing:border-box}
-body{
-  margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
-  background:var(--bg);color:var(--text);line-height:1.65;
-}
-.wrap{max-width:860px;margin:0 auto;padding:28px 16px 80px}
-.hero{padding:32px 4px 20px}
-.kicker{font-size:13px;letter-spacing:.12em;color:var(--accent);font-weight:700}
-h1{font-size:clamp(30px,7vw,52px);line-height:1.08;margin:8px 0 16px;letter-spacing:-.03em}
-.lead{color:var(--muted);font-size:16px;max-width:720px}
-.note{
-  margin-top:18px;padding:14px 16px;border:1px solid var(--line);border-radius:14px;background:#fbfbf8;color:#555;font-size:14px
-}
-.progress-shell{position:sticky;top:0;z-index:10;background:rgba(246,246,243,.92);backdrop-filter:blur(10px);padding:12px 0 10px}
-.progress-row{display:flex;justify-content:space-between;gap:12px;font-size:13px;color:var(--muted);margin-bottom:7px}
-.progress{height:7px;background:#deded8;border-radius:99px;overflow:hidden}
-.progress > div{height:100%;width:0;background:var(--accent);transition:.25s}
-.section-title{margin:30px 0 10px;font-size:18px}
-.card{
-  background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px;margin:12px 0;
-  box-shadow:0 1px 0 rgba(0,0,0,.02)
-}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"PingFang TC","Noto Sans TC","Helvetica Neue",Arial,sans-serif;line-height:1.6}
+.wrap{max-width:860px;margin:auto;padding:24px 16px 64px}
+.hero{padding:28px 4px 18px}
+.eyebrow{font-size:12px;letter-spacing:.14em;color:var(--muted);text-transform:uppercase}
+h1{font-size:32px;line-height:1.15;margin:8px 0 10px}
+.sub{color:var(--muted);font-size:15px;max-width:720px}
+.note{margin-top:14px;padding:12px 14px;background:#eceee9;border-radius:14px;font-size:13px;color:#555851}
+.progress-wrap{position:sticky;top:0;z-index:10;background:rgba(246,246,243,.94);backdrop-filter:blur(10px);padding:10px 0 12px}
+.progress{height:8px;background:#e5e6e1;border-radius:999px;overflow:hidden}
+.progress>div{height:100%;width:0;background:#20211f;transition:.25s}
+.ptext{font-size:12px;color:var(--muted);margin-top:6px;text-align:right}
+.qcard{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:20px;margin:14px 0}
 .qnum{font-size:12px;color:var(--muted);margin-bottom:6px}
-.question{font-size:17px;font-weight:650;margin-bottom:14px}
-.scale{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
-.scale label{
-  border:1px solid var(--line);border-radius:12px;padding:10px 5px;text-align:center;cursor:pointer;font-size:13px;
-  transition:.15s;background:#fafaf8
-}
-.scale input{display:none}
-.scale label:has(input:checked){background:var(--accent-soft);border-color:var(--accent);color:var(--accent);font-weight:700}
-.scale small{display:block;font-size:10px;color:var(--muted);margin-top:2px}
-.actions{margin-top:28px}
-button{
-  width:100%;border:0;border-radius:14px;padding:16px 18px;font-size:16px;font-weight:750;cursor:pointer;
-  background:var(--accent);color:white
-}
-button:hover{filter:brightness(.98)}
-.result{display:none;margin-top:28px}
-.result.show{display:block}
-.score-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
-.scorebox{background:#fff;border:1px solid var(--line);border-radius:18px;padding:18px}
-.scorelabel{font-size:13px;color:var(--muted)}
-.score{font-size:38px;font-weight:800;letter-spacing:-.04em;margin-top:4px}
-.bar{height:8px;background:#e8e8e2;border-radius:99px;overflow:hidden;margin-top:10px}
-.bar span{display:block;height:100%;background:var(--accent)}
-.result h2{font-size:28px;margin:26px 0 10px}
-.result h3{font-size:18px;margin:24px 0 8px}
-.pill{display:inline-block;background:var(--accent-soft);color:var(--accent);padding:6px 10px;border-radius:99px;font-size:13px;font-weight:700;margin:3px 6px 3px 0}
-.analysis{background:#fff;border:1px solid var(--line);border-radius:18px;padding:20px;margin-top:14px}
-.analysis p{margin:8px 0}
-.mini{font-size:14px;color:var(--muted)}
-.breakdown{display:grid;gap:10px;margin-top:12px}
-.row{display:grid;grid-template-columns:145px 1fr 46px;gap:10px;align-items:center;font-size:14px}
-.row .track{height:7px;background:#ecece7;border-radius:99px;overflow:hidden}
-.row .track span{display:block;height:100%;background:#5d776f}
-.footer{margin-top:34px;color:var(--muted);font-size:12px;text-align:center}
+.qtitle{font-size:17px;font-weight:650;margin-bottom:14px}
+.opt{display:block;border:1px solid var(--line);border-radius:14px;padding:12px 13px;margin:8px 0;cursor:pointer;transition:.18s;background:#fff}
+.opt:hover{background:#fafaf8}
+.opt input{margin-right:9px}
+.actions{display:flex;gap:10px;margin-top:24px}
+button{appearance:none;border:0;border-radius:14px;padding:14px 18px;font-weight:700;font-size:15px;cursor:pointer}
+.primary{background:#20211f;color:#fff;flex:1}
+.secondary{background:#e8e9e4;color:#20211f}
+#error{display:none;margin-top:12px;color:#9a2f2f;font-size:14px}
+#result{display:none}
+.result-head{background:#20211f;color:#fff;border-radius:24px;padding:24px;margin-top:28px}
+.result-head .score{font-size:52px;font-weight:800;line-height:1}
+.result-head .label{opacity:.75;font-size:14px}
+.result-head h2{margin:14px 0 8px;font-size:25px}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:16px}
+.metric{background:#fff;border:1px solid var(--line);border-radius:18px;padding:16px}
+.metric-top{display:flex;justify-content:space-between;gap:12px;align-items:center}
+.metric-name{font-weight:700}
+.metric-score{font-weight:800}
+.bar{height:8px;background:#ecece8;border-radius:999px;overflow:hidden;margin-top:10px}
+.bar>div{height:100%;background:#20211f}
+.section{background:#fff;border:1px solid var(--line);border-radius:20px;padding:20px;margin-top:14px}
+.section h3{margin:0 0 10px;font-size:18px}
+.kicker{font-size:12px;letter-spacing:.08em;color:var(--muted);text-transform:uppercase}
+.route{padding:12px 0;border-top:1px solid var(--line)}
+.route:first-of-type{border-top:0}
+.route b{display:block;margin-bottom:4px}
+.small{font-size:13px;color:var(--muted)}
 @media(max-width:640px){
-  .score-grid{grid-template-columns:1fr}
-  .scale{grid-template-columns:1fr}
-  .scale label{display:flex;justify-content:space-between;align-items:center;text-align:left;padding:12px}
-  .scale small{display:inline;margin:0}
-  .row{grid-template-columns:112px 1fr 40px}
+ h1{font-size:28px}.grid{grid-template-columns:1fr}.qcard{padding:17px}.wrap{padding:18px 12px 48px}
 }
 </style>
 </head>
 <body>
 <div class="wrap">
-  <section class="hero">
-    <div class="kicker">DECISION BEHAVIOR TEST</div>
-    <h1>你最後真的會去找媽媽嗎？</h1>
-    <div class="lead">
-      這份測驗不是在判斷「是不是媽寶」，也不是單純問「該不該去」。
-      它分開評估：<b>實際行動傾向</b>、<b>現實阻力</b>、<b>媽媽牽引力</b>、<b>替代道路</b>與<b>未來適配度</b>。
-    </div>
-    <div class="note">
-      請用「現在真實的你」回答，不要回答你覺得自己應該成為什麼樣的人。結果是決策分析，不是臨床診斷，也不能真正預測未來。
-    </div>
-  </section>
+  <div class="hero">
+    <div class="eyebrow">Life Decision Map</div>
+    <h1>下一階段人生選擇</h1>
+    <div class="sub">30 道題目，幫你看清楚你現在更需要的是穩定、累積、探索、獨立，還是把握一個新的發展機會。</div>
+    <div class="note">這不是臨床心理測驗，也不是「算命式預測」。它是決策輔助工具，重點不是替你決定，而是把你現在的資源、偏好、風險承受與成長需求拆開看。</div>
+  </div>
 
-  <div class="progress-shell">
-    <div class="progress-row"><span id="ptext">尚未開始</span><span id="pcnt">0 / 40</span></div>
-    <div class="progress"><div id="pbar"></div></div>
+  <div class="progress-wrap">
+    <div class="progress"><div id="prog"></div></div>
+    <div class="ptext" id="ptext">0 / 30</div>
   </div>
 
   <form id="quiz"></form>
-
   <div class="actions">
-    <button type="button" id="submitBtn">查看分析結果</button>
+    <button type="button" class="secondary" id="resetBtn">重填</button>
+    <button type="button" class="primary" id="submitBtn">查看分析</button>
   </div>
+  <div id="error">還有題目沒有作答，請先完成 30 題。</div>
 
-  <section id="result" class="result"></section>
-  <div class="footer">本測驗用於自我反思與決策整理，不替代心理、財務、法律或職涯專業意見。</div>
+  <div id="result"></div>
 </div>
 
 <script>
-const options = [
-  {v:1,t:"非常不同意",s:"1"},
-  {v:2,t:"不同意",s:"2"},
-  {v:3,t:"不確定／一半一半",s:"3"},
-  {v:4,t:"同意",s:"4"},
-  {v:5,t:"非常同意",s:"5"}
+const Q = [
+["如果未來三年只能優先得到一樣東西，你最想得到？",["穩定的生活","更多錢","真正有競爭力的能力","更多人生經驗","找到自己真正想走的方向"]],
+["現在阻止你過理想生活最大的因素是？",["錢不夠","能力／學歷不足","家庭因素","不知道自己要什麼","缺少機會"]],
+["如果完全不用考慮錢，你明年最想過什麼生活？",["和重要的人一起","自己生活","到新的環境","工作賺錢","學習／嘗試不同事情"]],
+["如果有一條路生活很舒服，但三年後能力幾乎沒增加，你會？",["可以接受","現階段可以","看情況","不太接受","完全不能接受"]],
+["另一條路前三年很辛苦，但可能大幅增加未來收入與選擇，你會？",["不想","偏向不選","要看風險","願意嘗試","很願意"]],
+["對你來說，有錢真正代表什麼？",["可以過舒服生活","不必依靠別人","可以照顧家人","可以選擇自己想做的事","成就感"]],
+["如果家人可以提供你很穩定的生活，你會？",["很願意接受","先接受再慢慢想","一邊接受一邊建立自己","只接受短期幫助","還是希望盡快完全獨立"]],
+["你目前最想改善自己哪一部分？",["收入","專業能力","行動力","人際／社會經驗","方向感"]],
+["如果一份工作薪水普通，但能學很多，你會做嗎？",["不會","短期可以","看能學到什麼","願意","非常願意"]],
+["如果另一份工作薪水高很多，但學不到太多呢？",["一定選","偏向選","看差多少","不一定","長期不會選"]],
+["你覺得自己現在最缺的是？",["資源","能力","經驗","自信／行動力","明確目標"]],
+["面對一個陌生但可能性很多的環境，你通常？",["很抗拒","有點害怕","可以試試","會興奮","很想挑戰"]],
+["如果現在選錯一條路，你最害怕損失什麼？",["錢","時間","安全感","發展機會","自己的人生可能性"]],
+["你比較希望幾年後的自己是哪種狀態？",["生活安穩","有一筆存款","有穩定職業","有很強的能力","已經知道自己想建立什麼人生"]],
+["如果現在不知道自己喜歡什麼，你比較願意？",["先待在安全環境","找穩定工作","邊工作邊探索","多換環境嘗試","主動做很多不同的小實驗"]],
+["你對『自己做生意／做自己的東西』真正的感覺是？",["沒興趣","覺得風險太高","有點想試","很有興趣","很希望未來做到"]],
+["如果創業可能失敗，但能快速學很多事情，你會？",["不會碰","等條件很好再說","小規模嘗試","願意認真試","很想試"]],
+["如果家人的事業剛好能讓你參與，你最希望自己的角色是？",["被照顧","幫忙","領薪工作","學會經營","把它當成累積未來能力的機會"]],
+["如果家人希望你走一條安全的路，但你發現另一條路更適合自己，你會？",["聽家人的","大多聽家人的","很難決定","說服家人","最後自己決定"]],
+["你現在有沒有一件事情，即使沒有人要求你，也會自己持續做？",["完全沒有","很少","偶爾","有","有，而且已持續一段時間"]],
+["如果給你一年完全自由的時間，你覺得自己最可能？",["休息很多","不知道做什麼","找工作","學新能力","自己開始一個計畫"]],
+["你覺得自己現在最大的風險是哪個？",["沒錢","選錯路","太依賴安全環境","想很多但沒有行動","太早把人生限制在某一種可能"]],
+["如果未來有一個機會必須離開熟悉的人與環境才能得到，你會？",["不會去","很可能放棄","認真衡量","如果值得就去","很願意出去試"]],
+["五年後回頭看，你最不希望自己說哪句話？",["早知道就多存一點錢","早知道就學一項真正的能力","早知道不要因為害怕而留下","早知道不要一直聽別人替我決定","早知道年輕時多試一點"]],
+["如果現在沒有任何人替你決定，你最希望下一階段是？",["先把生活穩定下來","先解決錢的問題","開始累積可以養活自己的能力","去一個能讓自己成長更快的環境","探索自己真正想建立的人生"]],
+["如果你現在只能在『低風險但成長慢』與『高不確定但成長快』之間選，你比較偏向？",["低風險","偏低風險","看條件","偏高成長","高成長"]],
+["如果某條路短期不賺錢，但能增加未來選擇，你能接受多久？",["不能接受","一兩個月","半年左右","一年左右","只要值得可以更久"]],
+["當你做重大決定時，最容易被哪件事影響？",["眼前壓力","家人意見","別人的成功案例","長期發展","自己的價值排序"]],
+["你希望未來的自己最有哪種自由？",["生活穩定的自由","不缺錢的自由","不靠別人的自由","可以換環境的自由","可以選自己人生方向的自由"]],
+["現在如果要選一條路，你最希望它替你帶來什麼？",["安全感","現金流","工作能力","更大的舞台","更多未來選擇"]]
 ];
 
-const qs = [
-{d:"intent", q:"我已經不只是在想，而是真的把「去媽媽那裡」當成近期可能發生的選項。"},
-{d:"intent", q:"如果沒有突然出現重大變故，我覺得自己一年內很可能真的會去。"},
-{d:"intent", q:"我已經開始查交通、住處、工作、學校、簽證或生活成本等實際資訊。"},
-{d:"intent", q:"我腦中已經想過大概什麼時候出發，而不是只有模糊地說「以後」。"},
-{d:"intent", q:"我願意為了去那裡，犧牲目前生活中的部分便利、關係或機會。"},
-{d:"intent", q:"如果今天就要我做決定，我傾向選擇去。"},
-{d:"mother", q:"媽媽在那裡，是我想去的重要原因之一。"},
-{d:"mother", q:"如果媽媽明年搬去別的地方，我對現在這個目的地的興趣會明顯下降。"},
-{d:"mother", q:"想到和媽媽距離更近，我會感到比較安心。"},
-{d:"mother", q:"我對「有人可以照應我／陪伴我」的期待，會影響我的選擇。"},
-{d:"mother", q:"如果媽媽不在那裡，我可能不會主動考慮這個地方。"},
-{d:"mother", q:"我希望去那裡後，能得到目前生活中缺少的家庭支持。"},
-{d:"push", q:"我現在所在的地方，已經讓我有明顯想離開的感覺。"},
-{d:"push", q:"我目前對自己的生活、學業或工作有明顯不滿。"},
-{d:"push", q:"就算目的地沒有特別好，我仍然很想換一個環境。"},
-{d:"push", q:"我現在的孤單、壓力或停滯感，會放大我想搬走的念頭。"},
-{d:"push", q:"只要能離開現在的狀態，我對新地方的缺點容忍度會變高。"},
-{d:"push", q:"我覺得自己現在需要一個『重新開始』的機會。"},
-{d:"barrier", q:"我目前的財務狀況足以支持搬去那裡後至少幾個月的基本生活。", rev:true},
-{d:"barrier", q:"我已經有相對可行的工作、學業或收入來源規劃。", rev:true},
-{d:"barrier", q:"住宿、交通、身份／簽證等現實問題，目前大致有辦法解決。", rev:true},
-{d:"barrier", q:"就算媽媽暫時不能提供實質幫助，我也能自己撐住。", rev:true},
-{d:"barrier", q:"我對目的地的生活成本與實際條件已有足夠了解。", rev:true},
-{d:"barrier", q:"我有能力承受搬遷失敗、重新搬家或重新找工作的成本。", rev:true},
-{d:"alt", q:"如果有另一個城市能提供明顯更好的發展，即使媽媽不在那裡，我也會認真考慮。", rev:true},
-{d:"alt", q:"除了去找媽媽，我其實還有至少一條具體可行的人生方案。", rev:true},
-{d:"alt", q:"我願意把『自己的長期成長』放在『離媽媽近』之前。", rev:true},
-{d:"alt", q:"如果目前所在地突然出現很好的機會，我願意留下來。", rev:true},
-{d:"alt", q:"我不會因為媽媽希望我過去，就自動把其他選項排除。", rev:true},
-{d:"alt", q:"即使最後不去找媽媽，我也知道下一步可以怎麼走。", rev:true},
-{d:"fit", q:"即使完全不考慮媽媽，這個地方本身仍然符合我未來3～5年的發展方向。"},
-{d:"fit", q:"這個地方能提供我真正需要的工作、學習或成長資源。"},
-{d:"fit", q:"去那裡之後，我有機會變得更獨立，而不是更依賴家人。"},
-{d:"fit", q:"我能想像三年後仍然願意留在那裡，而不是只把它當暫時避風港。"},
-{d:"fit", q:"那裡的生活方式、文化、收入與成本，和我想要的人生相容。"},
-{d:"fit", q:"即使第一年不順利，我仍然看得到長期累積價值。"},
-{d:"stability", q:"我對這個決定的想法已經維持一段時間，而不是最近突然出現。"},
-{d:"stability", q:"當別人反對我時，我仍能清楚說出自己為什麼想去。"},
-{d:"stability", q:"我的決定比較來自自己的判斷，而不是一時情緒或他人的期待。"},
-{d:"stability", q:"我已經想過『去了之後不如預期』的情況，而且仍願意承擔後果。"}
-];
+const dims = ["現實自由度","方向清晰度","成長驅動力","自主決策力","能力累積意識","風險承受度","探索傾向","家庭支持需求","事業／創業傾向","環境適應力"];
 
-const labels = {
- intent:"行動意圖",
- mother:"媽媽牽引力",
- push:"離開現況推力",
- barrier:"現實阻力",
- alt:"替代道路強度",
- fit:"未來適配度",
- stability:"決策穩定性"
-};
-
-const form = document.getElementById("quiz");
-qs.forEach((x,i)=>{
-  const card=document.createElement("div");
-  card.className="card";
-  card.innerHTML=`<div class="qnum">Q${i+1} · ${labels[x.d]}</div>
-  <div class="question">${x.q}</div>
-  <div class="scale">${options.map(o=>`
-    <label><input type="radio" name="q${i}" value="${o.v}">
-      <span>${o.t}</span><small>${o.s} 分</small>
-    </label>`).join("")}</div>`;
-  form.appendChild(card);
+const quiz = document.getElementById("quiz");
+Q.forEach((q,i)=>{
+  const card=document.createElement("div"); card.className="qcard";
+  card.innerHTML=`<div class="qnum">QUESTION ${i+1}</div><div class="qtitle">${q[0]}</div>`+
+  q[1].map((o,j)=>`<label class="opt"><input type="radio" name="q${i}" value="${j}"> ${o}</label>`).join("");
+  quiz.appendChild(card);
 });
 
 function updateProgress(){
   let n=0;
-  qs.forEach((_,i)=>{ if(document.querySelector(`input[name=q${i}]:checked`)) n++; });
-  document.getElementById("pcnt").textContent=`${n} / ${qs.length}`;
-  document.getElementById("pbar").style.width=`${n/qs.length*100}%`;
-  document.getElementById("ptext").textContent=n===0?"尚未開始":n===qs.length?"已完成":"填答中";
+  for(let i=0;i<Q.length;i++) if(document.querySelector(`input[name=q${i}]:checked`)) n++;
+  document.getElementById("prog").style.width=(n/Q.length*100)+"%";
+  document.getElementById("ptext").textContent=`${n} / ${Q.length}`;
 }
-document.addEventListener("change",updateProgress);
+quiz.addEventListener("change",updateProgress);
 
-function dimScores(){
-  const sums={}, counts={};
-  qs.forEach((x,i)=>{
-    const el=document.querySelector(`input[name=q${i}]:checked`);
-    if(!el) return;
-    let v=+el.value;
-    if(x.rev) v=6-v;
-    sums[x.d]=(sums[x.d]||0)+v;
-    counts[x.d]=(counts[x.d]||0)+1;
-  });
-  const out={};
-  Object.keys(labels).forEach(k=>{
-    out[k]=Math.round(((sums[k]/counts[k])-1)/4*100);
-  });
-  return out;
+function ans(i){
+  const el=document.querySelector(`input[name=q${i}]:checked`);
+  return el?+el.value:null;
 }
 function clamp(x){return Math.max(0,Math.min(100,Math.round(x)))}
+function avg(arr){return arr.reduce((a,b)=>a+b,0)/arr.length}
+function pos(i){return ans(i)/4*100}
+function rev(i){return (4-ans(i))/4*100}
+
+function scores(){
+  // deliberately cross-scored: not a simple A-low/E-high personality ladder.
+  const reality = clamp(avg([rev(1),rev(10),rev(21),pos(28),pos(29)]));
+  const clarity = clamp(avg([pos(0),pos(7),pos(10),pos(13),pos(24),pos(28)]));
+  const growth = clamp(avg([pos(3),pos(4),pos(8),rev(9),pos(13),pos(26),pos(29)]));
+  const autonomy = clamp(avg([pos(6),pos(18),pos(23),pos(28),pos(29)]));
+  const skill = clamp(avg([pos(7),pos(8),pos(13),pos(17),pos(20),pos(26)]));
+  const risk = clamp(avg([pos(4),pos(11),pos(16),pos(22),pos(25),pos(26)]));
+  const explore = clamp(avg([pos(2),pos(11),pos(14),pos(20),pos(22),pos(24)]));
+  const family = clamp(avg([rev(6),rev(18),rev(22), (ans(17)<=1?90:ans(17)==2?60:ans(17)==3?35:20)]));
+  const venture = clamp(avg([pos(15),pos(16),pos(17),pos(20),pos(24)]));
+  const adapt = clamp(avg([pos(11),pos(14),pos(22),pos(25),pos(28)]));
+  return [reality,clarity,growth,autonomy,skill,risk,explore,family,venture,adapt];
+}
+
 function band(v){
-  if(v>=80)return "非常高";
+  if(v>=80)return "很高";
   if(v>=65)return "偏高";
   if(v>=45)return "中等";
   if(v>=30)return "偏低";
   return "很低";
 }
-function probabilityText(p){
-  if(p>=80) return "目前屬於非常高的實際行動傾向。只要現實條件沒有突然惡化，很可能會把想法轉成行動。";
-  if(p>=65) return "目前明顯偏向真的會去，但仍有一兩個關鍵條件可能讓決定翻轉。";
-  if(p>=45) return "現在仍處於搖擺區。嘴上可能很常提，但現實條件、替代選項或情緒變化都可能改變結果。";
-  if(p>=30) return "目前比較像『認真想過』，但還沒有形成足夠強的行動鏈。";
-  return "目前較不像會真的執行，想法可能更多是情緒出口、想像或備案。";
-}
-function fitText(f){
-  if(f>=75) return "即使拿掉媽媽因素，這個地方本身仍有不錯的發展理由。去的理由相對完整。";
-  if(f>=55) return "這個地方有部分發展價值，但仍需要確認工作、收入、長期獨立性等現實條件。";
-  if(f>=40) return "適配度普通。最大風險是『因為想離開現在』而高估目的地本身。";
-  return "目前看起來，去那裡的吸引力可能主要來自媽媽或逃離現況，而不是目的地本身的長期價值。";
-}
-function scenario(s,prob,fit){
-  let a=[];
-  if(s.mother>=70 && s.fit<55) a.push("媽媽因素明顯高於目的地本身的發展價值");
-  if(s.push>=70) a.push("目前生活的推離力量很強");
-  if(s.barrier>=65) a.push("現實阻力仍然偏高");
-  if(s.alt>=65) a.push("替代道路偏弱，容易把『去媽媽那裡』視為主要出口");
-  if(s.stability<45) a.push("決策穩定性不足，之後仍可能反覆");
-  if(!a.length) a.push("目前各項因素相對平衡，沒有單一因素完全主導");
-  return a;
-}
-function resultTitle(prob,fit){
-  if(prob>=65 && fit>=60) return "高機率會去，而且這條路有一定合理性";
-  if(prob>=65 && fit<50) return "很可能真的會去，但『會去』不等於『適合去』";
-  if(prob<45 && fit>=60) return "這個地方其實不差，但目前還不像真的會行動";
-  if(prob<45 && fit<50) return "目前既沒有很強的行動鏈，也缺乏明確長期理由";
-  return "目前仍在搖擺，關鍵取決於接下來的現實條件";
+
+function profile(s){
+  const [reality,clarity,growth,autonomy,skill,risk,explore,family,venture,adapt]=s;
+  if(reality<40 && family>65) return ["生存優先型","你目前的選擇很容易被資源與安全感限制。這不代表你沒有想法，而是現階段先提高現金流、住處穩定與基本選擇權，會比逼自己做『最理想的人生決定』更實際。"];
+  if(growth>70 && risk<45) return ["安全累積型","你其實很想成長，但承擔失敗的空間還不大。比起一次押上全部，更適合先找能累積技能、存款與經驗的路，讓自己下一次有更多選擇。"];
+  if(explore>68 && clarity<58) return ["探索成長型","你現在未必適合過早定型。你需要的不是立刻選一條走十年的路，而是用工作、短期計畫、小型嘗試快速知道自己真正適合什麼。"];
+  if(skill>72 && growth>70) return ["能力投資型","你適合把接下來幾年當成能力投資期。短期不是只看薪水，而是看這條路能不能形成真正可帶走的技能、履歷、人脈與選擇權。"];
+  if(autonomy>72 && adapt>68) return ["高自主發展型","你對自己的人生主導權需求高，也有一定適應新環境的能力。適合選擇能讓你自己決策、累積成果、逐漸脫離被安排狀態的路線。"];
+  if(venture>70 && risk>58) return ["創業實驗型","你對自主發展與自己做東西的接受度高。比起立刻全職創業，更適合先用低成本專案、副業、網店或合作測試市場與自己的執行力。"];
+  return ["平衡轉換型","你不是單純偏安全或偏冒險，而是在現實、成長與自主之間找平衡。你現在最需要的不是一次決定終局，而是選一條能讓一年後的你更有籌碼的路。"];
 }
 
-document.getElementById("submitBtn").addEventListener("click",()=>{
-  const missing=[];
-  qs.forEach((_,i)=>{if(!document.querySelector(`input[name=q${i}]:checked`))missing.push(i+1)});
-  if(missing.length){
-    alert(`還有 ${missing.length} 題未完成。請先填完再查看結果。`);
-    document.querySelector(`input[name=q${missing[0]-1}]`).closest(".card").scrollIntoView({behavior:"smooth",block:"center"});
-    return;
+function overall(s){
+  const [r,c,g,a,sk,ri,e,f,v,ad]=s;
+  return clamp(r*.10+c*.12+g*.16+a*.12+sk*.16+ri*.08+e*.08+(100-f)*.05+v*.06+ad*.07);
+}
+
+function insight(s){
+  const [r,c,g,a,sk,ri,e,f,v,ad]=s;
+  let arr=[];
+  if(g>=70 && ri<45) arr.push("你想成長，但承擔風險的空間不大，容易出現『想走遠、實際選擇卻偏安全』的拉扯。");
+  if(f>=70 && a>=65) arr.push("你重視家庭支持，但不代表你缺乏自主性；關鍵是這份支持有沒有轉化成自己的能力與收入。");
+  if(r<40) arr.push("你目前最大的限制可能不是意志力，而是資源不足。先增加收入、存款與可執行選項，很多決策會自然變清楚。");
+  if(c<45 && e>=65) arr.push("你方向還沒完全成形，但探索傾向高，現在更適合多做小型嘗試，而不是過早固定自己。");
+  if(sk>=70) arr.push("你對『累積可以帶走的能力』很敏感，選工作或環境時應把學習密度與可轉移技能放進核心條件。");
+  if(v>=68) arr.push("你對自己做事情有明顯傾向，可以開始用低成本方式驗證，而不是等到所有條件完美才開始。");
+  if(ad<45) arr.push("你對陌生環境的適應成本偏高，任何轉換都最好先設計緩衝、退路與明確期限。");
+  if(!arr.length) arr.push("你的各項分數相對平衡，真正的差異不在『適不適合冒險』，而在每條路能不能讓你持續增加選擇權。");
+  return arr.slice(0,4);
+}
+
+function routes(s){
+  const [r,c,g,a,sk,ri,e,f,v,ad]=s;
+  let routes=[];
+  if(r<45) routes.push(["先建立生存底盤","先解決基本收入、住處與現金流，同時保留一個能累積技能的安排。"]);
+  if(sk>=60) routes.push(["能力累積路線","優先選能形成作品、履歷、技術或可轉移經驗的工作／學習機會，短期薪水不是唯一標準。"]);
+  if(e>=60) routes.push(["探索型路線","不要急著定終身方向，安排 3–6 個月的小型試驗：工作、專案、不同角色或不同環境。"]);
+  if(v>=60) routes.push(["低成本事業實驗","用副業、網店、小專案、合作方式測試市場與自己的執行力，不必立刻把全部資源押上去。"]);
+  if(f>=60) routes.push(["把家庭支持變成跳板","可以接受支持，但要同時設定自己的收入、技能與期限目標，避免支持只變成停留。"]);
+  if(a>=65 && ad>=60) routes.push(["自主發展路線","如果有更好的成長機會，可以把『是不是熟悉／是不是有人陪』降到次要，優先看三年後選擇權。"]);
+  return routes.slice(0,3);
+}
+
+document.getElementById("submitBtn").onclick=()=>{
+  for(let i=0;i<Q.length;i++){
+    if(ans(i)===null){
+      document.getElementById("error").style.display="block";
+      document.querySelectorAll(".qcard")[i].scrollIntoView({behavior:"smooth",block:"center"});
+      return;
+    }
   }
-  const s=dimScores();
+  document.getElementById("error").style.display="none";
+  const s=scores(), ov=overall(s), p=profile(s), ins=insight(s), rs=routes(s);
+  let html=`<div class="result-head">
+    <div class="label">整體人生選擇準備度</div>
+    <div class="score">${ov}</div>
+    <h2>${p[0]}</h2>
+    <div>${p[1]}</div>
+  </div>
+  <div class="grid">`;
+  dims.forEach((d,i)=>{
+    html+=`<div class="metric"><div class="metric-top"><div class="metric-name">${d}</div><div class="metric-score">${s[i]} · ${band(s[i])}</div></div><div class="bar"><div style="width:${s[i]}%"></div></div></div>`;
+  });
+  html+=`</div>
+  <div class="section"><div class="kicker">Key reading</div><h3>你現在最值得注意的地方</h3>${ins.map(x=>`<div class="route">${x}</div>`).join("")}</div>
+  <div class="section"><div class="kicker">Next step</div><h3>目前比較適合你的 3 條路</h3>${rs.map((x,i)=>`<div class="route"><b>${i+1}. ${x[0]}</b><div>${x[1]}</div></div>`).join("")}</div>
+  <div class="section"><div class="kicker">Decision rule</div><h3>這次不要只問「哪條路最好」</h3>
+  <div>更值得問的是：<b>哪一條路能讓一年後的你，比現在擁有更多選擇？</b></div>
+  <div class="small" style="margin-top:8px">分數是結構化自我評估，不代表臨床診斷、人格定論或未來預測。</div></div>`;
+  const r=document.getElementById("result");
+  r.innerHTML=html; r.style.display="block";
+  r.scrollIntoView({behavior:"smooth",block:"start"});
+};
 
-  // 行為傾向：意圖、母親牽引、現況推力、阻力、替代道路、穩定性
-  const prob=clamp(
-    s.intent*0.34 +
-    s.mother*0.16 +
-    s.push*0.14 +
-    s.barrier*0.14 +
-    s.alt*0.10 +
-    s.stability*0.12
-  );
-
-  // 適配：長期發展、低依賴性、現實可行、替代思考、穩定性
-  // barrier/alt 是「阻力高」「替代弱」方向，因此反向進入適配
-  const fit=clamp(
-    s.fit*0.42 +
-    (100-s.barrier)*0.18 +
-    (100-s.alt)*0.15 +
-    s.stability*0.15 +
-    (100-s.mother)*0.10
-  );
-
-  const motherGap = s.mother - s.fit;
-  let core = "";
-  if(motherGap>=25) core="目前最明顯的訊號是：『媽媽的吸引力』高於『目的地本身的長期價值』。這種情況最容易在搬過去後，才發現真正想要的其實是安全感，而不是那個地方。";
-  else if(s.push>=70 && s.fit<60) core="目前比較像是『被現在的生活推走』，而不是『被目的地真正吸引』。這種決策短期會有解脫感，但之後較容易重新面對原本沒有處理的問題。";
-  else if(s.fit>=70 && s.mother<65) core="即使把媽媽因素拿掉，這個目的地本身仍有相對完整的理由。這比較接近一個獨立的人生選擇，而不只是家庭牽引。";
-  else core="目前沒有單一因素完全主導。真正會決定結果的，通常是接下來幾個月是否開始出現實際準備：存錢、找工作、處理住宿、設定日期。";
-
-  const flags=scenario(s,prob,fit);
-  const res=document.getElementById("result");
-  res.innerHTML=`
-    <h2>${resultTitle(prob,fit)}</h2>
-    <div class="score-grid">
-      <div class="scorebox">
-        <div class="scorelabel">實際去找媽媽的行動傾向</div>
-        <div class="score">${prob}<span style="font-size:18px"> /100</span></div>
-        <div class="mini">${band(prob)}</div>
-        <div class="bar"><span style="width:${prob}%"></span></div>
-      </div>
-      <div class="scorebox">
-        <div class="scorelabel">這條路的未來適配度</div>
-        <div class="score">${fit}<span style="font-size:18px"> /100</span></div>
-        <div class="mini">${band(fit)}</div>
-        <div class="bar"><span style="width:${fit}%"></span></div>
-      </div>
-    </div>
-
-    <div class="analysis">
-      <h3>一句話判讀</h3>
-      <p><b>${probabilityText(prob)}</b></p>
-      <p>${fitText(fit)}</p>
-      <p>${core}</p>
-    </div>
-
-    <div class="analysis">
-      <h3>目前最值得注意的訊號</h3>
-      ${flags.map(x=>`<span class="pill">${x}</span>`).join("")}
-    </div>
-
-    <div class="analysis">
-      <h3>七個維度</h3>
-      <div class="breakdown">
-        ${Object.keys(labels).map(k=>`
-          <div class="row">
-            <div>${labels[k]}</div>
-            <div class="track"><span style="width:${s[k]}%"></span></div>
-            <div>${s[k]}</div>
-          </div>`).join("")}
-      </div>
-      <p class="mini" style="margin-top:14px">
-        注意：「現實阻力」越高＝錢、工作、住宿等越可能卡住；「替代道路強度」在本頁分數越高＝其他可行道路越弱。
-      </p>
-    </div>
-
-    <div class="analysis">
-      <h3>未來情境</h3>
-      <p><b>如果真的去了：</b> ${
-        fit>=60
-        ? "只要能維持自己的收入、工作／學習節奏和獨立生活邊界，這次移動有可能成為真正的發展轉折，而不是單純回到家庭依賴。"
-        : "短期可能會得到安全感、陪伴或暫時脫離現況的輕鬆感；但若沒有自己的工作、收入和生活結構，之後容易把新的問題重新集中到家庭關係上。"
-      }</p>
-      <p><b>如果最後沒有去：</b> ${
-        s.alt<=45
-        ? "目前仍有能力走其他路，但需要把替代方案具體化，否則容易反覆回到『去找媽媽』這個選項。"
-        : "因為替代道路目前偏弱，如果不去，就需要重新建立一條明確的工作、學業或生活路線，不然很容易再次陷入停滯感。"
-      }</p>
-      <p><b>最可能讓決定翻轉的變數：</b> ${
-        s.barrier>=65 ? "金錢、工作、住宿等現實條件。" :
-        s.alt>=65 ? "突然出現一條比『去找媽媽』更清楚、更有吸引力的人生道路。" :
-        s.mother>=70 ? "媽媽本人的態度、居住狀態或能否提供實際支持。" :
-        "接下來是否真的開始行動，而不是只停留在想法。"
-      }</p>
-    </div>
-
-    <div class="analysis">
-      <h3>不要只看總分</h3>
-      <p>最重要的是比較兩個分數：<b>行動傾向</b>和<b>未來適配度</b>。如果前者很高、後者很低，代表「非常可能會做，但不代表這是最好的選擇」；如果兩者都高，才比較接近「既想去，也有理由去」。</p>
-    </div>
-  `;
-  res.classList.add("show");
-  res.scrollIntoView({behavior:"smooth",block:"start"});
-});
+document.getElementById("resetBtn").onclick=()=>{
+  quiz.reset(); updateProgress();
+  document.getElementById("result").style.display="none";
+  document.getElementById("error").style.display="none";
+  window.scrollTo({top:0,behavior:"smooth"});
+};
 </script>
 </body>
 </html>
